@@ -65,7 +65,7 @@ public class WaypointComponent {
 	 * Creates a new user waypoint when the user left-clicks within the airspace
 	 * window.
 	 * 
-	 * Also is convinience method for generated permanent waypoints
+	 * Also is convenience method for generated permanent waypoints
 	 * 
 	 * @param x
 	 * @param y
