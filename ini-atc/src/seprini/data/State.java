@@ -7,7 +7,7 @@ public class State {
 	private static State instance = null;
 
 	public static boolean paused = false;
-	private static float time = 0;
+	private static double time = 0;
 
 	private State() {
 
@@ -32,7 +32,7 @@ public class State {
 	 * 
 	 * @return delta time added every frame
 	 */
-	public static float time() {
+	public static double time() {
 		return time;
 	}
 
