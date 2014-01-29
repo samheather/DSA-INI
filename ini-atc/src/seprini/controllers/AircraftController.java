@@ -125,16 +125,18 @@ public final class AircraftController extends InputListener implements
 				.setVelocity(new Vector2(0.8f, 0.8f));
 		
 		speedyAircraft.setCoords(new Vector2(0, 0)).setActive(true)
-			.setMaxClimbRate(10).setMaxSpeed(2.3f).setMaxTurningSpeed(0.5f)
-			.setRadius(12).setSeparationRadius(separationRadius)
+			.setMaxClimbRate(10).setMaxSpeed(2.3f).setMaxTurningSpeed(0.8f)
+			.setRadius(15).setSeparationRadius(separationRadius)
 			.setTexture(Art.getTextureRegion("fastAircraft"))
 			.setVelocity(new Vector2(1.3f, 1.3f));
 		
 		slowyAircraft.setCoords(new Vector2(0, 0)).setActive(true)
-			.setMaxClimbRate(10).setMaxSpeed(0.8f).setMaxTurningSpeed(0.3f)
-			.setRadius(12).setSeparationRadius(separationRadius)
+			.setMaxClimbRate(10).setMaxSpeed(0.8f).setMaxTurningSpeed(0.8f)
+			.setRadius(15).setSeparationRadius(separationRadius)
 			.setTexture(Art.getTextureRegion("slowAircraft"))
 			.setVelocity(new Vector2(0.4f, 0.4f));
+			
+		
 
 		// add aircraft types to airplaneTypes array.
 		aircraftTypeList.add(defaultAircraft);

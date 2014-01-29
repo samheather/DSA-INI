@@ -58,9 +58,9 @@ public class Art {
 		textures.put("airspace", split(combined, 0, 0, 1079, 720));
 		textures.put("sidebar", split(combined, 1080, 0, 200,720));
 		
-		textures.put("defaultAircraft", split(combined, 1281, 0, 72, 63));
-		textures.put("fastAircraft", split(combined, 1281, 64, 72, 63));
-		textures.put("slowAircraft", split(combined, 1281, 128, 72, 63));
+		textures.put("aircraft", split(combined, 1281, 0, 72, 63));
+		textures.put("fastAircraft", split(combined, 1281+72, 0, 72, 63));
+		textures.put("slowAircraft", split(combined, 1281+72+72, 0, 72, 63));
 		
 		textures.put("waypoint", split(combined, 0, 720, 20, 20));
 		textures.put("menuAircraft", split(combined, 1280, 64, 727, 249));
