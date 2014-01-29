@@ -38,12 +38,14 @@ public class WaypointComponent {
 		createEntrypoint(0, 720);
 		createEntrypoint(1080, 360);
 		createEntrypoint(540, 0);
+		createEntrypoint(400, 345);
 
 		// add exit waypoints to exitList
 		createExitpoint(1080, 720);
 		createExitpoint(1080, 0);
 		createExitpoint(0, 420);
 		createExitpoint(540, 720);
+		createExitpoint(400, 345);
 
 		// add some waypoints
 		createWaypoint(300, 200, true);
