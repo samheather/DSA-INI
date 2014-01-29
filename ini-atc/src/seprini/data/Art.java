@@ -116,6 +116,7 @@ public class Art {
 		textFieldStyle.font = skin.getFont("default");
 		textFieldStyle.background = skin.newDrawable("white", Color.BLUE);
 		textFieldStyle.fontColor = Color.BLACK;
+		textFieldStyle.selection = skin.newDrawable("white", Color.WHITE);
 		skin.add("default", textFieldStyle);
 
 		// Configure a TextButtonStyle and name it "default". Skin resources are

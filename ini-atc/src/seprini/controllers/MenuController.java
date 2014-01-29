@@ -69,6 +69,7 @@ public final class MenuController extends ChangeListener implements Controller {
 	private void addLeaderboard() {
 		Table leaderboardEntries = new Table(Art.getSkin());
 		leaderboardEntries.add(new Label("LEADERBOARD", Art.getSkin(), "bold"));
+		leaderboardEntries.row();
 		for (LeaderboardEntry l : lb.leaderboardEntries) {
 			leaderboardEntries.add(new Label(l.getName() + ": " + l.getScore(),
 					Art.getSkin()));
