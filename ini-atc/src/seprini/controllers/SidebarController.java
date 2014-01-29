@@ -137,6 +137,11 @@ public final class SidebarController extends ChangeListener implements
 				.colspan(2);
 
 		aircraftControls.row();
+		
+		createLabel("", " Score:", bottomButtons).width(100);
+		createLabel("score", "..", bottomButtons).width(100);
+		
+		bottomButtons.row();
 
 		createLabel("", " Time:", bottomButtons).width(100);
 		createLabel("timer", "..", bottomButtons).width(100);
@@ -157,6 +162,7 @@ public final class SidebarController extends ChangeListener implements
 
 		// update timer
 		labels.get("timer").setText("" + Math.round(State.time()));
+		labels.get("score").setText("" + State.getScore());
 
 		// if there is no selected aircraft, return immediately to avoid errors
 		// otherwise set it to the local selectedAircraft variable and update
