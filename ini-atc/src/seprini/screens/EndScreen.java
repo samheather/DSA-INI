@@ -40,7 +40,7 @@ public class EndScreen extends Screen {
 		root.setKeyboardFocus(ui);
 
 		Art.getSkin().getFont("default").setScale(1f);
-
+		System.out.println(Math.round(State.time()));
 		Label text = new Label(
 				"You have failed.\n"
 						+ "Two aeroplanes have collided mid-flight in a huge crash which resulted in the death of many innocent people.\n"

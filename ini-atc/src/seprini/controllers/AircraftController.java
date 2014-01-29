@@ -37,11 +37,12 @@ public final class AircraftController extends InputListener implements
 
 	private final int maxAircraft, timeBetweenGenerations, separationRadius;
 
-	private double lastWarned, lastGenerated;
+	private float lastWarned, lastGenerated;
 	private boolean breachingSound, breachingIsPlaying;
 
 	private final AircraftType defaultAircraft = new AircraftType();
 	private Aircraft selectedAircraft;
+	private boolean hasCollided = false;
 
 	private final GameDifficulty difficulty;
 
@@ -101,8 +102,8 @@ public final class AircraftController extends InputListener implements
 			State.setDifficultyMultiplier(1.5f);
 			break;
 		case HARD:
-			maxAircraft = 20;
-			timeBetweenGenerations = 3;
+			maxAircraft = 30;
+			timeBetweenGenerations = 1;
 			separationRadius = 150;
 			State.setDifficultyMultiplier(2);
 			break;
@@ -149,9 +150,9 @@ public final class AircraftController extends InputListener implements
 			// Collision Detection + Separation breach detection.
 			for (int j = 0; j < aircraftList.size(); j++) {
 
-				// Quite simply checks if distance between the centres of both
-				// the aircraft <= the radius of aircraft i + radius of aircraft
-				// j
+				/* Quite simply checks if distance between the centres of both
+				 the aircraft <= the radius of aircraft i + radius of aircraft
+				 j */
 				planeJ = aircraftList.get(j);
 
 				if (!planeI.equals(planeJ)
@@ -159,7 +160,10 @@ public final class AircraftController extends InputListener implements
 						&& Math.abs(planeI.getAltitude() - planeJ.getAltitude()) < Config.MIN_ALTITUDE_DIFFERENCE
 						// Check difference in horizontal 2d plane.
 						&& planeI.getCoords().dst(planeJ.getCoords()) < planeI
-								.getRadius() + planeJ.getRadius()) {
+								.getRadius() + planeJ.getRadius()
+						&& (!hasCollided))
+				{
+					hasCollided = true;
 					collisionHasOccured(planeI, planeJ);
 				}
 

@@ -9,7 +9,7 @@ public class State {
 	private static float difficultyMultiplier;
 
 	public static boolean paused = false;
-	private static double time = 0;
+	private static float time = 0;
 
 	private State() {
 
@@ -35,7 +35,7 @@ public class State {
 	 * 
 	 * @return delta time added every frame
 	 */
-	public static double time() {
+	public static float time() {
 		return time;
 	}
 
