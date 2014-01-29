@@ -8,6 +8,7 @@ import seprini.controllers.AircraftController;
 import seprini.controllers.SidebarController;
 import seprini.data.Config;
 import seprini.data.Debug;
+import seprini.models.Aircraft;
 import seprini.models.Entrypoint;
 import seprini.models.Exitpoint;
 import seprini.models.Waypoint;
@@ -106,6 +107,7 @@ public class WaypointComponent {
 					int pointer, int button) {
 
 				if (button == Buttons.LEFT && sidebar.allowRedirection()) {
+					Aircraft.ignorePath = false;
 					controller.redirectAircraft(waypoint);
 					return true;
 				}
