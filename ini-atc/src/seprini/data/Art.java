@@ -1,5 +1,6 @@
 package seprini.data;
 
+import java.awt.TextField;
 import java.util.Hashtable;
 
 import com.badlogic.gdx.Gdx;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 
 /**
  * Loads all the requires art (textures), essentially pre-loading all the
@@ -108,6 +110,12 @@ public class Art {
 		textButtonStyle.over = skin.newDrawable("white", Color.LIGHT_GRAY);
 		textButtonStyle.font = skin.getFont("default");
 		skin.add("default", textButtonStyle);
+		
+		TextFieldStyle textFieldStyle = new TextFieldStyle();
+		textFieldStyle.font = skin.getFont("default");
+		textFieldStyle.background = skin.newDrawable("white", Color.BLUE);
+		textFieldStyle.fontColor = Color.BLACK;
+		skin.add("default", textFieldStyle);
 
 		// Configure a TextButtonStyle and name it "default". Skin resources are
 		// stored by type, so this doesn't overwrite the font.

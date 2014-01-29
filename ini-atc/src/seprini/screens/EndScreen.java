@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 public class EndScreen extends Screen {
@@ -50,9 +51,20 @@ public class EndScreen extends Screen {
 						+ "\n"
 						+ "\nPRESS ESC TO RETURN TO MAIN MENU ",
 				Art.getSkin(), "textStyle");
-
+		
+		
 		ui.add(text).center();
 
+		ui.row();
+		
+		Table t = new Table();
+		
+		Label l = new Label("Name: ", Art.getSkin());
+		t.add(l).center();
+		TextField tf = new TextField("", Art.getSkin());
+		t.add(tf).left();
+		
+		ui.add(t);
 		ui.row();
 
 		TextButton button = new TextButton("Main Menu", Art.getSkin());
