@@ -475,7 +475,7 @@ public final class Aircraft extends Entity {
 	/**
 	 * Returns false if aircraft flightplan is empty, true otherwise.
 	 * 
-	 * @return whether is active
+	 * @return whether is activeprivate int score;
 	 */
 	public boolean isActive() {
 		// FIXME
@@ -490,6 +490,7 @@ public final class Aircraft extends Entity {
 		if (waypoints.size() == 0) {
 			this.isActive = false;
 			Debug.msg("Aircraft id " + id + ": Reached exit WP");
+			seprini.data.State.incScore(25);
 		}
 
 		return isActive;

@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import seprini.data.Art;
 import seprini.data.GameDifficulty;
+import seprini.models.LeaderboardEntry;
 import seprini.screens.GameScreen;
 import seprini.screens.MenuScreen;
 
@@ -25,6 +26,7 @@ public final class MenuController extends ChangeListener implements Controller {
 
 	private final Table ui;
 	private final MenuScreen screen;
+	private final Leaderboard lb = new Leaderboard();
 
 	private HashMap<String, TextButton> buttons;
 
@@ -44,6 +46,23 @@ public final class MenuController extends ChangeListener implements Controller {
 
 		buttons = new HashMap<String, TextButton>();
 		addButtons();
+		addLeaderboard();
+		ui.toFront();
+	}
+
+	/**
+	 * Adds the leaderboard to the screen.
+	 */
+	private void addLeaderboard() {
+		Table leaderboardEntries = new Table(Art.getSkin());
+		for (LeaderboardEntry l : lb.leaderboardEntries) {
+			leaderboardEntries
+					.add(new Label(l.getName() + ": " + l.getScore(), Art
+							.getSkin())).center();
+			leaderboardEntries.row();
+		}
+		ui.row();
+		ui.add(leaderboardEntries);
 	}
 
 	/**
@@ -68,8 +87,6 @@ public final class MenuController extends ChangeListener implements Controller {
 
 		// create the Exit button
 		addButton("exit", "Exit", this).width(200).colspan(4);
-
-		ui.toFront();
 	}
 
 	/**
