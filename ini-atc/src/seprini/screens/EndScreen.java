@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 public class EndScreen extends Screen {
@@ -43,16 +44,27 @@ public class EndScreen extends Screen {
 		System.out.println(Math.round(State.time()));
 		Label text = new Label(
 				"You have failed.\n"
-						+ "Two aeroplanes have collided mid-flight in a huge crash which resulted in the death of many innocent people.\n"
+						+ "Two aeroplanes have collided mid-flight in a huge crash which resulted in the death of a chinese man.\n"
 						+ "However, surprisingly, you managed to avoid a crash for exactly "
 						+ Math.round(State.time())
 						+ " seconds, which is respectable (at least by some standards).\n"
 						+ "\n"
 						+ "\nPRESS ESC TO RETURN TO MAIN MENU ",
 				Art.getSkin(), "textStyle");
-
+		
+		
 		ui.add(text).center();
 
+		ui.row();
+		
+		Table t = new Table();
+		
+		Label l = new Label("Name: ", Art.getSkin());
+		t.add(l).center();
+		TextField tf = new TextField("", Art.getSkin());
+		t.add(tf).left();
+		
+		ui.add(t);
 		ui.row();
 
 		TextButton button = new TextButton("Main Menu", Art.getSkin());
