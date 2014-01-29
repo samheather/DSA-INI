@@ -53,9 +53,15 @@ public class Art {
 				TextureFilter.Linear);
 
 		// splits up the sprite into parts and loads them into the table
+		
+		//split(texture, x coord of image, y coord of image, height, width)
 		textures.put("airspace", split(combined, 0, 0, 1079, 720));
 		textures.put("sidebar", split(combined, 1080, 0, 200,720));
-		textures.put("aircraft", split(combined, 1281, 0, 72, 63));
+		
+		textures.put("defaultAircraft", split(combined, 1281, 0, 72, 63));
+		textures.put("fastAircraft", split(combined, 1281, 64, 72, 63));
+		textures.put("slowAircraft", split(combined, 1281, 128, 72, 63));
+		
 		textures.put("waypoint", split(combined, 0, 720, 20, 20));
 		textures.put("menuAircraft", split(combined, 1280, 64, 727, 249));
 		textures.put("libgdx", split(combined, 1353, 0, 53, 10));
