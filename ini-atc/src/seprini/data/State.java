@@ -40,13 +40,10 @@ public class State {
 	}
 
 	/**
-	 * Reset timer
+	 * Reset timer and the score
 	 */
 	public static void reset() {
 		time = 0;
-	}
-	
-	public static void resetScore() {
 		score = 0;
 	}
 	
