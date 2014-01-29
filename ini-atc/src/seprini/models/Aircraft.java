@@ -31,7 +31,9 @@ public final class Aircraft extends Entity {
 	private final ArrayList<Waypoint> waypoints;
 
 	private final float radius, separationRadius, maxTurningRate, maxClimbRate,
-			maxSpeed, minSpeed;
+			maxSpeed;
+
+	double minSpeed;
 
 	private float velocityScalar;
 
@@ -49,7 +51,7 @@ public final class Aircraft extends Entity {
 	private boolean turnRight, turnLeft;
 
 	// used for smooth turning
-	// rememeber last angle to check if it's increasing or not
+	// remember last angle to check if it's increasing or not
 	private float previousAngle = 0;
 	// if is increasing, switch rotation sides so it uses the 'smaller' angle
 	private boolean rotateRight = false;
@@ -70,7 +72,7 @@ public final class Aircraft extends Entity {
 		maxTurningRate = aircraftType.getMaxTurningSpeed();
 		maxClimbRate = aircraftType.getMaxClimbRate();
 		maxSpeed = aircraftType.getMaxSpeed();
-		minSpeed = maxSpeed - 1;
+		minSpeed = Math.max((maxSpeed - 1) , 0.1);
 		velocityScalar = INITIAL_VELOCITY_SCALAR;
 		velocity = aircraftType.getVelocity();
 
