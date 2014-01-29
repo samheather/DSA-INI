@@ -15,6 +15,7 @@ public class AircraftType {
 	private float maxClimbRate;
 	private float maxSpeed;
 	private boolean isActive;
+	private float probability;
 	private boolean controllable = true;
 
 	public Vector2 getCoords() {
@@ -113,6 +114,15 @@ public class AircraftType {
 	
 	public AircraftType setControllable(boolean canControl){
 		this.controllable = canControl;
+		return this;
+	}
+	
+	public float getProbability(){
+		return this.probability;
+	}
+	
+	public AircraftType setProbability(float chance){
+		this.probability = chance;
 		return this;
 	}
 }
