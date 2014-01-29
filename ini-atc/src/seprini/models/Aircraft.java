@@ -44,7 +44,8 @@ public final class Aircraft extends Entity {
 	private boolean isActive = true;
 	public static boolean ignorePath = false; // When user has taken control of the
 	// aircraft
-
+	
+	private boolean canControl;
 	// whether the aircraft is selected by the player
 	private boolean selected;
 
@@ -75,6 +76,7 @@ public final class Aircraft extends Entity {
 		minSpeed = Math.max((maxSpeed - 1) , 0.1);
 		velocityScalar = INITIAL_VELOCITY_SCALAR;
 		velocity = aircraftType.getVelocity();
+		canControl = aircraftType.getControllable();
 
 		Random rand = new Random();
 		altitude = Config.ALTITUDES[rand.nextInt(Config.ALTITUDES.length)];
@@ -190,15 +192,15 @@ public final class Aircraft extends Entity {
 	 */
 	public void act() {
 		// if player is holding D or -> on the keyboard, turn right
-		if (turnRight)
+		if (turnRight && selected)
 			turnRight();
 
 		// if the player is holding A or <-, turn left
-		if (turnLeft)
+		if (turnLeft && selected)
 			turnLeft();
 
 		// if the player has taken control of the aircraft, ignore all waypoints
-		if (!ignorePath) {
+		if ((!ignorePath) && selected) {
 
 			// Vector to next waypoint
 			Vector2 nextWaypoint = vectorToWaypoint();
@@ -252,10 +254,12 @@ public final class Aircraft extends Entity {
 		coords.add(velocity.cpy().scl(velocityScalar));
 
 		// allows for smooth decent/ascent
-		if (altitude > desiredAltitude) {
-			this.altitude -= this.maxClimbRate;
-		} else if (altitude < desiredAltitude) {
-			this.altitude += this.maxClimbRate;
+		if (selected) {
+			if (altitude > desiredAltitude) {
+				this.altitude -= this.maxClimbRate;
+			} else if (altitude < desiredAltitude) {
+				this.altitude += this.maxClimbRate;
+			}
 		}
 
 		// updating bounds to make sure the aircraft is clickable
@@ -338,7 +342,7 @@ public final class Aircraft extends Entity {
 	 *         (maxSpeed)
 	 */
 	public boolean increaseSpeed() {
-		if (velocity.cpy().scl(velocityScalar + SPEED_CHANGE).len() > maxSpeed)
+		if ((!selected) || velocity.cpy().scl(velocityScalar + SPEED_CHANGE).len() > maxSpeed)
 			return false;
 
 		velocityScalar += SPEED_CHANGE;
@@ -358,7 +362,7 @@ public final class Aircraft extends Entity {
 	 *         (minSpeed)
 	 */
 	public boolean decreaseSpeed() {
-		if (velocity.cpy().scl(velocityScalar - SPEED_CHANGE).len() < minSpeed)
+		if ((!selected) || velocity.cpy().scl(velocityScalar - SPEED_CHANGE).len() < minSpeed)
 			return false;
 
 		velocityScalar -= SPEED_CHANGE;
@@ -400,7 +404,6 @@ public final class Aircraft extends Entity {
 	 * Turns right by maxTurningRate * 2
 	 */
 	public void turnRight() {
-
 		ignorePath = true;
 		float angle = 0;
 
@@ -508,7 +511,10 @@ public final class Aircraft extends Entity {
 	 * @return whether is selected
 	 */
 	public boolean selected(boolean newSelected) {
-		return this.selected = newSelected;
+		if (canControl) {
+			return this.selected = newSelected;
+		}
+		return false;
 	}
 
 	@Override

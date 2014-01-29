@@ -15,6 +15,7 @@ public class AircraftType {
 	private float maxClimbRate;
 	private float maxSpeed;
 	private boolean isActive;
+	private boolean controllable = true;
 
 	public Vector2 getCoords() {
 		return coords.cpy();
@@ -103,6 +104,15 @@ public class AircraftType {
 
 	public AircraftType setAircraftName(String aircraftName) {
 		this.aircraftName = aircraftName;
+		return this;
+	}
+	
+	public boolean getControllable(){
+		return this.controllable;
+	}
+	
+	public AircraftType setControllable(boolean canControl){
+		this.controllable = canControl;
 		return this;
 	}
 }
