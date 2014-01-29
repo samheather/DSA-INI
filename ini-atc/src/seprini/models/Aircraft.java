@@ -473,7 +473,10 @@ public final class Aircraft extends Entity {
 	public float getSpeed() {
 		return velocityScalar;
 	}
-
+	
+	public Vector2 getVelocity(){
+		return velocity;
+	}
 	/**
 	 * Returns false if aircraft flightplan is empty, true otherwise.
 	 * 
