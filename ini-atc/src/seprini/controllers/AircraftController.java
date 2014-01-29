@@ -43,6 +43,7 @@ public final class AircraftController extends InputListener implements
 	private final AircraftType defaultAircraft = new AircraftType();
 	private final AircraftType speedyAircraft = new AircraftType();
 	private final AircraftType slowyAircraft = new AircraftType();
+	private final AircraftType snakeyAircraft = new AircraftType();
 	
 	private Aircraft selectedAircraft;
 	private boolean hasCollided = false;
@@ -135,6 +136,12 @@ public final class AircraftController extends InputListener implements
 			.setRadius(15).setSeparationRadius(separationRadius)
 			.setTexture(Art.getTextureRegion("slowAircraft"))
 			.setVelocity(new Vector2(0.4f, 0.4f));
+		
+		snakeyAircraft.setCoords(new Vector2(0, 0)).setActive(true)
+		.setMaxClimbRate(10).setMaxSpeed(1.5f).setMaxTurningSpeed(0.8f)
+		.setRadius(15).setSeparationRadius(separationRadius)
+		.setTexture(Art.getTextureRegion("snakeyaircraft"))
+		.setVelocity(new Vector2(0.8f, 0.8f));
 			
 		
 
@@ -142,6 +149,7 @@ public final class AircraftController extends InputListener implements
 		aircraftTypeList.add(defaultAircraft);
 		aircraftTypeList.add(speedyAircraft);
 		aircraftTypeList.add(slowyAircraft);
+		aircraftTypeList.add(snakeyAircraft);
 
 		this.sidebar.init();
 	}

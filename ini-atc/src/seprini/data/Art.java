@@ -63,6 +63,8 @@ public class Art {
 		textures.put("aircraft", split(combined, 1281, 0, 72, 63));
 		textures.put("fastAircraft", split(combined, 1281+72, 0, 72, 63));
 		textures.put("slowAircraft", split(combined, 1281+72+72, 0, 72, 63));
+		textures.put("snakeyaircraft", split(combined, 1281+72+72+72, 0, 72, 63));
+		
 		
 		textures.put("waypoint", split(combined, 0, 720, 20, 20));
 		textures.put("menuAircraft", split(combined, 1280, 64, 727, 249));
