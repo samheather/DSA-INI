@@ -37,13 +37,14 @@ public final class AircraftController extends InputListener implements
 
 	private final int maxAircraft, timeBetweenGenerations, separationRadius;
 
-	private float lastGenerated, lastWarned;
+	private float lastWarned, lastGenerated;
 	private boolean breachingSound, breachingIsPlaying;
 
 	private final AircraftType defaultAircraft = new AircraftType();
 	private final AircraftType speedyAircraft = new AircraftType();
 	
 	private Aircraft selectedAircraft;
+	private boolean hasCollided = false;
 
 	private final GameDifficulty difficulty;
 
@@ -93,7 +94,7 @@ public final class AircraftController extends InputListener implements
 		case EASY:
 			maxAircraft = 10;
 			timeBetweenGenerations = 6;
-			separationRadius = 150;
+			separationRadius = 75;
 			break;
 		case MEDIUM:
 			maxAircraft = 10;
@@ -101,9 +102,9 @@ public final class AircraftController extends InputListener implements
 			separationRadius = 100;
 			break;
 		case HARD:
-			maxAircraft = 10;
-			timeBetweenGenerations = 4;
-			separationRadius = 75;
+			maxAircraft = 30;
+			timeBetweenGenerations = 1;
+			separationRadius = 150;
 			break;
 		default:
 			maxAircraft = 10;
@@ -156,9 +157,9 @@ public final class AircraftController extends InputListener implements
 			// Collision Detection + Separation breach detection.
 			for (int j = 0; j < aircraftList.size(); j++) {
 
-				// Quite simply checks if distance between the centres of both
-				// the aircraft <= the radius of aircraft i + radius of aircraft
-				// j
+				/* Quite simply checks if distance between the centres of both
+				 the aircraft <= the radius of aircraft i + radius of aircraft
+				 j */
 				planeJ = aircraftList.get(j);
 
 				if (!planeI.equals(planeJ)
@@ -166,7 +167,10 @@ public final class AircraftController extends InputListener implements
 						&& Math.abs(planeI.getAltitude() - planeJ.getAltitude()) < Config.MIN_ALTITUDE_DIFFERENCE
 						// Check difference in horizontal 2d plane.
 						&& planeI.getCoords().dst(planeJ.getCoords()) < planeI
-								.getRadius() + planeJ.getRadius()) {
+								.getRadius() + planeJ.getRadius()
+						&& (!hasCollided))
+				{
+					hasCollided = true;
 					collisionHasOccured(planeI, planeJ);
 				}
 
