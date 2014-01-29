@@ -45,7 +45,9 @@ public final class MenuController extends ChangeListener implements Controller {
 		this.screen = screen;
 
 		buttons = new HashMap<String, TextButton>();
+		
 		addButtons();
+		ui.row();
 		addLeaderboard();
 		ui.toFront();
 	}
@@ -61,7 +63,7 @@ public final class MenuController extends ChangeListener implements Controller {
 							.getSkin())).center();
 			leaderboardEntries.row();
 		}
-		ui.row();
+		
 		ui.add(leaderboardEntries);
 	}
 
