@@ -46,15 +46,23 @@ public final class MenuController extends ChangeListener implements Controller {
 
 		buttons = new HashMap<String, TextButton>();
 		addButtons();
+		addLeaderboard();
+		ui.toFront();
 	}
-	
+
 	/**
 	 * Adds the leaderboard to the screen.
 	 */
 	private void addLeaderboard() {
-		for(LeaderboardEntry l : lb.leaderboardEntries) {
-			ui.add(new Label(l.getName() + ": " + l.getScore(), Art.getSkin())).center();
+		Table leaderboardEntries = new Table(Art.getSkin());
+		for (LeaderboardEntry l : lb.leaderboardEntries) {
+			leaderboardEntries
+					.add(new Label(l.getName() + ": " + l.getScore(), Art
+							.getSkin())).center();
+			leaderboardEntries.row();
 		}
+		ui.row();
+		ui.add(leaderboardEntries);
 	}
 
 	/**
@@ -79,8 +87,6 @@ public final class MenuController extends ChangeListener implements Controller {
 
 		// create the Exit button
 		addButton("exit", "Exit", this).width(200).colspan(4);
-
-		ui.toFront();
 	}
 
 	/**
