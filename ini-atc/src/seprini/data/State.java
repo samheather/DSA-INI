@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 public class State {
 
 	private static State instance = null;
+	private static float score;
 
 	public static boolean paused = false;
 	private static float time = 0;
@@ -25,6 +26,7 @@ public class State {
 	 */
 	public synchronized static void tick() {
 		time += Gdx.graphics.getDeltaTime();
+		incScore(Gdx.graphics.getDeltaTime());
 	}
 
 	/**
@@ -41,6 +43,18 @@ public class State {
 	 */
 	public static void reset() {
 		time = 0;
+	}
+	
+	public static void resetScore() {
+		score = 0;
+	}
+	
+	public static void incScore(float increment) {
+		score += increment;
+	}
+	
+	public static int getScore() {
+		return Math.round(score);
 	}
 
 }
