@@ -43,11 +43,19 @@ public final class MenuController extends ChangeListener implements Controller {
 	public MenuController(MenuScreen screen, Table ui) {
 		this.ui = ui;
 		this.screen = screen;
-
 		buttons = new HashMap<String, TextButton>();
+		//ui.setLayoutEnabled(false);
+		
 		addButtons();
+//		ui.toFront();
+		ui.row();
+		ui.padTop(200);
+//		ui.setHeight(50);
+		ui.row().padTop(100);
 		addLeaderboard();
-		ui.toFront();
+		ui.row();
+		
+		
 	}
 
 	/**
@@ -58,11 +66,12 @@ public final class MenuController extends ChangeListener implements Controller {
 		for (LeaderboardEntry l : lb.leaderboardEntries) {
 			leaderboardEntries
 					.add(new Label(l.getName() + ": " + l.getScore(), Art
-							.getSkin())).center();
+							.getSkin()));
 			leaderboardEntries.row();
 		}
-		ui.row();
-		ui.add(leaderboardEntries);
+		//leaderboardEntries.add("xdxxxxxxxxxxxxxxxxssssssssssssssssss").height(500);
+		Cell<?> c = ui.add(leaderboardEntries);
+		c.colspan(4).center();
 	}
 
 	/**
