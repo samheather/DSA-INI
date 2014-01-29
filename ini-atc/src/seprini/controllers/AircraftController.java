@@ -141,7 +141,8 @@ public final class AircraftController extends InputListener implements
 		.setMaxClimbRate(10).setMaxSpeed(1.5f).setMaxTurningSpeed(0.8f)
 		.setRadius(15).setSeparationRadius(separationRadius)
 		.setTexture(Art.getTextureRegion("snakeyaircraft"))
-		.setVelocity(new Vector2(0.8f, 0.8f));
+		.setVelocity(new Vector2(0.8f, 0.8f))
+		.setControllable(false);
 			
 		
 
