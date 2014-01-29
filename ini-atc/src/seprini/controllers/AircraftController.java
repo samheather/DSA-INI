@@ -41,6 +41,8 @@ public final class AircraftController extends InputListener implements
 	private boolean breachingSound, breachingIsPlaying;
 
 	private final AircraftType defaultAircraft = new AircraftType();
+	private final AircraftType speedyAircraft = new AircraftType();
+	
 	private Aircraft selectedAircraft;
 
 	private final GameDifficulty difficulty;
@@ -116,6 +118,14 @@ public final class AircraftController extends InputListener implements
 				.setRadius(15).setSeparationRadius(separationRadius)
 				.setTexture(Art.getTextureRegion("aircraft"))
 				.setVelocity(new Vector2(0.8f, 0.8f));
+		
+		speedyAircraft.setCoords(new Vector2(0, 0)).setActive(true)
+			.setMaxClimbRate(10).setMaxSpeed(2.3f).setMaxTurningSpeed(0.5f)
+			.setRadius(12).setSeparationRadius(separationRadius)
+			.setTexture(Art.getTextureRegion("aircraft"))
+			.setVelocity(new Vector2(1.3f, 1.3f));
+		
+		
 
 		// add aircraft types to airplaneTypes array.
 		aircraftTypeList.add(defaultAircraft);
