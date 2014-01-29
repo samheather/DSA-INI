@@ -37,11 +37,15 @@ public final class AircraftController extends InputListener implements
 
 	private final int maxAircraft, timeBetweenGenerations, separationRadius;
 
-	private double lastWarned, lastGenerated;
+	private float lastWarned, lastGenerated;
 	private boolean breachingSound, breachingIsPlaying;
 
 	private final AircraftType defaultAircraft = new AircraftType();
+	private final AircraftType speedyAircraft = new AircraftType();
+	private final AircraftType slowyAircraft = new AircraftType();
+	
 	private Aircraft selectedAircraft;
+	private boolean hasCollided = false;
 
 	private final GameDifficulty difficulty;
 
@@ -92,16 +96,19 @@ public final class AircraftController extends InputListener implements
 			maxAircraft = 10;
 			timeBetweenGenerations = 6;
 			separationRadius = 75;
+			State.setDifficultyMultiplier(1);
 			break;
 		case MEDIUM:
-			maxAircraft = 10;
+			maxAircraft = 15;
 			timeBetweenGenerations = 5;
 			separationRadius = 100;
+			State.setDifficultyMultiplier(1.5f);
 			break;
 		case HARD:
-			maxAircraft = 20;
-			timeBetweenGenerations = 3;
+			maxAircraft = 30;
+			timeBetweenGenerations = 1;
 			separationRadius = 150;
+			State.setDifficultyMultiplier(2);
 			break;
 		default:
 			maxAircraft = 10;
@@ -116,9 +123,25 @@ public final class AircraftController extends InputListener implements
 				.setRadius(15).setSeparationRadius(separationRadius)
 				.setTexture(Art.getTextureRegion("aircraft"))
 				.setVelocity(new Vector2(0.8f, 0.8f));
+		
+		speedyAircraft.setCoords(new Vector2(0, 0)).setActive(true)
+			.setMaxClimbRate(10).setMaxSpeed(2.3f).setMaxTurningSpeed(0.8f)
+			.setRadius(15).setSeparationRadius(separationRadius)
+			.setTexture(Art.getTextureRegion("fastAircraft"))
+			.setVelocity(new Vector2(1.3f, 1.3f));
+		
+		slowyAircraft.setCoords(new Vector2(0, 0)).setActive(true)
+			.setMaxClimbRate(10).setMaxSpeed(0.8f).setMaxTurningSpeed(0.8f)
+			.setRadius(15).setSeparationRadius(separationRadius)
+			.setTexture(Art.getTextureRegion("slowAircraft"))
+			.setVelocity(new Vector2(0.4f, 0.4f));
+			
+		
 
 		// add aircraft types to airplaneTypes array.
 		aircraftTypeList.add(defaultAircraft);
+		aircraftTypeList.add(speedyAircraft);
+		aircraftTypeList.add(slowyAircraft);
 
 		this.sidebar.init();
 	}
@@ -146,9 +169,9 @@ public final class AircraftController extends InputListener implements
 			// Collision Detection + Separation breach detection.
 			for (int j = 0; j < aircraftList.size(); j++) {
 
-				// Quite simply checks if distance between the centres of both
-				// the aircraft <= the radius of aircraft i + radius of aircraft
-				// j
+				/* Quite simply checks if distance between the centres of both
+				 the aircraft <= the radius of aircraft i + radius of aircraft
+				 j */
 				planeJ = aircraftList.get(j);
 
 				if (!planeI.equals(planeJ)
@@ -156,7 +179,10 @@ public final class AircraftController extends InputListener implements
 						&& Math.abs(planeI.getAltitude() - planeJ.getAltitude()) < Config.MIN_ALTITUDE_DIFFERENCE
 						// Check difference in horizontal 2d plane.
 						&& planeI.getCoords().dst(planeJ.getCoords()) < planeI
-								.getRadius() + planeJ.getRadius()) {
+								.getRadius() + planeJ.getRadius()
+						&& (!hasCollided))
+				{
+					hasCollided = true;
 					collisionHasOccured(planeI, planeJ);
 				}
 

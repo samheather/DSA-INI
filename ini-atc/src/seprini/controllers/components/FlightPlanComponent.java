@@ -2,7 +2,7 @@ package seprini.controllers.components;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+import seprini.models.Aircraft;
 import seprini.models.Exitpoint;
 import seprini.models.Waypoint;
 
@@ -30,7 +30,7 @@ public class FlightPlanComponent {
 		// Initialisation of parameters required by flightPlanWaypointGenerator.
 		ArrayList<Waypoint> flightPlan = new ArrayList<Waypoint>();
 		Waypoint entryWaypoint = setStartpoint();
-		Waypoint lastWaypoint = setEndpoint(entryWaypoint, 1);
+		Waypoint lastWaypoint = setEndpoint(entryWaypoint, 600 );
 		// entryWaypoint immediately added to aircrafts flightPlan.
 		flightPlan.add(entryWaypoint);
 
@@ -100,6 +100,7 @@ public class FlightPlanComponent {
 			ArrayList<Waypoint> waypointSelectionList, int maxAngle,
 			int minDistance) {
 		Waypoint nextWaypoint = null;
+		Aircraft.ignorePath = false;
 
 		for (Waypoint waypoint : waypointSelectionList) {
 			// Find normal vector from current item in waypointSelectionList to
