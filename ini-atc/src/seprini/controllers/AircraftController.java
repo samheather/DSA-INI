@@ -37,7 +37,7 @@ public final class AircraftController extends InputListener implements
 
 	private final int maxAircraft, timeBetweenGenerations, separationRadius;
 
-	private float lastGenerated, lastWarned;
+	private double lastWarned, lastGenerated;
 	private boolean breachingSound, breachingIsPlaying;
 
 	private final AircraftType defaultAircraft = new AircraftType();
@@ -91,7 +91,7 @@ public final class AircraftController extends InputListener implements
 		case EASY:
 			maxAircraft = 10;
 			timeBetweenGenerations = 6;
-			separationRadius = 150;
+			separationRadius = 75;
 			break;
 		case MEDIUM:
 			maxAircraft = 10;
@@ -99,9 +99,9 @@ public final class AircraftController extends InputListener implements
 			separationRadius = 100;
 			break;
 		case HARD:
-			maxAircraft = 10;
-			timeBetweenGenerations = 4;
-			separationRadius = 75;
+			maxAircraft = 20;
+			timeBetweenGenerations = 3;
+			separationRadius = 150;
 			break;
 		default:
 			maxAircraft = 10;
