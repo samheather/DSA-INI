@@ -50,7 +50,8 @@ public class EndScreen extends Screen {
 						+ " people.\n"
 						+ "However, surprisingly, you managed to avoid a crash for exactly "
 						+ Math.round(State.time())
-						+ " seconds, which is respectable (at least by some standards).\n",
+						+ " seconds, which is respectable (at least by some standards).\n\n"
+						+ "Enter your name to be entered into the Leaderboard:\n",
 				Art.getSkin(), "textStyle");
 
 		ui.add(text).center();
@@ -72,7 +73,7 @@ public class EndScreen extends Screen {
 		button.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				if(tf.getText() != "") {
+				if(!tf.getText().isEmpty()) {
 					MenuController.addLeaderboardEntry(tf.getText(), State.getScore());
 				}
 				setScreen(new MenuScreen());
