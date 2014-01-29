@@ -27,7 +27,7 @@ public final class MenuController extends ChangeListener implements Controller {
 	private final Table ui;
 	private final MenuScreen screen;
 	private static final Leaderboard lb = new Leaderboard();
-	
+
 	public static void addLeaderboardEntry(String name, double score) {
 		lb.addLeaderboardEntry(name, score);
 	}
@@ -49,20 +49,18 @@ public final class MenuController extends ChangeListener implements Controller {
 		this.screen = screen;
 		buttons = new HashMap<String, TextButton>();
 
-		//ui.setLayoutEnabled(false);
+		// ui.setLayoutEnabled(false);
 
-		
 		addButtons();
 
-//		ui.toFront();
+		// ui.toFront();
 		ui.row();
 		ui.padTop(200);
-//		ui.setHeight(50);
+		// ui.setHeight(50);
 		ui.row().padTop(100);
 		addLeaderboard();
 		ui.row();
-		
-		
+
 	}
 
 	/**
@@ -70,14 +68,14 @@ public final class MenuController extends ChangeListener implements Controller {
 	 */
 	private void addLeaderboard() {
 		Table leaderboardEntries = new Table(Art.getSkin());
+		leaderboardEntries.add(new Label("LEADERBOARD", Art.getSkin(), "bold"));
+		leaderboardEntries.row();
 		for (LeaderboardEntry l : lb.leaderboardEntries) {
-			leaderboardEntries
-					.add(new Label(" " + l.getName() + ": " + (int)l.getScore() + " ", Art
-							.getSkin()));
+			leaderboardEntries.add(new Label(" " + l.getName() + ": "
+					+ (int) l.getScore() + " ", Art.getSkin()));
 			leaderboardEntries.row();
 		}
 
-		//leaderboardEntries.add("xdxxxxxxxxxxxxxxxxssssssssssssssssss").height(500);
 		Cell<?> c = ui.add(leaderboardEntries);
 		c.colspan(4).center();
 

@@ -68,7 +68,6 @@ public class Art {
 		
 		textures.put("waypoint", split(combined, 0, 720, 20, 20));
 		textures.put("menuAircraft", split(combined, 1280, 64, 727, 249));
-		textures.put("libgdx", split(combined, 1353, 0, 53, 10));
 		textures.put("entrypoint", split(combined, 20, 720, 20, 20));
 		textures.put("exitpoint", split(combined, 40, 720, 20, 20));
 
@@ -117,6 +116,7 @@ public class Art {
 		textFieldStyle.font = skin.getFont("default");
 		textFieldStyle.background = skin.newDrawable("white", Color.LIGHT_GRAY);
 		textFieldStyle.fontColor = Color.BLACK;
+		textFieldStyle.selection = skin.newDrawable("white", Color.WHITE);
 		skin.add("default", textFieldStyle);
 
 		// Configure a TextButtonStyle and name it "default". Skin resources are
@@ -134,6 +134,11 @@ public class Art {
 		labelStyle.font = skin.getFont("default");
 		labelStyle.background = skin.newDrawable("white", Color.DARK_GRAY);
 		skin.add("default", labelStyle);
+		
+		LabelStyle labelStyleBold = new LabelStyle();
+		labelStyleBold.font = skin.getFont("default"); //needs to be bold
+		labelStyleBold.background = skin.newDrawable("white", Color.DARK_GRAY);
+		skin.add("bold", labelStyleBold);
 
 		// labelStyle without a background and black text
 		LabelStyle textStyle = new LabelStyle();
