@@ -134,6 +134,11 @@ public class Art {
 		labelStyle.font = skin.getFont("default");
 		labelStyle.background = skin.newDrawable("white", Color.DARK_GRAY);
 		skin.add("default", labelStyle);
+		
+		LabelStyle labelStyleBold = new LabelStyle();
+		labelStyleBold.font = skin.getFont("default"); //needs to be bold
+		labelStyleBold.background = skin.newDrawable("white", Color.DARK_GRAY);
+		skin.add("bold", labelStyleBold);
 
 		// labelStyle without a background and black text
 		LabelStyle textStyle = new LabelStyle();
