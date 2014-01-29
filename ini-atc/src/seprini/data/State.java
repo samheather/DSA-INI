@@ -6,6 +6,7 @@ public class State {
 
 	private static State instance = null;
 	private static float score;
+	private static float difficultyMultiplier;
 
 	public static boolean paused = false;
 	private static double time = 0;
@@ -50,11 +51,15 @@ public class State {
 	}
 	
 	public static void incScore(float increment) {
-		score += increment;
+		score += (difficultyMultiplier * increment);
 	}
 	
 	public static int getScore() {
 		return Math.round(score);
+	}
+	
+	public static void setDifficultyMultiplier(float multiplier) {
+		difficultyMultiplier = multiplier;
 	}
 
 }

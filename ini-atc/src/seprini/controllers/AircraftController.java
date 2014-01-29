@@ -92,16 +92,19 @@ public final class AircraftController extends InputListener implements
 			maxAircraft = 10;
 			timeBetweenGenerations = 6;
 			separationRadius = 75;
+			State.setDifficultyMultiplier(1);
 			break;
 		case MEDIUM:
-			maxAircraft = 10;
+			maxAircraft = 15;
 			timeBetweenGenerations = 5;
 			separationRadius = 100;
+			State.setDifficultyMultiplier(1.5f);
 			break;
 		case HARD:
 			maxAircraft = 20;
 			timeBetweenGenerations = 3;
 			separationRadius = 150;
+			State.setDifficultyMultiplier(2);
 			break;
 		default:
 			maxAircraft = 10;
