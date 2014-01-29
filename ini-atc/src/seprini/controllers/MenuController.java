@@ -72,7 +72,7 @@ public final class MenuController extends ChangeListener implements Controller {
 		Table leaderboardEntries = new Table(Art.getSkin());
 		for (LeaderboardEntry l : lb.leaderboardEntries) {
 			leaderboardEntries
-					.add(new Label(l.getName() + ": " + l.getScore(), Art
+					.add(new Label(" " + l.getName() + ": " + (int)l.getScore() + " ", Art
 							.getSkin()));
 			leaderboardEntries.row();
 		}

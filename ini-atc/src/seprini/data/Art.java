@@ -115,7 +115,7 @@ public class Art {
 		
 		TextFieldStyle textFieldStyle = new TextFieldStyle();
 		textFieldStyle.font = skin.getFont("default");
-		textFieldStyle.background = skin.newDrawable("white", Color.BLUE);
+		textFieldStyle.background = skin.newDrawable("white", Color.LIGHT_GRAY);
 		textFieldStyle.fontColor = Color.BLACK;
 		skin.add("default", textFieldStyle);
 
