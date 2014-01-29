@@ -40,7 +40,7 @@ public final class Aircraft extends Entity {
 	private boolean breaching;
 
 	private boolean isActive = true;
-	private boolean ignorePath = false; // When user has taken control of the
+	public static boolean ignorePath = false; // When user has taken control of the
 	// aircraft
 
 	// whether the aircraft is selected by the player
