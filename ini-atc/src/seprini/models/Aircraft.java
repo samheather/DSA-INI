@@ -44,7 +44,8 @@ public final class Aircraft extends Entity {
 	private boolean isActive = true;
 	public static boolean ignorePath = false; // When user has taken control of the
 	// aircraft
-
+	
+	private boolean canControl;
 	// whether the aircraft is selected by the player
 	private boolean selected;
 
@@ -75,6 +76,7 @@ public final class Aircraft extends Entity {
 		minSpeed = Math.max((maxSpeed - 1) , 0.1);
 		velocityScalar = INITIAL_VELOCITY_SCALAR;
 		velocity = aircraftType.getVelocity();
+		canControl = aircraftType.getControllable();
 
 		Random rand = new Random();
 		altitude = Config.ALTITUDES[rand.nextInt(Config.ALTITUDES.length)];
@@ -508,7 +510,10 @@ public final class Aircraft extends Entity {
 	 * @return whether is selected
 	 */
 	public boolean selected(boolean newSelected) {
-		return this.selected = newSelected;
+		if (canControl) {
+			return this.selected = newSelected;
+		}
+		return false;
 	}
 
 	@Override
