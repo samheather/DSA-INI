@@ -58,8 +58,6 @@ public class MenuScreen extends Screen {
 		draw(Art.getTextureRegion("menuAircraft"), 300, 390,
 				root.getSpriteBatch());
 
-		draw(Art.getTextureRegion("libgdx"), 1228, 0,
-				root.getSpriteBatch());
 	}
 
 	@Override

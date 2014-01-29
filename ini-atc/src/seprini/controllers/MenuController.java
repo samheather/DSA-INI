@@ -26,7 +26,11 @@ public final class MenuController extends ChangeListener implements Controller {
 
 	private final Table ui;
 	private final MenuScreen screen;
-	private final Leaderboard lb = new Leaderboard();
+	private static final Leaderboard lb = new Leaderboard();
+	
+	public static void addLeaderboardEntry(String name, double score) {
+		lb.addLeaderboardEntry(name, score);
+	}
 
 	private HashMap<String, TextButton> buttons;
 

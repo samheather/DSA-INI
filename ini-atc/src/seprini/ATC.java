@@ -1,7 +1,10 @@
 package seprini;
 
+import org.hamcrest.core.IsInstanceOf;
+
 import seprini.data.Art;
 import seprini.data.State;
+import seprini.screens.EndScreen;
 import seprini.screens.MenuScreen;
 import seprini.screens.Screen;
 
@@ -41,7 +44,9 @@ public class ATC implements ApplicationListener {
 
 		screen = newScreen;
 
-		State.reset();
+		if (screen instanceof MenuScreen) {
+			State.reset();
+		}
 
 		if (screen != null)
 			screen.init(this);
