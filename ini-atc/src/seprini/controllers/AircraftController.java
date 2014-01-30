@@ -3,6 +3,8 @@ package seprini.controllers;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.text.View;
+
 import seprini.controllers.components.FlightPlanComponent;
 import seprini.controllers.components.WaypointComponent;
 import seprini.data.Art;
@@ -327,8 +329,12 @@ public final class AircraftController extends InputListener implements
 				+ rand.nextInt(100))
 			return null;
 
-		Aircraft newAircraft = new Aircraft(randomAircraftType(),
-				flightplan.generate(), aircraftId++);
+		AircraftType t = randomAircraftType();
+		if (t == snakeyAircraft) {
+			sidebar.addEvent("You've got snakes on a plane! You have no control over this plane.");
+		}
+		Aircraft newAircraft = new Aircraft(t, flightplan.generate(),
+				aircraftId++);
 
 		aircraftList.add(newAircraft);
 
