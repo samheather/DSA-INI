@@ -254,7 +254,7 @@ public final class Aircraft extends Entity {
 		coords.add(velocity.cpy().scl(velocityScalar));
 
 		// allows for smooth decent/ascent
-		if (selected) {
+		if (this.canControl) {
 			if (altitude > desiredAltitude) {
 				this.altitude -= this.maxClimbRate;
 			} else if (altitude < desiredAltitude) {
