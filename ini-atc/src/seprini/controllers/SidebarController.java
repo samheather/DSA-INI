@@ -1,6 +1,8 @@
 package seprini.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import seprini.data.Art;
 import seprini.data.Config;
@@ -41,6 +43,30 @@ public final class SidebarController extends ChangeListener implements
 
 	// UI wrappers for the controls and the buttons at the bottom
 	private Table sidebar, aircraftControls, bottomButtons;
+	
+	private Table eventsDisplay = new Table(Art.getSkin());
+	
+	private class Event {
+		private final String message;
+		private final float time;
+		public float time() {
+			return time;
+		}
+		public String message() {
+			return message;
+		}
+		public Event(String message, float time) {
+			this.time = time;
+			this.message = message;
+		}
+	}
+	
+	private List<Event> events = new ArrayList<Event>();
+	
+	
+	public void addEvent(String message) {
+		events.add(new Event(message, State.time() + 10));
+	}
 
 	// stores state of the turn left/right buttons
 	private boolean turningLeft, turningRight;
@@ -67,6 +93,10 @@ public final class SidebarController extends ChangeListener implements
 	 * Initialise all the buttons and labels
 	 */
 	public void init() {
+		//eventsDisplay.add("lololtesting");
+		//eventsDisplay.row();
+		//eventsDisplay.add("loltetsing2");
+		sidebar.add(eventsDisplay);
 
 		// wrapper for aicraft controls
 		aircraftControls = new Table();
@@ -157,6 +187,16 @@ public final class SidebarController extends ChangeListener implements
 	 * Update the sidebar according to changes in the AircraftController
 	 */
 	public void update() {
+		
+		eventsDisplay.clear();
+		for(int i = 0; i<events.size(); ++i) {
+			if(events.get(i).time() < State.time()) {
+				events.remove(i);
+				--i;
+			} else {
+				eventsDisplay.add(events.get(i).message());
+			}
+		}
 		String altitudeText;
 		String speedText;
 
