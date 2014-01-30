@@ -18,7 +18,7 @@ public class Leaderboard /* implements Drawable */{
 	/**
 	 * Array containing the LeaderboardEntries
 	 */
-	public LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
+	public static LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
 	/**
 	 * Path to the file in which leaderboardScores are stored.
 	 */
