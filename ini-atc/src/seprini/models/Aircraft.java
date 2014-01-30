@@ -200,7 +200,7 @@ public final class Aircraft extends Entity {
 			turnLeft();
 
 		// if the player has taken control of the aircraft, ignore all waypoints
-		if (!ignorePath) {
+		if ((!ignorePath)&& selected) {
 
 			// Vector to next waypoint
 			Vector2 nextWaypoint = vectorToWaypoint();
