@@ -35,7 +35,7 @@ public class MenuScreen extends Screen {
 		// create a table layout
 		ui = new Table();
 
-		// creater the controller for this screen, this will handle basically
+		// creator the controller for this screen, this will handle basically
 		// everything for this screen, including input and creation of buttons
 		new MenuController(this, ui);
 

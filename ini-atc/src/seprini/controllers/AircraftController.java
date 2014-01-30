@@ -44,7 +44,9 @@ public final class AircraftController extends InputListener implements
 	private final AircraftType speedyAircraft = new AircraftType();
 	private final AircraftType slowyAircraft = new AircraftType();
 	private final AircraftType snakeyAircraft = new AircraftType();
-	
+
+	private int totalProbabilities;
+
 	private Aircraft selectedAircraft;
 	private boolean hasCollided = false;
 
@@ -123,38 +125,37 @@ public final class AircraftController extends InputListener implements
 				.setMaxClimbRate(10).setMaxSpeed(1.5f).setMaxTurningSpeed(0.8f)
 				.setRadius(15).setSeparationRadius(separationRadius)
 				.setTexture(Art.getTextureRegion("aircraft"))
-				.setVelocity(new Vector2(0.8f, 0.8f))
-				.setProbability(0.3f);
-		
+				.setVelocity(new Vector2(0.8f, 0.8f)).setProbability(3);
+
 		speedyAircraft.setCoords(new Vector2(0, 0)).setActive(true)
-			.setMaxClimbRate(10).setMaxSpeed(2.3f).setMaxTurningSpeed(1.2f)
-			.setRadius(15).setSeparationRadius(separationRadius)
-			.setTexture(Art.getTextureRegion("fastAircraft"))
-			.setVelocity(new Vector2(1.3f, 1.3f))
-			.setProbability(0.2f);
-		
+				.setMaxClimbRate(10).setMaxSpeed(2.3f).setMaxTurningSpeed(1.2f)
+				.setRadius(15).setSeparationRadius(separationRadius)
+				.setTexture(Art.getTextureRegion("fastAircraft"))
+				.setVelocity(new Vector2(1.3f, 1.3f)).setProbability(2);
+
 		slowyAircraft.setCoords(new Vector2(0, 0)).setActive(true)
-			.setMaxClimbRate(10).setMaxSpeed(0.8f).setMaxTurningSpeed(0.8f)
-			.setRadius(15).setSeparationRadius(separationRadius)
-			.setTexture(Art.getTextureRegion("slowAircraft"))
-			.setVelocity(new Vector2(0.4f, 0.4f))
-			.setProbability(0.2f);
-		
+				.setMaxClimbRate(10).setMaxSpeed(0.8f).setMaxTurningSpeed(0.8f)
+				.setRadius(15).setSeparationRadius(separationRadius)
+				.setTexture(Art.getTextureRegion("slowAircraft"))
+				.setVelocity(new Vector2(0.4f, 0.4f)).setProbability(1);
+
 		snakeyAircraft.setCoords(new Vector2(0, 0)).setActive(true)
-		.setMaxClimbRate(10).setMaxSpeed(1.5f).setMaxTurningSpeed(0.8f)
-		.setRadius(15).setSeparationRadius(separationRadius)
-		.setTexture(Art.getTextureRegion("snakeyaircraft"))
-		.setVelocity(new Vector2(0.8f, 0.8f))
-		.setControllable(false)
-		.setProbability(0.1f);
-			
-		
+				.setMaxClimbRate(10).setMaxSpeed(1.5f).setMaxTurningSpeed(0.8f)
+				.setRadius(15).setSeparationRadius(separationRadius)
+				.setTexture(Art.getTextureRegion("snakeyaircraft"))
+				.setVelocity(new Vector2(0.8f, 0.8f)).setControllable(false)
+				.setProbability(1);
 
 		// add aircraft types to airplaneTypes array.
 		aircraftTypeList.add(defaultAircraft);
 		aircraftTypeList.add(speedyAircraft);
 		aircraftTypeList.add(slowyAircraft);
 		aircraftTypeList.add(snakeyAircraft);
+
+		for (AircraftType plane : aircraftTypeList) {
+			totalProbabilities += plane.getProbability();
+			plane.setProbability(totalProbabilities);
+		}
 
 		this.sidebar.init();
 	}
@@ -182,9 +183,11 @@ public final class AircraftController extends InputListener implements
 			// Collision Detection + Separation breach detection.
 			for (int j = 0; j < aircraftList.size(); j++) {
 
-				/* Quite simply checks if distance between the centres of both
-				 the aircraft <= the radius of aircraft i + radius of aircraft
-				 j */
+				/*
+				 * Quite simply checks if distance between the centres of both
+				 * the aircraft <= the radius of aircraft i + radius of aircraft
+				 * j
+				 */
 				planeJ = aircraftList.get(j);
 
 				if (!planeI.equals(planeJ)
@@ -193,8 +196,7 @@ public final class AircraftController extends InputListener implements
 						// Check difference in horizontal 2d plane.
 						&& planeI.getCoords().dst(planeJ.getCoords()) < planeI
 								.getRadius() + planeJ.getRadius()
-						&& (!hasCollided))
-				{
+						&& (!hasCollided)) {
 					hasCollided = true;
 					collisionHasOccured(planeI, planeJ);
 				}
@@ -316,7 +318,7 @@ public final class AircraftController extends InputListener implements
 	 */
 	private Aircraft generateAircraft() {
 		// number of aircraft has reached maximum, abort
-		if (aircraftList.size() == maxAircraft)
+		if (aircraftList.size() >= maxAircraft)
 			return null;
 
 		// time difference between aircraft generated - depends on difficulty
@@ -331,7 +333,7 @@ public final class AircraftController extends InputListener implements
 		aircraftList.add(newAircraft);
 
 		// store the time when an aircraft was last generated to know when to
-		// generate the next aicraft
+		// generate the next aircraft
 		lastGenerated = State.time();
 
 		return newAircraft;
@@ -343,6 +345,12 @@ public final class AircraftController extends InputListener implements
 	 * @return AircraftType
 	 */
 	private AircraftType randomAircraftType() {
+		int randNum = rand.nextInt(totalProbabilities);
+		for (AircraftType plane : aircraftTypeList) {
+			if (randNum > plane.getProbability()) {
+				return plane;
+			}
+		}
 		return aircraftTypeList.get(rand.nextInt(aircraftTypeList.size()));
 	}
 
