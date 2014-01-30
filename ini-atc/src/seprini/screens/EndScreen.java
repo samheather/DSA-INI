@@ -50,8 +50,10 @@ public class EndScreen extends Screen {
 						+ " people.\n"
 						+ "However, surprisingly, you managed to avoid a crash for exactly "
 						+ Math.round(State.time())
-						+ " seconds, which is respectable (at least by some standards).\n\n"
-						+ "Enter your name to be entered into the Leaderboard:\n",
+						+ " seconds, which is respectable (at least by some standards).\n"
+						+ "Your final score is "
+						+ State.getScore()
+						+ ". Enter your name if you want to be added into the Leaderboard:\n",
 				Art.getSkin(), "textStyle");
 
 		ui.add(text).center();
