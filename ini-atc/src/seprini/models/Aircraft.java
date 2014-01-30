@@ -73,7 +73,7 @@ public final class Aircraft extends Entity {
 		maxTurningRate = aircraftType.getMaxTurningSpeed();
 		maxClimbRate = aircraftType.getMaxClimbRate();
 		maxSpeed = aircraftType.getMaxSpeed();
-		minSpeed = Math.max((maxSpeed - 1) , 0.1);
+		minSpeed = Math.max((maxSpeed - 1.5) , 0.4);
 		velocityScalar = INITIAL_VELOCITY_SCALAR;
 		velocity = aircraftType.getVelocity();
 		canControl = aircraftType.getControllable();
