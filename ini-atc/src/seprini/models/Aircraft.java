@@ -192,11 +192,11 @@ public final class Aircraft extends Entity {
 	 */
 	public void act() {
 		// if player is holding D or -> on the keyboard, turn right
-		if (turnRight && selected)
+		if (turnRight && this.canControl)
 			turnRight();
 
 		// if the player is holding A or <-, turn left
-		if (turnLeft && selected)
+		if (turnLeft && this.canControl)
 			turnLeft();
 
 		// if the player has taken control of the aircraft, ignore all waypoints
