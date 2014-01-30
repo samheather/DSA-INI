@@ -47,7 +47,7 @@ public class EndScreen extends Screen {
 		Label text = new Label(
 				"You have failed.\n"
 						+ "Two aeroplanes have collided mid-flight in a huge crash which resulted in the death of "
-						+ Math.max(Math.ceil(Math.random() * 500), 50)
+						+ (int)Math.max(Math.ceil(Math.random() * 500), 50)
 						+ " people.\n"
 						+ "However, surprisingly, you managed to avoid a crash for approximately "
 						+ Math.round(State.time())
