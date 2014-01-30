@@ -63,6 +63,7 @@ public class EndScreen extends Screen {
 		Label l = new Label("Name: ", Art.getSkin());
 		t.add(l).center();
 		final TextField tf = new TextField("", Art.getSkin());
+		tf.setMaxLength(30);
 		t.add(tf).left();
 
 		ui.add(t);

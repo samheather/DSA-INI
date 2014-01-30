@@ -117,6 +117,7 @@ public class Art {
 		textFieldStyle.background = skin.newDrawable("white", Color.LIGHT_GRAY);
 		textFieldStyle.fontColor = Color.BLACK;
 		textFieldStyle.selection = skin.newDrawable("white", Color.WHITE);
+		textFieldStyle.cursor = skin.newDrawable("white", Color.WHITE);
 		skin.add("default", textFieldStyle);
 
 		// Configure a TextButtonStyle and name it "default". Skin resources are
@@ -132,7 +133,7 @@ public class Art {
 		// labelStyle with background
 		LabelStyle labelStyle = new LabelStyle();
 		labelStyle.font = skin.getFont("default");
-		labelStyle.background = skin.newDrawable("white", Color.DARK_GRAY);
+		labelStyle.fontColor = new Color(0.07f, 0.1f, 0.22f, 1);
 		skin.add("default", labelStyle);
 		
 		LabelStyle labelStyleBold = new LabelStyle();
