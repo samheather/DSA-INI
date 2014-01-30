@@ -225,7 +225,7 @@ public final class SidebarController extends ChangeListener implements
 	 * @return
 	 */
 	private Cell<?> createLabel(String name, String text, Table parent) {
-		Label label = new Label(text, Art.getSkin());
+		Label label = new Label(text, Art.getSkin(), "bold");
 
 		labels.put(name, label);
 
