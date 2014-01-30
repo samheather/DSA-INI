@@ -55,9 +55,9 @@ public final class MenuController extends ChangeListener implements Controller {
 
 		// ui.toFront();
 		ui.row();
-		ui.padTop(200);
+		ui.padTop(230);
 		// ui.setHeight(50);
-		ui.row().padTop(100);
+		ui.row().padTop(80);
 		addLeaderboard();
 		ui.row();
 
@@ -68,7 +68,8 @@ public final class MenuController extends ChangeListener implements Controller {
 	 */
 	private void addLeaderboard() {
 		Table leaderboardEntries = new Table(Art.getSkin());
-		leaderboardEntries.add(new Label("LEADERBOARD", Art.getSkin(), "bold"));
+		// TODO remove bold
+		leaderboardEntries.add(new Label("---Leaderboard---", Art.getSkin()));
 		leaderboardEntries.row();
 		for (LeaderboardEntry l : lb.leaderboardEntries) {
 			leaderboardEntries.add(new Label(" " + l.getName() + ": "
@@ -86,7 +87,7 @@ public final class MenuController extends ChangeListener implements Controller {
 	 */
 	private void addButtons() {
 		// Create a label for difficulty and add it
-		Label difficultylabel = new Label("Difficulty:", Art.getSkin());
+		Label difficultylabel = new Label("Difficulty:", Art.getSkin(), "bold");
 		ui.add(difficultylabel).width(100).center();
 
 		// create a button to start the game in easy mode

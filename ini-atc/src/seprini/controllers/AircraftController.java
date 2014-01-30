@@ -123,26 +123,30 @@ public final class AircraftController extends InputListener implements
 				.setMaxClimbRate(10).setMaxSpeed(1.5f).setMaxTurningSpeed(0.8f)
 				.setRadius(15).setSeparationRadius(separationRadius)
 				.setTexture(Art.getTextureRegion("aircraft"))
-				.setVelocity(new Vector2(0.8f, 0.8f));
+				.setVelocity(new Vector2(0.8f, 0.8f))
+				.setProbability(0.3f);
 		
 		speedyAircraft.setCoords(new Vector2(0, 0)).setActive(true)
 			.setMaxClimbRate(10).setMaxSpeed(2.3f).setMaxTurningSpeed(1.2f)
 			.setRadius(15).setSeparationRadius(separationRadius)
 			.setTexture(Art.getTextureRegion("fastAircraft"))
-			.setVelocity(new Vector2(1.3f, 1.3f));
+			.setVelocity(new Vector2(1.3f, 1.3f))
+			.setProbability(0.2f);
 		
 		slowyAircraft.setCoords(new Vector2(0, 0)).setActive(true)
 			.setMaxClimbRate(10).setMaxSpeed(0.8f).setMaxTurningSpeed(0.8f)
 			.setRadius(15).setSeparationRadius(separationRadius)
 			.setTexture(Art.getTextureRegion("slowAircraft"))
-			.setVelocity(new Vector2(0.4f, 0.4f));
+			.setVelocity(new Vector2(0.4f, 0.4f))
+			.setProbability(0.2f);
 		
 		snakeyAircraft.setCoords(new Vector2(0, 0)).setActive(true)
 		.setMaxClimbRate(10).setMaxSpeed(1.5f).setMaxTurningSpeed(0.8f)
 		.setRadius(15).setSeparationRadius(separationRadius)
 		.setTexture(Art.getTextureRegion("snakeyaircraft"))
 		.setVelocity(new Vector2(0.8f, 0.8f))
-		.setControllable(false);
+		.setControllable(false)
+		.setProbability(0.1f);
 			
 		
 
