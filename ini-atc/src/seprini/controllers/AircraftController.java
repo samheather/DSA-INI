@@ -331,7 +331,7 @@ public final class AircraftController extends InputListener implements
 
 		AircraftType t = randomAircraftType();
 		if (t == snakeyAircraft) {
-			sidebar.addEvent("You've got snakes on a plane! You have no control over this plane.");
+			sidebar.addEvent("You've got snakes on a plane!");
 		}
 		Aircraft newAircraft = new Aircraft(t, flightplan.generate(),
 				aircraftId++);

@@ -195,6 +195,7 @@ public final class SidebarController extends ChangeListener implements
 				--i;
 			} else {
 				eventsDisplay.add(events.get(i).message());
+				eventsDisplay.row();
 			}
 		}
 		String altitudeText;
