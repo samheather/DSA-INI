@@ -64,6 +64,8 @@ public final class AircraftController extends InputListener implements
 	private final GameScreen screen;
 
 	private int aircraftId = 0;
+	
+	private boolean snakeyPlaneMessageDisplayed;
 
 	/**
 	 * 
@@ -331,7 +333,11 @@ public final class AircraftController extends InputListener implements
 
 		AircraftType t = randomAircraftType();
 		if (t == snakeyAircraft) {
-			sidebar.addEvent("You've got snakes on a plane!");
+			if (!snakeyPlaneMessageDisplayed) {
+				sidebar.addEvent("You've got snakes on a plane!");
+				sidebar.addEvent("You can't control this plane.");
+				snakeyPlaneMessageDisplayed = true;
+			}
 		}
 		Aircraft newAircraft = new Aircraft(t, flightplan.generate(),
 				aircraftId++);
