@@ -19,6 +19,7 @@ public class Leaderboard /* implements Drawable */{
 	 * Array containing the LeaderboardEntries
 	 */
 	public static LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
+	public static String[] originalNames = {"Larry", "Sergey", "Tim", "Richard", "Fiona"};
 	/**
 	 * Path to the file in which leaderboardScores are stored.
 	 */
@@ -42,8 +43,8 @@ public class Leaderboard /* implements Drawable */{
 		//	System.out
 		//			.println("Is first load, initialising leaderboard values");
 			for (int i = 0; i < leaderboardEntries.length; i++) {
-				leaderboardEntries[i].setName("Sam");
-				leaderboardEntries[i].setScore((double) 5 + i);
+				leaderboardEntries[i].setName(originalNames[i]);
+				leaderboardEntries[i].setScore((double) 25*i+10);
 			}
 
 			sortLeaderboard(leaderboardEntries);

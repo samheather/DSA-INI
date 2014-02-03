@@ -156,7 +156,7 @@ public final class Aircraft extends Entity {
 
 		// draw the altitude for each aircraft
 		Color color;
-
+		
 		if (getAltitude() <= 7500) {
 			color = Color.GREEN;
 		} else if (getAltitude() <= 12500) {
@@ -192,11 +192,11 @@ public final class Aircraft extends Entity {
 	 */
 	public void act() {
 		// if player is holding D or -> on the keyboard, turn right
-		if (turnRight && selected)
+		if (turnRight && this.canControl)
 			turnRight();
 
 		// if the player is holding A or <-, turn left
-		if (turnLeft && selected)
+		if (turnLeft && this.canControl)
 			turnLeft();
 
 		// if the player has taken control of the aircraft, ignore all waypoints
@@ -254,7 +254,7 @@ public final class Aircraft extends Entity {
 		coords.add(velocity.cpy().scl(velocityScalar));
 
 		// allows for smooth decent/ascent
-		if (selected) {
+		if (this.canControl) {
 			if (altitude > desiredAltitude) {
 				this.altitude -= this.maxClimbRate;
 			} else if (altitude < desiredAltitude) {
@@ -279,9 +279,8 @@ public final class Aircraft extends Entity {
 				.nor();
 		Vector2 coord = velocity.cpy().nor();
 
-		float angle = (float) Math.acos(way.dot(coord) / way.len()
-				* coord.len())
-				* MathUtils.radiansToDegrees;
+		float angle = (float) Math.toDegrees(Math.acos(way.dot(coord) / way.len()
+				* coord.len()));
 		
 		return angle;
 	}
@@ -376,8 +375,9 @@ public final class Aircraft extends Entity {
 	 * Increases rate of altitude change
 	 */
 	public void increaseAltitude() {
-		if (desiredAltitude + ALTITUDE_CHANGE > 15000)
+		if (desiredAltitude + ALTITUDE_CHANGE > 15000){
 			return;
+		}
 
 		this.desiredAltitude += ALTITUDE_CHANGE;
 	}
@@ -386,8 +386,9 @@ public final class Aircraft extends Entity {
 	 * Decreasing rate of altitude change
 	 */
 	public void decreaseAltitude() {
-		if (desiredAltitude - ALTITUDE_CHANGE < 5000)
+		if (desiredAltitude - ALTITUDE_CHANGE < 5000){
 			return;
+		}
 
 		this.desiredAltitude -= ALTITUDE_CHANGE;
 	}
@@ -407,8 +408,9 @@ public final class Aircraft extends Entity {
 		ignorePath = true;
 		float angle = 0;
 
-		if (getRotation() - maxTurningRate * 2 < 0)
+		if (getRotation() - maxTurningRate * 2 < 0){
 			angle = (float) (360 - maxTurningRate * 2);
+		}
 
 		if (angle == 0) {
 			this.rotate(-maxTurningRate * 2);
@@ -426,8 +428,9 @@ public final class Aircraft extends Entity {
 		ignorePath = true;
 		float angle = 0;
 
-		if (getRotation() + maxTurningRate * 2 >= 360.0f)
+		if (getRotation() + maxTurningRate * 2 >= 360.0f){
 			angle = (float) (maxTurningRate * 2);
+		}
 
 		if (angle == 0) {
 			this.rotate(maxTurningRate * 2);

@@ -65,7 +65,7 @@ public final class SidebarController extends ChangeListener implements
 	
 	
 	public void addEvent(String message) {
-		events.add(new Event(message, State.time() + 10));
+		events.add(new Event(message, State.time() + 20));
 	}
 
 	// stores state of the turn left/right buttons
@@ -195,6 +195,7 @@ public final class SidebarController extends ChangeListener implements
 				--i;
 			} else {
 				eventsDisplay.add(events.get(i).message());
+				eventsDisplay.row();
 			}
 		}
 		String altitudeText;
