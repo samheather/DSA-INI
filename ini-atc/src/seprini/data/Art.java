@@ -50,7 +50,7 @@ public class Art {
 	 */
 	public static void load() {
 		// loads the whole sprite which consists most of the game's textures
-		Texture combined = loadTexture("data/combinedgraphics.png");
+		Texture combined = loadTexture("data/combinedgraphics2.png");
 		combined.setFilter(TextureFilter.MipMapLinearLinear,
 				TextureFilter.Linear);
 
@@ -67,6 +67,11 @@ public class Art {
 		
 		
 		textures.put("waypoint", split(combined, 0, 720, 20, 20));
+		
+		//space waypoints
+		//textures.put("waypoint", split(combined, 21, 720, 34, 20));
+		
+		
 		textures.put("menuAircraft", split(combined, 1280, 64, 727, 249));
 		textures.put("entrypoint", split(combined, 20, 720, 20, 20));
 		textures.put("exitpoint", split(combined, 40, 720, 20, 20));
