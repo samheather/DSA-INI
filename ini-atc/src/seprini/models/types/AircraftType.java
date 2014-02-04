@@ -17,7 +17,7 @@ public class AircraftType {
 	private boolean isActive;
 	private int probability;
 	private boolean controllable = true;
-
+	
 	public Vector2 getCoords() {
 		return coords.cpy();
 	}
@@ -26,7 +26,7 @@ public class AircraftType {
 		this.coords = coords;
 		return this;
 	}
-
+	
 	public Vector2 getVelocity() {
 		return velocity.cpy();
 	}

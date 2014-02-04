@@ -3,8 +3,6 @@ package seprini.controllers;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.text.View;
-
 import seprini.controllers.components.FlightPlanComponent;
 import seprini.controllers.components.WaypointComponent;
 import seprini.data.Art;
@@ -64,8 +62,6 @@ public final class AircraftController extends InputListener implements
 	private final GameScreen screen;
 
 	private int aircraftId = 0;
-	
-	private boolean snakeyPlaneMessageDisplayed;
 
 	/**
 	 * 
@@ -331,16 +327,8 @@ public final class AircraftController extends InputListener implements
 				+ rand.nextInt(100))
 			return null;
 
-		AircraftType t = randomAircraftType();
-		if (t == snakeyAircraft) {
-			if (!snakeyPlaneMessageDisplayed) {
-				sidebar.addEvent("You've got snakes on a plane!");
-				sidebar.addEvent("You can't control this plane.");
-				snakeyPlaneMessageDisplayed = true;
-			}
-		}
-		Aircraft newAircraft = new Aircraft(t, flightplan.generate(),
-				aircraftId++);
+		Aircraft newAircraft = new Aircraft(randomAircraftType(),
+				flightplan.generate(), aircraftId++);
 
 		aircraftList.add(newAircraft);
 
@@ -419,7 +407,7 @@ public final class AircraftController extends InputListener implements
 
 		if (getSelectedAircraft() == null)
 			return;
-
+		selectedAircraft.setIgnorePath(false);
 		getSelectedAircraft().insertWaypoint(waypoint);
 	}
 
@@ -441,6 +429,7 @@ public final class AircraftController extends InputListener implements
 
 		if (button == Buttons.LEFT && sidebar.allowNewWaypoints()) {
 			waypoints.createWaypoint(x, y, false);
+			System.out.print("Hello");
 			return true;
 		}
 

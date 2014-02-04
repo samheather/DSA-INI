@@ -36,16 +36,19 @@ public final class Aircraft extends Entity {
 	double minSpeed;
 
 	private float velocityScalar;
-
+	
 	@SuppressWarnings("unused")
 	private final int sepRulesBreachCounter = 0;
 	private boolean breaching;
-
 	private boolean isActive = true;
-	public static boolean ignorePath = false; // When user has taken control of the
+	// When user has taken control of the
 	// aircraft
 	
 	private boolean canControl;
+	private boolean ignorePath = false;
+	
+	
+	
 	// whether the aircraft is selected by the player
 	private boolean selected;
 
@@ -192,12 +195,14 @@ public final class Aircraft extends Entity {
 	 */
 	public void act() {
 		// if player is holding D or -> on the keyboard, turn right
-		if (turnRight && this.canControl)
+		if (turnRight && this.canControl){
 			turnRight();
+		}
 
 		// if the player is holding A or <-, turn left
-		if (turnLeft && this.canControl)
+		if (turnLeft && this.canControl){
 			turnLeft();
+		}
 
 		// if the player has taken control of the aircraft, ignore all waypoints
 		if (!ignorePath) {
@@ -394,10 +399,12 @@ public final class Aircraft extends Entity {
 	}
 
 	public void turnRight(boolean set) {
+		ignorePath = true;
 		turnRight = set;
 	}
 
 	public void turnLeft(boolean set) {
+		ignorePath = true;
 		turnLeft = set;
 	}
 
@@ -405,7 +412,6 @@ public final class Aircraft extends Entity {
 	 * Turns right by maxTurningRate * 2
 	 */
 	public void turnRight() {
-		ignorePath = true;
 		float angle = 0;
 
 		if (getRotation() - maxTurningRate * 2 < 0){
@@ -425,7 +431,6 @@ public final class Aircraft extends Entity {
 	 * Turns left by maxTurningRate * 2
 	 */
 	public void turnLeft() {
-		ignorePath = true;
 		float angle = 0;
 
 		if (getRotation() + maxTurningRate * 2 >= 360.0f){
@@ -469,6 +474,14 @@ public final class Aircraft extends Entity {
 
 	public int getAltitude() {
 		return altitude;
+	}
+	
+	public boolean getIgnorePath(){
+		return ignorePath;
+	}
+	
+	public void setIgnorePath(boolean x){
+		ignorePath = x;
 	}
 
 	/**
