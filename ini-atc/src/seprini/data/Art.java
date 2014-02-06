@@ -47,7 +47,7 @@ public class Art {
 	static{
 		textureFiles.put("earth", new Texture(Gdx.files.internal("data/earthImages.png"), true));
 		textureFiles.put("space", new Texture(Gdx.files.internal("data/spaceImages.png"), true));
-		//textureFiles.put("water", new Texture(Gdx.files.internal("data/waterImages.png"), true));
+		textureFiles.put("water", new Texture(Gdx.files.internal("data/waterImages.png"), true));
 		// load the sound effects
 		sounds.put("ding", loadSound("ding.wav"));
 		sounds.put("warning", loadSound("warning.mp3"));
