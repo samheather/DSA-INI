@@ -438,6 +438,10 @@ public final class AircraftController extends InputListener implements
 
 	@Override
 	public boolean keyDown(InputEvent event, int keycode) {
+		
+		if (keycode == Keys.SPACE)
+			State.paused = (State.paused) ? false : true;
+		
 		if (selectedAircraft != null && !State.paused) {
 
 			if (keycode == Keys.LEFT || keycode == Keys.A)
@@ -457,7 +461,6 @@ public final class AircraftController extends InputListener implements
 
 			if (keycode == Keys.Q)
 				selectedAircraft.decreaseSpeed();
-
 		}
 
 		return false;
