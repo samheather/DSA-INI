@@ -101,13 +101,23 @@ public final class MenuController extends ChangeListener implements Controller {
 
 		// create a new row
 		ui.row();
+		
+		ui.add(new Label("Themes:", Art.getSkin(), "bold")).width(100).center();
+		
+		addButton("earth", "Aircraft", this).width(100);
+		
+		addButton("space", "Spacecraft", this).width(100);
+		
+		addButton("submarine", "Submarines", this).width(100);
+		
+		ui.row();
 
 		// create the Exit button
 		addButton("exit", "Exit", this).width(200).colspan(4);
 	}
 
 	/**
-	 * Convinience method to add a button to the UI
+	 * Convenience method to add a button to the UI
 	 * 
 	 * @param name
 	 * @param text
@@ -144,5 +154,17 @@ public final class MenuController extends ChangeListener implements Controller {
 
 		if (actor.equals(buttons.get("exit")))
 			Gdx.app.exit();
+		
+		if (actor.equals(buttons.get("space"))){
+			Art.load("space");
+		}
+		
+		if (actor.equals(buttons.get("earth"))){
+			Art.load("earth");
+		}
+		
+		if (actor.equals(buttons.get("water"))){
+			Art.load("water");
+		}
 	}
 }

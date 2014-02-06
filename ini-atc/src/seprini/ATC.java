@@ -28,7 +28,7 @@ public class ATC implements ApplicationListener {
 
 	@Override
 	public void create() {
-		Art.load();
+		Art.load("earth");
 
 		setScreen(new MenuScreen());
 	}

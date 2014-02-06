@@ -1,6 +1,5 @@
 package seprini.data;
 
-import java.awt.TextField;
 import java.util.Hashtable;
 
 import com.badlogic.gdx.Gdx;
@@ -26,10 +25,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
  */
 public class Art {
 
+	private static Hashtable<String, Texture> textureFiles = new Hashtable<String, Texture>();
+	
 	/**
 	 * A hashtable which stores all of the textures
 	 */
-	private final static Hashtable<String, TextureRegion> textures = new Hashtable<String, TextureRegion>();
+	private static Hashtable<String, TextureRegion> textures = new Hashtable<String, TextureRegion>();
 
 	/**
 	 * A hashtable which stores all of the sounds
@@ -37,20 +38,33 @@ public class Art {
 	private final static Hashtable<String, Sound> sounds = new Hashtable<String, Sound>();
 
 	/**
-	 * A skin can be loaded via JSON or defined programmatically, either is
-	 * fine. Using a skin is optional but strongly recommended solely for the
-	 * convenience of getting a texture, region, etc as a drawable, tinted
-	 * drawable, etc.
+	 * A skin is loaded from preloaded images in the hashtable textureFiles
 	 */
 	private final static Skin skin = new Skin();
 
+	
+	//Pre-loading assets for quicker use
+	static{
+		textureFiles.put("earth", new Texture(Gdx.files.internal("data/earthImages.png"), true));
+		textureFiles.put("space", new Texture(Gdx.files.internal("data/spaceImages.png"), true));
+		//textureFiles.put("water", new Texture(Gdx.files.internal("data/waterImages.png"), true));
+		// load the sound effects
+		sounds.put("ding", loadSound("ding.wav"));
+		sounds.put("warning", loadSound("warning.mp3"));
+		sounds.put("crash", loadSound("crash.mp3"));
+		sounds.put("comeflywithme", loadSound("comeflywithme.mp3"));
+		sounds.put("ambience", loadSound("ambience.mp3"));
+	}
+	
+	
 	/**
 	 * Initialises loading of texture, should be called once
 	 * 
 	 */
-	public static void load() {
+	public static void load(String theme) {
+		textures.clear();
 		// loads the whole sprite which consists most of the game's textures
-		Texture combined = loadTexture("data/combinedgraphics2.png");
+		Texture combined = loadTexture(theme);
 		combined.setFilter(TextureFilter.MipMapLinearLinear,
 				TextureFilter.Linear);
 
@@ -78,17 +92,6 @@ public class Art {
 
 		// load the default skin
 		loadSkin();
-
-		// load the sound effects
-		loadSounds();
-	}
-
-	private static void loadSounds() {
-		sounds.put("ding", loadSound("ding.wav"));
-		sounds.put("warning", loadSound("warning.mp3"));
-		sounds.put("crash", loadSound("crash.mp3"));
-		sounds.put("comeflywithme", loadSound("comeflywithme.mp3"));
-		sounds.put("ambience", loadSound("ambience.mp3"));
 	}
 
 	/**
@@ -100,7 +103,6 @@ public class Art {
 		pixmap.setColor(Color.WHITE);
 		pixmap.fill();
 		skin.add("white", new Texture(pixmap));
-
 		// Add the font to the skin; TODO: use a different one?
 		BitmapFont font = new BitmapFont();
 
@@ -109,29 +111,29 @@ public class Art {
 		// Configure a TextButtonStyle and name it "default". Skin resources are
 		// stored by type, so this doesn't overwrite the font.
 		TextButtonStyle textButtonStyle = new TextButtonStyle();
-		textButtonStyle.up = skin.newDrawable("white", 0.07f, 0.1f, 0.22f, 1);
-		textButtonStyle.down = skin.newDrawable("white", Color.DARK_GRAY);
-		textButtonStyle.checked = skin.newDrawable("white", 0.07f, 0.1f, 0.22f,
+		textButtonStyle.up = skin.newDrawable("white".toString(), 0.07f, 0.1f, 0.22f, 1);
+		textButtonStyle.down = skin.newDrawable("white".toString(), Color.DARK_GRAY);
+		textButtonStyle.checked = skin.newDrawable("white".toString(), 0.07f, 0.1f, 0.22f,
 				1);
-		textButtonStyle.over = skin.newDrawable("white", Color.LIGHT_GRAY);
+		textButtonStyle.over = skin.newDrawable("white".toString(), Color.LIGHT_GRAY);
 		textButtonStyle.font = skin.getFont("default");
 		skin.add("default", textButtonStyle);
 		
 		TextFieldStyle textFieldStyle = new TextFieldStyle();
 		textFieldStyle.font = skin.getFont("default");
-		textFieldStyle.background = skin.newDrawable("white", Color.LIGHT_GRAY);
+		textFieldStyle.background = skin.newDrawable("white".toString(), Color.LIGHT_GRAY);
 		textFieldStyle.fontColor = Color.BLACK;
-		textFieldStyle.selection = skin.newDrawable("white", Color.WHITE);
-		textFieldStyle.cursor = skin.newDrawable("white", Color.WHITE);
+		textFieldStyle.selection = skin.newDrawable("white".toString(), Color.WHITE);
+		textFieldStyle.cursor = skin.newDrawable("white".toString(), Color.WHITE);
 		skin.add("default", textFieldStyle);
 
 		// Configure a TextButtonStyle and name it "default". Skin resources are
 		// stored by type, so this doesn't overwrite the font.
 		TextButtonStyle toggleStyle = new TextButtonStyle();
-		toggleStyle.up = skin.newDrawable("white", 0.07f, 0.1f, 0.22f, 1);
-		toggleStyle.down = skin.newDrawable("white", Color.DARK_GRAY);
-		toggleStyle.checked = skin.newDrawable("white", Color.BLUE);
-		toggleStyle.over = skin.newDrawable("white", Color.LIGHT_GRAY);
+		toggleStyle.up = skin.newDrawable("white".toString(), 0.07f, 0.1f, 0.22f, 1);
+		toggleStyle.down = skin.newDrawable("white".toString(), Color.DARK_GRAY);
+		toggleStyle.checked = skin.newDrawable("white".toString(), Color.BLUE);
+		toggleStyle.over = skin.newDrawable("white".toString(), Color.LIGHT_GRAY);
 		toggleStyle.font = skin.getFont("default");
 		skin.add("toggle", toggleStyle);
 
@@ -143,7 +145,7 @@ public class Art {
 		
 		LabelStyle labelStyleBold = new LabelStyle();
 		labelStyleBold.font = skin.getFont("default"); //needs to be bold
-		labelStyleBold.background = skin.newDrawable("white", Color.DARK_GRAY);
+		labelStyleBold.background = skin.newDrawable("white".toString(), Color.DARK_GRAY);
 		skin.add("bold", labelStyleBold);
 
 		// labelStyle without a background and black text
@@ -151,7 +153,7 @@ public class Art {
 		textStyle.font = skin.getFont("default");
 		textStyle.fontColor = Color.BLACK;
 		skin.add("textStyle", textStyle);
-
+		
 	}
 
 	/**
@@ -176,8 +178,7 @@ public class Art {
 	 * @return Texture
 	 */
 	private static Texture loadTexture(String textureName) {
-		Texture texture = new Texture(Gdx.files.internal(textureName), true);
-		return texture;
+		return textureFiles.get(textureName);
 	}
 
 	private static Sound loadSound(String soundName) {
