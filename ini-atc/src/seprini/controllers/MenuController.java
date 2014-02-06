@@ -93,7 +93,7 @@ public final class MenuController extends ChangeListener implements Controller {
 	 */
 	private void addButtons() {
 		// Create a label for difficulty and add it
-		Label difficultylabel = new Label("Difficulty:", Art.getSkin(), "bold");
+		Label difficultylabel = new Label("Difficulty:", Art.getSkin(), "menuLabel");
 		ui.add(difficultylabel).width(100).center();
 
 		// create a button to start the game in easy mode
@@ -108,7 +108,7 @@ public final class MenuController extends ChangeListener implements Controller {
 		// create a new row
 		ui.row();
 		
-		ui.add(new Label("Themes:", Art.getSkin(), "bold")).width(100).center();
+		ui.add(new Label("Themes:", Art.getSkin(), "menuLabel")).width(100).center();
 		
 		addButton("earth", "Aircraft", this).width(100);
 		

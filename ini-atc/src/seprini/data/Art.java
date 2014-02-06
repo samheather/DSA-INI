@@ -147,6 +147,11 @@ public class Art {
 		labelStyleBold.font = skin.getFont("default"); //needs to be bold
 		labelStyleBold.background = skin.newDrawable("white", Color.CLEAR);
 		skin.add("bold", labelStyleBold);
+		
+		LabelStyle menuLabels = new LabelStyle();
+		menuLabels.font = skin.getFont("default"); //needs to be bold
+		menuLabels.background = skin.newDrawable("white", Color.DARK_GRAY);
+		skin.add("menuLabel", menuLabels);
 
 		// labelStyle without a background and black text
 		LabelStyle textStyle = new LabelStyle();
