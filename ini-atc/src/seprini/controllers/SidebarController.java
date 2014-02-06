@@ -98,7 +98,7 @@ public final class SidebarController extends ChangeListener implements
 		//eventsDisplay.add("loltetsing2");
 		sidebar.add(eventsDisplay);
 
-		// wrapper for aicraft controls
+		// wrapper for aircraft controls
 		aircraftControls = new Table();
 		aircraftControls.setFillParent(true);
 

@@ -111,29 +111,29 @@ public class Art {
 		// Configure a TextButtonStyle and name it "default". Skin resources are
 		// stored by type, so this doesn't overwrite the font.
 		TextButtonStyle textButtonStyle = new TextButtonStyle();
-		textButtonStyle.up = skin.newDrawable("white".toString(), 0.07f, 0.1f, 0.22f, 1);
-		textButtonStyle.down = skin.newDrawable("white".toString(), Color.DARK_GRAY);
-		textButtonStyle.checked = skin.newDrawable("white".toString(), 0.07f, 0.1f, 0.22f,
+		textButtonStyle.up = skin.newDrawable("white", 0.07f, 0.1f, 0.22f, 1);
+		textButtonStyle.down = skin.newDrawable("white", Color.DARK_GRAY);
+		textButtonStyle.checked = skin.newDrawable("white", 0.07f, 0.1f, 0.22f,
 				1);
-		textButtonStyle.over = skin.newDrawable("white".toString(), Color.LIGHT_GRAY);
+		textButtonStyle.over = skin.newDrawable("white", Color.LIGHT_GRAY);
 		textButtonStyle.font = skin.getFont("default");
 		skin.add("default", textButtonStyle);
 		
 		TextFieldStyle textFieldStyle = new TextFieldStyle();
 		textFieldStyle.font = skin.getFont("default");
-		textFieldStyle.background = skin.newDrawable("white".toString(), Color.LIGHT_GRAY);
+		textFieldStyle.background = skin.newDrawable("white", Color.LIGHT_GRAY);
 		textFieldStyle.fontColor = Color.BLACK;
-		textFieldStyle.selection = skin.newDrawable("white".toString(), Color.WHITE);
-		textFieldStyle.cursor = skin.newDrawable("white".toString(), Color.WHITE);
+		textFieldStyle.selection = skin.newDrawable("white", Color.WHITE);
+		textFieldStyle.cursor = skin.newDrawable("white", Color.WHITE);
 		skin.add("default", textFieldStyle);
 
 		// Configure a TextButtonStyle and name it "default". Skin resources are
 		// stored by type, so this doesn't overwrite the font.
 		TextButtonStyle toggleStyle = new TextButtonStyle();
-		toggleStyle.up = skin.newDrawable("white".toString(), 0.07f, 0.1f, 0.22f, 1);
-		toggleStyle.down = skin.newDrawable("white".toString(), Color.DARK_GRAY);
-		toggleStyle.checked = skin.newDrawable("white".toString(), Color.BLUE);
-		toggleStyle.over = skin.newDrawable("white".toString(), Color.LIGHT_GRAY);
+		toggleStyle.up = skin.newDrawable("white", 0.07f, 0.1f, 0.22f, 1);
+		toggleStyle.down = skin.newDrawable("white", Color.DARK_GRAY);
+		toggleStyle.checked = skin.newDrawable("white", Color.BLUE);
+		toggleStyle.over = skin.newDrawable("white", Color.LIGHT_GRAY);
 		toggleStyle.font = skin.getFont("default");
 		skin.add("toggle", toggleStyle);
 
@@ -145,7 +145,7 @@ public class Art {
 		
 		LabelStyle labelStyleBold = new LabelStyle();
 		labelStyleBold.font = skin.getFont("default"); //needs to be bold
-		labelStyleBold.background = skin.newDrawable("white".toString(), Color.DARK_GRAY);
+		labelStyleBold.background = skin.newDrawable("white", Color.CLEAR);
 		skin.add("bold", labelStyleBold);
 
 		// labelStyle without a background and black text
