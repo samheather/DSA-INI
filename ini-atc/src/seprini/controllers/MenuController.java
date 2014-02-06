@@ -9,11 +9,17 @@ import seprini.screens.GameScreen;
 import seprini.screens.MenuScreen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.esotericsoftware.tablelayout.Cell;
 
 /**
@@ -108,7 +114,7 @@ public final class MenuController extends ChangeListener implements Controller {
 		
 		addButton("space", "Spacecraft", this).width(100);
 		
-		addButton("submarine", "Submarines", this).width(100);
+		addButton("water", "Submarines", this).width(100);
 		
 		ui.row();
 
@@ -155,15 +161,39 @@ public final class MenuController extends ChangeListener implements Controller {
 		if (actor.equals(buttons.get("exit")))
 			Gdx.app.exit();
 		
-		if (actor.equals(buttons.get("space"))){
-			Art.load("space");
-		}
-		
 		if (actor.equals(buttons.get("earth"))){
+			// Temporary background creator for mainmenu
+			Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
+			pixmap.setColor(new Color(1.0f, 1.0f, 1.0f, 1));
+			pixmap.fill();
+			
+			ui.setBackground(new TextureRegionDrawable(new TextureRegion(
+					new Texture(pixmap))));
+			ui.padTop(230);
 			Art.load("earth");
 		}
 		
+		if (actor.equals(buttons.get("space"))){
+			// Temporary background creator for mainmenu
+			Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
+			pixmap.setColor(new Color(0.31f, 0.33f, 0.32f, 1));
+			pixmap.fill();
+			
+			ui.setBackground(new TextureRegionDrawable(new TextureRegion(
+					new Texture(pixmap))));
+			ui.padTop(230);
+			Art.load("space");
+		}
+		
 		if (actor.equals(buttons.get("water"))){
+			// Temporary background creator for mainmenu
+			Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
+			pixmap.setColor(new Color(0.015f, 0.686f, 0.3925f, 1));
+			pixmap.fill();
+			
+			ui.setBackground(new TextureRegionDrawable(new TextureRegion(
+					new Texture(pixmap))));
+			ui.padTop(230);
 			Art.load("water");
 		}
 	}

@@ -140,7 +140,7 @@ public class Art {
 		// labelStyle with background
 		LabelStyle labelStyle = new LabelStyle();
 		labelStyle.font = skin.getFont("default");
-		labelStyle.fontColor = new Color(0.07f, 0.1f, 0.22f, 1);
+		labelStyle.fontColor = new Color(0.823f, 0.118f, 0.314f, 1);
 		skin.add("default", labelStyle);
 		
 		LabelStyle labelStyleBold = new LabelStyle();
