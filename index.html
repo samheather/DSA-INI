@@ -60,40 +60,13 @@ bugs to fix!  Take a look, or download Controller Concern Mk 2 to try it.</p>
 	<li>Fully Documented</li>
 </p>
 
-<h3><a name="simpleanddocumented" class="anchor" href="#simpleanddocumented"><span class="octicon octicon-link"></span></a>Beautifully Simple and Well Documented</h3>
+<h3><a name="simpleanddocumented" class="anchor" href="#simpleanddocumented"><span class="octicon octicon-link"></span></a>Beautifully Simple - The only thing left to document is our documentation.</h3>
 
 <p>
 
-<pre><code>
-	{% highlight bash %}
-	/**
-	 * Decrease speed of the aircraft <br>
-	 * Actually changes a scalar which is later multiplied by the velocity
-	 * vector
-	 * 
-	 * @return <b>true</b> on success <br>
-	 *         <b>false</b> when decreased speed will be less than allowed
-	 *         (minSpeed)
-	 */
-	public boolean decreaseSpeed() {
-		if ((!selected) || velocity.cpy().scl(velocityScalar - SPEED_CHANGE).len() < minSpeed)
-			return false;
-
-		velocityScalar -= SPEED_CHANGE;
-
-		Debug.msg("Increasing speed; Velocity scalar: " + velocityScalar);
-
-		return true;
-	}
-	
-	{% endhighlight %}
-
-
-
-$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<pre>
+<img src="images/code.png" width="100%"></img>
+</pre>
 
 </p>
 
