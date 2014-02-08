@@ -333,7 +333,7 @@ Full-Width Styles
   background: url(../images/sprite_download.png) no-repeat bottom left;
 }
 
-.tar_download_link {
+.javadoc_download_link {
   display: block;
   float: right;
   width: 90px;
@@ -344,12 +344,26 @@ Full-Width Styles
   margin-left: 10px;
 }
 
+.github_download_link {
+  display: block;
+  float: right;
+  width: 90px;
+  height:70px;
+  text-indent: -5000px;
+  overflow: hidden;
+  background: url(../images/sprite_download_2.png) no-repeat bottom left;
+}
+
 .zip_download_link:hover {
   background: url(../images/sprite_download.png) no-repeat top left;
 }
 
-.tar_download_link:hover {
+.javadoc_download_link:hover {
   background: url(../images/sprite_download.png) no-repeat top right;
+}
+
+.github_download_link:hover {
+  background: url(../images/sprite_download_2.png) no-repeat top left;
 }
 
 #main_content_wrap {
