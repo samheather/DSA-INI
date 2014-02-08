@@ -39,7 +39,7 @@
 we've added countless improvements to optimise performance, and we even found a couple of 
 bugs to fix!  Take a look, or download Controller Concern Mk 2 to try it.</p>
 
-<a name="techspecs" class="anchor" href="#techspecs"><span class="octicon octicon-link"></span></a>Tech Specs</h3>
+<h3><a name="techspecs" class="anchor" href="#techspecs"><span class="octicon octicon-link"></span></a>Tech Specs</h3>
 
 <p>
 <ul>
@@ -49,7 +49,7 @@ bugs to fix!  Take a look, or download Controller Concern Mk 2 to try it.</p>
 </ul>
 </p>
 
-<a name="why" class="anchor" href="#why"><span class="octicon octicon-link"></span></a>Why Pick our Code?</h3>
+<h3><a name="why" class="anchor" href="#why"><span class="octicon octicon-link"></span></a>Why Pick our Code?</h3>
 
 <p>
 <ul>
@@ -59,6 +59,42 @@ bugs to fix!  Take a look, or download Controller Concern Mk 2 to try it.</p>
 	<li>Super well structured - to match requirements for Assessment 3 only 9 lines of code were changed.</li>
 	<li>Fully Documented</li>
 </p>
+
+<h3><a name="simpleanddocumented" class="anchor" href="#simpleanddocumented"><span class="octicon octicon-link"></span></a>Beautifully Simple and Well Documented</h3>
+
+<p>
+
+<pre><code>
+	/**
+	 * Decrease speed of the aircraft <br>
+	 * Actually changes a scalar which is later multiplied by the velocity
+	 * vector
+	 * 
+	 * @return <b>true</b> on success <br>
+	 *         <b>false</b> when decreased speed will be less than allowed
+	 *         (minSpeed)
+	 */
+	public boolean decreaseSpeed() {
+		if ((!selected) || velocity.cpy().scl(velocityScalar - SPEED_CHANGE).len() < minSpeed)
+			return false;
+
+		velocityScalar -= SPEED_CHANGE;
+
+		Debug.msg("Increasing speed; Velocity scalar: " + velocityScalar);
+
+		return true;
+	}
+
+
+
+$ cd your_repo_root/repo_name
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
+
+</p>
+
+
 
 <!--<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
 
