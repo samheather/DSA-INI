@@ -162,37 +162,16 @@ public final class MenuController extends ChangeListener implements Controller {
 			Gdx.app.exit();
 		
 		if (actor.equals(buttons.get("earth"))){
-			// Temporary background creator for mainmenu
-			Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
-			pixmap.setColor(new Color(1.0f, 1.0f, 1.0f, 1));
-			pixmap.fill();
-			
-			ui.setBackground(new TextureRegionDrawable(new TextureRegion(
-					new Texture(pixmap))));
 			ui.padTop(230);
 			Art.load("earth");
 		}
 		
 		if (actor.equals(buttons.get("space"))){
-			// Temporary background creator for mainmenu
-			Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
-			pixmap.setColor(new Color(0.31f, 0.33f, 0.32f, 1));
-			pixmap.fill();
-			
-			ui.setBackground(new TextureRegionDrawable(new TextureRegion(
-					new Texture(pixmap))));
 			ui.padTop(230);
 			Art.load("space");
 		}
 		
 		if (actor.equals(buttons.get("water"))){
-			// Temporary background creator for mainmenu
-			Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
-			pixmap.setColor(new Color(0.015f, 0.686f, 0.3925f, 1));
-			pixmap.fill();
-			
-			ui.setBackground(new TextureRegionDrawable(new TextureRegion(
-					new Texture(pixmap))));
 			ui.padTop(230);
 			Art.load("water");
 		}
