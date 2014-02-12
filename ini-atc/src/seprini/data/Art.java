@@ -38,7 +38,7 @@ public class Art {
 	private final static Hashtable<String, Sound> sounds = new Hashtable<String, Sound>();
 
 	/**
-	 * A skin is loaded from preloaded images in the hashtable textureFiles
+	 * A skin is loaded from preloade>>>>>>> branch 'master' of https://github.com/samheather/DSA-INI.gitd images in the hashtable textureFiles
 	 */
 	private final static Skin skin = new Skin();
 
@@ -78,6 +78,8 @@ public class Art {
 		textures.put("fastAircraft", split(combined, 1281+72, 0, 72, 63));
 		textures.put("slowAircraft", split(combined, 1281+72+72, 0, 72, 63));
 		textures.put("snakeyaircraft", split(combined, 1281+72+72+72, 0, 72, 63));
+		
+		//CLOUDS 62, 722 -> 146, 756
 		
 		
 		textures.put("waypoint", split(combined, 0, 720, 20, 20));
