@@ -366,6 +366,7 @@ public final class Aircraft extends Entity {
 	 *         (minSpeed)
 	 */
 	public boolean decreaseSpeed() {
+		
 		if ((!selected) || velocity.cpy().scl(velocityScalar - SPEED_CHANGE).len() < minSpeed)
 			return false;
 
