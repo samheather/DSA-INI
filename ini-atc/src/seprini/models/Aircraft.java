@@ -366,10 +366,15 @@ public final class Aircraft extends Entity {
 	 *         (minSpeed)
 	 */
 	public boolean decreaseSpeed() {
-		
+
+		// If plane not selected or the velocity scaled by the magnitude of
+		// velocityScalar-SPEED_CHANGE is less than the minimum speed allowed
+		// for the plane, don't change velocity and return false.
+
 		if ((!selected) || velocity.cpy().scl(velocityScalar - SPEED_CHANGE).len() < minSpeed)
 			return false;
 
+		// Else, change the velocity as requested and return true.
 		velocityScalar -= SPEED_CHANGE;
 
 		Debug.msg("Increasing speed; Velocity scalar: " + velocityScalar);
