@@ -12,6 +12,7 @@ import seprini.data.GameDifficulty;
 import seprini.data.State;
 import seprini.models.Aircraft;
 import seprini.models.Airspace;
+import seprini.models.Cloud;
 import seprini.models.Map;
 import seprini.models.Waypoint;
 import seprini.models.types.AircraftType;
@@ -34,6 +35,7 @@ public final class AircraftController extends InputListener implements
 	// aircraft and aircraft type lists
 	private final ArrayList<AircraftType> aircraftTypeList = new ArrayList<AircraftType>();
 	private final ArrayList<Aircraft> aircraftList = new ArrayList<Aircraft>();
+	private final ArrayList<Cloud> clouds = new ArrayList<Cloud>();
 
 	private final int maxAircraft, timeBetweenGenerations, separationRadius;
 
@@ -74,6 +76,10 @@ public final class AircraftController extends InputListener implements
 	 * @param sidebar
 	 * @param screen
 	 */
+	private void addCloud(Cloud c) {
+		clouds.add(c);
+		airspace.addActor(c);
+	}
 	public AircraftController(GameDifficulty diff, Airspace airspace,
 			Table sidebar, GameScreen screen) {
 		this.difficulty = diff;
@@ -164,7 +170,21 @@ public final class AircraftController extends InputListener implements
 	 * Updates the aircraft positions. Generates a new aircraft and adds it to
 	 * the stage. Collision Detection. Removes aircraft if inactive.
 	 */
+	
+	float lastCloud = State.time();
 	public void update() {
+		
+		for (int i = 0; i < clouds.size(); i++) {
+			clouds.get(i).act();
+		}
+		float t = State.time();
+		if(t - lastCloud > 30)
+		{
+			addCloud(new Cloud());
+			lastCloud = t;
+		}
+		
+		
 		Aircraft planeI, planeJ;
 
 		breachingSound = false;
