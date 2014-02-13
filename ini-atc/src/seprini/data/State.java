@@ -1,5 +1,10 @@
 package seprini.data;
 
+import java.util.ArrayList;
+
+import seprini.controllers.AircraftController;
+import seprini.models.Aircraft;
+
 import com.badlogic.gdx.Gdx;
 
 public class State {
@@ -12,7 +17,6 @@ public class State {
 	private static float time = 0;
 
 	private State() {
-
 	}
 
 	public static State getInstance() {
@@ -25,9 +29,9 @@ public class State {
 	/**
 	 * Tick time; time += delta
 	 */
-	public synchronized static void tick() {
+	public static synchronized void tick() {
 		time += Gdx.graphics.getDeltaTime();
-		incScore(Gdx.graphics.getDeltaTime());
+		changeScore(Gdx.graphics.getDeltaTime());
 	}
 
 	/**
@@ -47,8 +51,8 @@ public class State {
 		score = 0;
 	}
 	
-	public static void incScore(float increment) {
-		score += (difficultyMultiplier * increment);
+	public static void changeScore(float increment) {
+		score = Math.max(0,(score + difficultyMultiplier * increment));
 	}
 	
 	public static int getScore() {

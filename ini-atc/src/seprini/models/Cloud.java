@@ -3,20 +3,11 @@
  */
 package seprini.models;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import seprini.data.Art;
 import seprini.data.Config;
-import seprini.data.Debug;
-import seprini.models.types.AircraftType;
-import seprini.screens.Screen;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -31,8 +22,6 @@ public class Cloud extends Entity {
 
 	Random rnd = new Random();
 	private static final float INITIAL_VELOCITY_SCALAR = 1f;
-	private static final float SPEED_CHANGE = 0.1f;
-	private static final int ALTITUDE_CHANGE = 5000;
 
 	private int desiredAltitude;
 
