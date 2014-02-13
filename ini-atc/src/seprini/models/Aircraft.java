@@ -3,6 +3,7 @@ package seprini.models;
 import java.util.ArrayList;
 import java.util.Random;
 
+import seprini.data.Art;
 import seprini.data.Config;
 import seprini.data.Debug;
 import seprini.models.types.AircraftType;
@@ -138,7 +139,10 @@ public final class Aircraft extends Entity {
 
 			drawer.begin(ShapeType.Line);
 			drawer.setColor(1, 0, 0, 0);
-			drawer.line(getX(), getY(), exitpoint.getX(), exitpoint.getY());
+			drawer.line(getX(), getY(), waypoints.get(0).getX(), waypoints.get(0).getY());
+			for (int i = 1 ; i < waypoints.size(); i++){
+				drawer.line(waypoints.get(i-1).getX(), waypoints.get(i-1).getY(), waypoints.get(i).getX(), waypoints.get(i).getY());
+			}
 			drawer.end();
 
 			batch.begin();
@@ -424,7 +428,12 @@ public final class Aircraft extends Entity {
 	 */
 	public void turnRight() {
 		float angle = 0;
-
+		for (int i = 0 ; i < waypoints.size() ; i++){
+			if (i != waypoints.size()-1){
+				waypoints.remove(i);
+			}
+		}
+		
 		if (getRotation() - maxTurningRate * 2 < 0){
 			angle = (float) (360 - maxTurningRate * 2);
 		}
@@ -443,6 +452,11 @@ public final class Aircraft extends Entity {
 	 */
 	public void turnLeft() {
 		float angle = 0;
+		for (int i = 0 ; i < waypoints.size() ; i++){
+			if (i != waypoints.size()-1){
+				waypoints.remove(i);
+			}
+		}
 
 		if (getRotation() + maxTurningRate * 2 >= 360.0f){
 			angle = (float) (maxTurningRate * 2);
