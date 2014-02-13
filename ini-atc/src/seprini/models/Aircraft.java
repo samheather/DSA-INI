@@ -214,7 +214,7 @@ public final class Aircraft extends Entity {
 		}
 
 		// if the player has taken control of the aircraft, ignore all waypoints
-		if (true) {
+		if (!ignorePath) {
 
 			// Vector to next waypoint
 			Vector2 nextWaypoint = vectorToWaypoint();
@@ -225,7 +225,7 @@ public final class Aircraft extends Entity {
 			// smoothly rotate aircraft
 			// sets a threshold due to float imprecision, should be generally
 			// relativeAngle != 0
-			if (true){//relativeAngle > 1) {
+			if (relativeAngle > 1) {
 				
 				System.out.println("lol");
 				
