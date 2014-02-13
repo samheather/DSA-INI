@@ -103,14 +103,14 @@ public final class AircraftController extends InputListener implements
 		switch (difficulty) {
 		case EASY:
 			maxAircraft = 10;
-			timeBetweenGenerations = 6;
-			separationRadius = 75;
+			timeBetweenGenerations = 3;
+			separationRadius = 100;
 			State.setDifficultyMultiplier(1);
 			break;
 		case MEDIUM:
 			maxAircraft = 15;
-			timeBetweenGenerations = 5;
-			separationRadius = 100;
+			timeBetweenGenerations = 2;
+			separationRadius = 125;
 			State.setDifficultyMultiplier(1.5f);
 			break;
 		case HARD:

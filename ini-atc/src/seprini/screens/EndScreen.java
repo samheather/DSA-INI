@@ -46,10 +46,10 @@ public class EndScreen extends Screen {
 		//System.out.println(Math.round(State.time()));
 		Label text = new Label(
 				"You have failed.\n"
-						+ "Two aeroplanes have collided mid-flight in a huge crash which resulted in the death of "
+						+ "Two vehicles have collided mid-flight in a huge explosion which resulted in the death of "
 						+ (int)Math.max(Math.ceil(Math.random() * 500), 50)
 						+ " people.\n"
-						+ "However, surprisingly, you managed to avoid a crash for approximately "
+						+ "However, you managed to avoid a crash for approximately "
 						+ Math.round(State.time())
 						+ " seconds, which is respectable (at least by some standards).\n"
 						+ "Your final score is "
