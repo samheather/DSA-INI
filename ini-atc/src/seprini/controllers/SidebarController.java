@@ -335,7 +335,9 @@ public final class SidebarController extends ChangeListener implements
 				//	selectedAircraft.takeOff();
 				
 				if (actor.equals(buttons.get("land")))
-					aircrafts.airport.landPlane(selectedAircraft);
+					if (!aircrafts.airport.landPlane(selectedAircraft)) {
+						this.addEvent("The Airport is full");
+					}
 
 			}
 		}

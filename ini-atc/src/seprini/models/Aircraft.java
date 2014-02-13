@@ -227,8 +227,6 @@ public final class Aircraft extends Entity {
 			// relativeAngle != 0
 			if (relativeAngle > 1) {
 				
-				System.out.println("lol");
-				
 				// if the current angle is bigger than the previous, it means we
 				// are rotating towards the wrong side
 				if (previousAngle < relativeAngle) {
@@ -300,14 +298,6 @@ public final class Aircraft extends Entity {
 		
 		return angle;
 	}
-	private Vector2 overriddenWaypoint = null;
-	void overrideWaypoint(Vector2 v){
-		overriddenWaypoint = v;
-	}
-	
-	void unoverrideWaypoint() {
-		overriddenWaypoint = null;
-	}
 
 	/**
 	 * Calculates the vector to the next waypoint
@@ -324,7 +314,7 @@ public final class Aircraft extends Entity {
 		nextWaypoint.y = (float) (Math
 				.round(waypoints.get(0).getCoords().y * 100.0) / 100.0);
 
-		return overriddenWaypoint != null ? overriddenWaypoint : nextWaypoint;
+		return nextWaypoint;
 	}
 
 	/**
