@@ -8,11 +8,11 @@ import seprini.data.Debug;
 import seprini.models.types.AircraftType;
 import seprini.screens.Screen;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 public final class Aircraft extends Entity {
@@ -173,7 +173,12 @@ public final class Aircraft extends Entity {
 		Screen.drawString("alt: " + getAltitude(), getX() - 30, getY() - 20,
 				color, batch, true, 1);
 
-
+		// Changing scores for violation rules
+		if (this.breaching){
+			seprini.data.State.changeScore(-3 * Gdx.graphics.getDeltaTime());
+		}
+		
+		
 		// debug line from aircraft centre to waypoint centre
 		if (Config.DEBUG_UI) {
 			Vector2 nextWaypoint = vectorToWaypoint();
@@ -520,7 +525,7 @@ public final class Aircraft extends Entity {
 		if (waypoints.size() == 0) {
 			this.isActive = false;
 			Debug.msg("Aircraft id " + id + ": Reached exit WP");
-			seprini.data.State.incScore(25);
+			seprini.data.State.changeScore(25);
 		}
 
 		return isActive;

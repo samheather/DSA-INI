@@ -301,7 +301,7 @@ public final class AircraftController extends InputListener implements
 		// stop the ambience sound and play the crash sound
 		Art.getSound("ambience").stop();
 		Art.getSound("crash").play(0.6f);
-
+		
 		// change the screen to the endScreen
 		screen.setScreen(new EndScreen());
 	}
@@ -318,7 +318,6 @@ public final class AircraftController extends InputListener implements
 		// for scoring mechanisms, if applicable
 		a.isBreaching(true);
 		b.isBreaching(true);
-
 		breachingSound = true;
 	}
 
