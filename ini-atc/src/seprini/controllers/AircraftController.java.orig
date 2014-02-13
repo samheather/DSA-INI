@@ -509,12 +509,5 @@ public final class AircraftController extends InputListener implements
 
 		return false;
 	}
-	public void land(Aircraft selectedAircraft2) {
-		airport.landPlane(selectedAircraft2);
-		
-	}
-	public int getPlaneCount(){
-		return airport.getPlaneCount();
-	}
 
 }

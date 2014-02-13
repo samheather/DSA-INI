@@ -1,0 +1,92 @@
+From 5fbaf8eecf64482cbc271ee939010f66681bac60 Mon Sep 17 00:00:00 2001
+From: Sam Heather <sam@heather.sh>
+Date: Thu, 13 Feb 2014 12:46:59 +0000
+Subject: [PATCH] Started airport, Jamaaal has a bug somewhere with planes not
+ aligning properly
+
+---
+ .../seprini/controllers/AircraftController.java    |    4 ++++
+ .../src/seprini/controllers/SidebarController.java |    6 ++++--
+ ini-atc/src/seprini/models/Aircraft.java           |    7 +++++--
+ ini-atc/src/seprini/models/Airport.java            |    2 +-
+ 4 files changed, 14 insertions(+), 5 deletions(-)
+
+diff --git a/ini-atc/src/seprini/controllers/AircraftController.java b/ini-atc/src/seprini/controllers/AircraftController.java
+index e62391f..a26e40c 100644
+--- a/ini-atc/src/seprini/controllers/AircraftController.java
++++ b/ini-atc/src/seprini/controllers/AircraftController.java
+@@ -508,5 +508,9 @@ public final class AircraftController extends InputListener implements
+ 
+ 		return false;
+ 	}
++	public void land(Aircraft selectedAircraft2) {
++		airport.landPlane(selectedAircraft2);
++		
++	}
+ 
+ }
+diff --git a/ini-atc/src/seprini/controllers/SidebarController.java b/ini-atc/src/seprini/controllers/SidebarController.java
+index 7ffeb82..e95974f 100755
+--- a/ini-atc/src/seprini/controllers/SidebarController.java
++++ b/ini-atc/src/seprini/controllers/SidebarController.java
+@@ -316,8 +316,10 @@ public final class SidebarController extends ChangeListener implements
+ 				//if (actor.equals(buttons.get("takeOff")))
+ 				//	selectedAircraft.takeOff();
+ 				
+-				//if (actor.equals(button.get("land")))
+-				//	selectedAircraft.land();
++				if (actor.equals(buttons.get("land"))) {
++					aircrafts.land(selectedAircraft);
++				}
++					
+ 
+ 			}
+ 		}
+diff --git a/ini-atc/src/seprini/models/Aircraft.java b/ini-atc/src/seprini/models/Aircraft.java
+index 7aaa4d2..2d95755 100644
+--- a/ini-atc/src/seprini/models/Aircraft.java
++++ b/ini-atc/src/seprini/models/Aircraft.java
+@@ -203,6 +203,7 @@ public final class Aircraft extends Entity {
+ 	 * Update the aircraft rotation & position
+ 	 */
+ 	public void act() {
++		//System.out.println("rofl");
+ 		// if player is holding D or -> on the keyboard, turn right
+ 		if (turnRight && this.canControl){
+ 			turnRight();
+@@ -214,7 +215,7 @@ public final class Aircraft extends Entity {
+ 		}
+ 
+ 		// if the player has taken control of the aircraft, ignore all waypoints
+-		if (!ignorePath) {
++		if (true) {
+ 
+ 			// Vector to next waypoint
+ 			Vector2 nextWaypoint = vectorToWaypoint();
+@@ -225,7 +226,9 @@ public final class Aircraft extends Entity {
+ 			// smoothly rotate aircraft
+ 			// sets a threshold due to float imprecision, should be generally
+ 			// relativeAngle != 0
+-			if (relativeAngle > 1) {
++			if (true){//relativeAngle > 1) {
++				
++				System.out.println("lol");
+ 				
+ 				// if the current angle is bigger than the previous, it means we
+ 				// are rotating towards the wrong side
+diff --git a/ini-atc/src/seprini/models/Airport.java b/ini-atc/src/seprini/models/Airport.java
+index af06e24..41ae951 100644
+--- a/ini-atc/src/seprini/models/Airport.java
++++ b/ini-atc/src/seprini/models/Airport.java
+@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
+ 
+ public class Airport {
+ 	
+-	private Vector2 pos = new Vector2(400, 345);
++	private Vector2 pos = new Vector2(0, 0);
+ 	
+ 	public Airport() {
+ 		
+-- 
+1.7.9.5
+

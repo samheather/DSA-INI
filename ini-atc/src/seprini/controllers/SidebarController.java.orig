@@ -7,8 +7,8 @@ import java.util.List;
 import seprini.data.Art;
 import seprini.data.Config;
 import seprini.data.State;
-import seprini.controllers.MenuController;
 import seprini.models.Aircraft;
+import seprini.models.Airport;
 import seprini.screens.GameScreen;
 import seprini.screens.MenuScreen;
 
@@ -130,11 +130,6 @@ public final class SidebarController extends ChangeListener implements
 				.colspan(2);
 
 		aircraftControls.row();
-		
-		createLabel("planeNumber"," Planes in airport: ", aircraftControls).width(200)
-				.colspan(2);
-		
-		aircraftControls.row();
 
 		// adding buttons to aircraft controls
 		createButton("createWaypoint", " Create Waypoint", aircraftControls,
@@ -162,7 +157,6 @@ public final class SidebarController extends ChangeListener implements
 		aircraftControls.row().colspan(2);
 		
 		createButton("land", "Land", aircraftControls, false).width(200).colspan(2);
-		
 
 		aircraftControls.row().spaceTop(100);
 
@@ -180,7 +174,6 @@ public final class SidebarController extends ChangeListener implements
 				.colspan(2);
 
 		aircraftControls.row();
-		
 		
 		createLabel("", " Score:", bottomButtons).width(100);
 		createLabel("score", "..", bottomButtons).width(100);
@@ -214,8 +207,6 @@ public final class SidebarController extends ChangeListener implements
 		}
 		String altitudeText;
 		String speedText;
-		String airportText;
-		
 
 		// update timer
 		labels.get("timer").setText("" + Math.round(State.time()));
@@ -230,21 +221,13 @@ public final class SidebarController extends ChangeListener implements
 		} else {
 			altitudeText = " Altitude: " + selectedAircraft.getAltitude() + "m";
 			speedText = " Speed: " + Math.round(selectedAircraft.getVelocity().len() * selectedAircraft.getSpeed()  * Config.AIRCRAFT_SPEED_MULTIPLIER) + "km/h";
-		};
-		
-		if ( MenuController.theme == "earth"){
-			airportText = " Planes in airport : " + aircrafts.getPlaneCount();
-		} else if( MenuController.theme == "space"){
-			airportText = " Spaceships in spacestation : " + aircrafts.getPlaneCount();
-		} else airportText = " Submarines in mothership : " + aircrafts.getPlaneCount();
-		
+		}
+			
 		// update aircraft altitude text
 		labels.get("altitude").setText(altitudeText);
 
 		// update aircraft speed text
 		labels.get("speed").setText(speedText);
-		
-		labels.get("planeNumber").setText(airportText);
 	}
 
 	/**

@@ -1,0 +1,23 @@
+--- ini-atc/src/seprini/controllers/AircraftController.java
++++ ini-atc/src/seprini/controllers/AircraftController.java
+@@ -29,8 +28,6 @@
+ 
+ public final class AircraftController extends InputListener implements
+ 		Controller {
+-	
+-	Airport airport = new Airport();
+ 
+ 	Random rand = new Random();
+ 
+@@ -201,11 +198,6 @@
+ 			// Update aircraft.
+ 			(planeI = aircraftList.get(i)).act();
+ 			planeI.isBreaching(false);
+-			if(planeI.getCoords().dst(airport.getCoords()) < planeI
+-			.getRadius() + airport.getRadius()) {
+-				airport.planeCollision(planeI);
+-			}
+-			
+ 
+ 			// Collision Detection + Separation breach detection.
+ 			for (int j = 0; j < aircraftList.size(); j++) {

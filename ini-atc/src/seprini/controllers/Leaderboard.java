@@ -19,7 +19,7 @@ public class Leaderboard /* implements Drawable */{
 	 * Array containing the LeaderboardEntries
 	 */
 	public static LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
-	public static String[] originalNames = {"Larry", "Bill", "Tim", "Richard", "Fiona"};
+	public static String[] originalNames = {"Larry", "Sergey", "Tim", "Richard", "Fiona"};
 	/**
 	 * Path to the file in which leaderboardScores are stored.
 	 */

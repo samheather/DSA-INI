@@ -1,0 +1,155 @@
+From b1ba693ca459ff93691287157e810a782e3a54f3 Mon Sep 17 00:00:00 2001
+From: Paulius Kazakas <pk627@york.ac.uk>
+Date: Thu, 13 Feb 2014 14:16:18 +0000
+Subject: [PATCH] Added label for number of planes in the airport
+
+---
+ .../seprini/controllers/AircraftController.java    |    3 +++
+ .../src/seprini/controllers/MenuController.java    |    5 +++++
+ .../src/seprini/controllers/SidebarController.java |   22 ++++++++++++++++++--
+ ini-atc/src/seprini/models/Aircraft.java           |    3 +--
+ 4 files changed, 29 insertions(+), 4 deletions(-)
+
+diff --git a/ini-atc/src/seprini/controllers/AircraftController.java b/ini-atc/src/seprini/controllers/AircraftController.java
+index a26e40c..fc72aec 100644
+--- a/ini-atc/src/seprini/controllers/AircraftController.java
++++ b/ini-atc/src/seprini/controllers/AircraftController.java
+@@ -512,5 +512,8 @@ public final class AircraftController extends InputListener implements
+ 		airport.landPlane(selectedAircraft2);
+ 		
+ 	}
++	public int getPlaneCount(){
++		return airport.getPlaneCount();
++	}
+ 
+ }
+diff --git a/ini-atc/src/seprini/controllers/MenuController.java b/ini-atc/src/seprini/controllers/MenuController.java
+index 7f2a709..d9b42d2 100644
+--- a/ini-atc/src/seprini/controllers/MenuController.java
++++ b/ini-atc/src/seprini/controllers/MenuController.java
+@@ -33,6 +33,7 @@ public final class MenuController extends ChangeListener implements Controller {
+ 	private final Table ui;
+ 	private final MenuScreen screen;
+ 	private static final Leaderboard lb = new Leaderboard();
++	public static String theme = "earth";
+ 
+ 	public static void addLeaderboardEntry(String name, double score) {
+ 		lb.addLeaderboardEntry(name, score);
+@@ -170,16 +171,20 @@ public final class MenuController extends ChangeListener implements Controller {
+ 		if (actor.equals(buttons.get("earth"))){
+ 			ui.padTop(230);
+ 			Art.load("earth");
++			theme = "earth";
+ 		}
+ 		
+ 		if (actor.equals(buttons.get("space"))){
+ 			ui.padTop(230);
+ 			Art.load("space");
++			theme = "space";
+ 		}
+ 		
+ 		if (actor.equals(buttons.get("water"))){
+ 			ui.padTop(230);
+ 			Art.load("water");
++			theme = "water";
+ 		}
+ 	}
++	
+ }
+diff --git a/ini-atc/src/seprini/controllers/SidebarController.java b/ini-atc/src/seprini/controllers/SidebarController.java
+index e95974f..a32aa4f 100755
+--- a/ini-atc/src/seprini/controllers/SidebarController.java
++++ b/ini-atc/src/seprini/controllers/SidebarController.java
+@@ -7,6 +7,7 @@ import java.util.List;
+ import seprini.data.Art;
+ import seprini.data.Config;
+ import seprini.data.State;
++import seprini.controllers.MenuController;
+ import seprini.models.Aircraft;
+ import seprini.screens.GameScreen;
+ import seprini.screens.MenuScreen;
+@@ -129,6 +130,11 @@ public final class SidebarController extends ChangeListener implements
+ 				.colspan(2);
+ 
+ 		aircraftControls.row();
++		
++		createLabel("planeNumber"," Planes in airport: ", aircraftControls).width(200)
++				.colspan(2);
++		
++		aircraftControls.row();
+ 
+ 		// adding buttons to aircraft controls
+ 		createButton("createWaypoint", " Create Waypoint", aircraftControls,
+@@ -156,6 +162,7 @@ public final class SidebarController extends ChangeListener implements
+ 		aircraftControls.row().colspan(2);
+ 		
+ 		createButton("land", "Land", aircraftControls, false).width(200).colspan(2);
++		
+ 
+ 		aircraftControls.row().spaceTop(100);
+ 
+@@ -174,6 +181,7 @@ public final class SidebarController extends ChangeListener implements
+ 
+ 		aircraftControls.row();
+ 		
++		
+ 		createLabel("", " Score:", bottomButtons).width(100);
+ 		createLabel("score", "..", bottomButtons).width(100);
+ 		
+@@ -206,6 +214,8 @@ public final class SidebarController extends ChangeListener implements
+ 		}
+ 		String altitudeText;
+ 		String speedText;
++		String airportText;
++		
+ 
+ 		// update timer
+ 		labels.get("timer").setText("" + Math.round(State.time()));
+@@ -220,13 +230,21 @@ public final class SidebarController extends ChangeListener implements
+ 		} else {
+ 			altitudeText = " Altitude: " + selectedAircraft.getAltitude() + "m";
+ 			speedText = " Speed: " + Math.round(selectedAircraft.getVelocity().len() * selectedAircraft.getSpeed()  * Config.AIRCRAFT_SPEED_MULTIPLIER) + "km/h";
+-		}
+-			
++		};
++		
++		if ( MenuController.theme == "earth"){
++			airportText = " Planes in airport : " + aircrafts.getPlaneCount();
++		} else if( MenuController.theme == "space"){
++			airportText = " Spaceships in spacestation : " + aircrafts.getPlaneCount();
++		} else airportText = " Submarines in mothership : " + aircrafts.getPlaneCount();
++		
+ 		// update aircraft altitude text
+ 		labels.get("altitude").setText(altitudeText);
+ 
+ 		// update aircraft speed text
+ 		labels.get("speed").setText(speedText);
++		
++		labels.get("planeNumber").setText(airportText);
+ 	}
+ 
+ 	/**
+diff --git a/ini-atc/src/seprini/models/Aircraft.java b/ini-atc/src/seprini/models/Aircraft.java
+index 2d95755..7964d58 100644
+--- a/ini-atc/src/seprini/models/Aircraft.java
++++ b/ini-atc/src/seprini/models/Aircraft.java
+@@ -2,8 +2,6 @@ package seprini.models;
+ 
+ import java.util.ArrayList;
+ import java.util.Random;
+-
+-import seprini.data.Art;
+ import seprini.data.Config;
+ import seprini.data.Debug;
+ import seprini.models.types.AircraftType;
+@@ -188,6 +186,7 @@ public final class Aircraft extends Entity {
+ 			Vector2 nextWaypoint = vectorToWaypoint();
+ 
+ 			batch.end();
++			
+ 
+ 			drawer.begin(ShapeType.Line);
+ 			drawer.setColor(1, 0, 0, 0);
+-- 
+1.7.9.5
+

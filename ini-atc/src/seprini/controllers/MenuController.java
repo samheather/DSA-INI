@@ -33,6 +33,7 @@ public final class MenuController extends ChangeListener implements Controller {
 	private final Table ui;
 	private final MenuScreen screen;
 	private static final Leaderboard lb = new Leaderboard();
+	public static String theme = "earth";
 
 	public static void addLeaderboardEntry(String name, double score) {
 		lb.addLeaderboardEntry(name, score);
@@ -170,16 +171,20 @@ public final class MenuController extends ChangeListener implements Controller {
 		if (actor.equals(buttons.get("earth"))){
 			ui.padTop(230);
 			Art.load("earth");
+			theme = "earth";
 		}
 		
 		if (actor.equals(buttons.get("space"))){
 			ui.padTop(230);
 			Art.load("space");
+			theme = "space";
 		}
 		
 		if (actor.equals(buttons.get("water"))){
 			ui.padTop(230);
 			Art.load("water");
+			theme = "water";
 		}
 	}
+	
 }

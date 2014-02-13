@@ -1,0 +1,15 @@
+--- ini-atc/src/seprini/controllers/SidebarController.java
++++ ini-atc/src/seprini/controllers/SidebarController.java
+@@ -316,8 +316,10 @@
+ 				//if (actor.equals(buttons.get("takeOff")))
+ 				//	selectedAircraft.takeOff();
+ 				
+-				//if (actor.equals(button.get("land")))
+-				//	selectedAircraft.land();
++				if (actor.equals(buttons.get("land"))) {
++					aircrafts.land(selectedAircraft);
++				}
++					
+ 
+ 			}
+ 		}
