@@ -78,7 +78,7 @@ public class Art {
 		textures.put("fastAircraft", split(combined, 1281+72, 0, 72, 63));
 		textures.put("slowAircraft", split(combined, 1281+72+72, 0, 72, 63));
 		textures.put("snakeyaircraft", split(combined, 1281+72+72+72, 0, 72, 63));
-		
+		textures.put("clouds", split(combined, 62, 722, 146 - 62, 756 - 722));
 		//CLOUDS 62, 722 -> 146, 756
 		
 		
