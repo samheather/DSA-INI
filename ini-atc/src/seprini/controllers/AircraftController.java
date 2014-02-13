@@ -354,8 +354,12 @@ public final class AircraftController extends InputListener implements
 		if (State.time() - lastGenerated < timeBetweenGenerations
 				+ rand.nextInt(100))
 			return null;
+		
+		AircraftType act = randomAircraftType();
+		if(act == snakeyAircraft)
+			sidebar.addEvent("You've got snakes on a plane!");
 
-		Aircraft newAircraft = new Aircraft(randomAircraftType(),
+		Aircraft newAircraft = new Aircraft(act,
 				flightplan.generate(), aircraftId++);
 
 		aircraftList.add(newAircraft);

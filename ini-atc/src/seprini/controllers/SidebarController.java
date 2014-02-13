@@ -66,7 +66,7 @@ public final class SidebarController extends ChangeListener implements
 	
 	
 	public void addEvent(String message) {
-		events.add(new Event(message, State.time() + 20));
+		events.add(new Event(message, State.time() + 10));
 	}
 
 	// stores state of the turn left/right buttons
