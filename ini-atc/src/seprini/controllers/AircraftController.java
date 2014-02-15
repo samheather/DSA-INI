@@ -78,7 +78,7 @@ public final class AircraftController extends InputListener implements
 	 * @param screen
 	 */
 
-	public Airport airport = new Airport();
+	private Airport airport = new Airport();
 
 	private void addCloud(Cloud c) {
 		clouds.add(c);
@@ -264,38 +264,8 @@ public final class AircraftController extends InputListener implements
 		}
 
 		// try to generate a new aircraft
-		final Aircraft generatedAircraft = generateAircraft();
+		generateAircraft();
 
-		// if the newly generated aircraft is not null (ie checking one was
-		// generated), add it as an actor to the stage
-		if (generatedAircraft != null) {
-
-			// makes the aircraft clickable. Once clicked it is set as the
-			// selected aircraft.
-			generatedAircraft.addListener(new ClickListener() {
-
-				@Override
-				public void clicked(InputEvent event, float x, float y) {
-					selectAircraft(generatedAircraft);
-				}
-
-			});
-
-			// push the aircraft to the top so it's infront of the user created
-			// waypoints
-			generatedAircraft.toFront();
-
-			// add it to the airspace (stage group) so its automatically drawn
-			// upon calling root.draw()
-			airspace.addActor(generatedAircraft);
-
-			// play a sound to audibly inform the player that an aircraft as
-			// spawned
-			Art.getSound("ding").play(0.5f);
-		}
-
-		// finally, update the sidebar
-		sidebar.update();
 	}
 
 	/**
@@ -354,20 +324,49 @@ public final class AircraftController extends InputListener implements
 		if (State.time() - lastGenerated < timeBetweenGenerations
 				+ rand.nextInt(100))
 			return null;
-		
+
 		AircraftType act = randomAircraftType();
-		if(act == snakeyAircraft)
+		if (act == snakeyAircraft)
 			sidebar.addEvent("You've got snakes on a plane!");
 
-		Aircraft newAircraft = new Aircraft(act,
-				flightplan.generate(), aircraftId++);
+		final Aircraft newAircraft = new Aircraft(act, flightplan.generate(),
+				aircraftId++);
 
 		aircraftList.add(newAircraft);
 
 		// store the time when an aircraft was last generated to know when to
 		// generate the next aircraft
 		lastGenerated = State.time();
+		// if the newly generated aircraft is not null (ie checking one was
+		// generated), add it as an actor to the stage
+		if (newAircraft != null) {
 
+			// makes the aircraft clickable. Once clicked it is set as the
+			// selected aircraft.
+			newAircraft.addListener(new ClickListener() {
+
+				@Override
+				public void clicked(InputEvent event, float x, float y) {
+					selectAircraft(newAircraft);
+				}
+
+			});
+
+			// push the aircraft to the top so it's infront of the user created
+			// waypoints
+			newAircraft.toFront();
+
+			// add it to the airspace (stage group) so its automatically drawn
+			// upon calling root.draw()
+			airspace.addActor(newAircraft);
+
+			// play a sound to audibly inform the player that an aircraft as
+			// spawned
+			Art.getSound("ding").play(0.5f);
+		}
+
+		// finally, update the sidebar
+		sidebar.update();
 		return newAircraft;
 	}
 
@@ -513,11 +512,31 @@ public final class AircraftController extends InputListener implements
 
 		return false;
 	}
-	public void land(Aircraft selectedAircraft2) {
-		airport.landPlane(selectedAircraft2);
-		
+
+	public boolean land(Aircraft selectedAircraft2) {
+		boolean a = airport.landPlane(selectedAircraft2);
+		sidebar.update();
+		return a;
 	}
-	public int getPlaneCount(){
+
+	public Aircraft launch() {
+		Aircraft a = airport.launchPlane();
+		Aircraft a2 = null;
+		if (a != null) {
+			System.out.println("launched plane");
+			aircraftList.remove(a);
+			a2 = generateAircraft();
+			if (a2 != null)
+				a2.setPosition(airport.getCoords().x, airport.getCoords().y);
+			else
+				aircraftList.add(a);
+		}
+		sidebar.update();
+		return a2;
+
+	}
+
+	public int getPlaneCount() {
 		return airport.getPlaneCount();
 	}
 

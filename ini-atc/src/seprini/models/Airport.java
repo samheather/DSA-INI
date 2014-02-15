@@ -16,6 +16,8 @@ public class Airport {
 		if (!canLandPlane()) {
 			return false;
 		}
+		if(stored.contains(a))
+			return false;
 		stored.add(a);
 		ArrayList<Waypoint> temp = new ArrayList<Waypoint>();
 		temp.add(new Exitpoint(pos, true));
@@ -26,17 +28,11 @@ public class Airport {
 	}
 	
 	public boolean canLandPlane() {
-		if (this.stored.size() < 3) {
-			return true;
-		}
-		return false;
+		return this.stored.size() < 3;
 	}
 	
 	public boolean canLaunchPlane() {
-		if (this.stored.size() > 0) {
-			return true;
-		}
-		return false;
+		return this.landed.size() > 0;
 	}
 	
 	public int getPlaneCount() {
@@ -58,11 +54,21 @@ public class Airport {
 	}
 	
 	private ArrayList<Aircraft> stored = new ArrayList<Aircraft>();
+	private ArrayList<Aircraft> landed = new ArrayList<Aircraft>();
 
 	public void planeCollision(Aircraft planeI) {
 		if (stored.contains(planeI)) {
 			planeI.remove();
+			landed.add(planeI);
 		}
+	}
+
+	public Aircraft launchPlane() {
+		if(!canLaunchPlane())
+			return null;
+		Aircraft rem = landed.remove(0);
+		stored.remove(rem);
+		return rem;
 	}
 
 }

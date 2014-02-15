@@ -331,11 +331,19 @@ public final class SidebarController extends ChangeListener implements
 				
 				// Buttons commands for landing and taking off.
 				
-				//if (actor.equals(buttons.get("takeOff")))
-				//	selectedAircraft.takeOff();
+				if (actor.equals(buttons.get("takeOff"))) {
+					Aircraft a;
+					if ((a = aircrafts.launch()) == null) {
+						this.addEvent("The Airport is empty");
+					}
+					else
+					{
+						selectedAircraft = a;
+					}
+				}
 				
 				if (actor.equals(buttons.get("land")))
-					if (!aircrafts.airport.landPlane(selectedAircraft)) {
+					if (!aircrafts.land(selectedAircraft)) {
 						this.addEvent("The Airport is full");
 					}
 
