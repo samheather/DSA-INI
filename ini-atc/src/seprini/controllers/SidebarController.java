@@ -181,6 +181,11 @@ public final class SidebarController extends ChangeListener implements
 
 		aircraftControls.row();
 		
+		createLabel("", " Score:", bottomButtons).width(100);
+		createLabel("score", "..", bottomButtons).width(100);
+		
+		bottomButtons.row();
+		
 		
 		createLabel("", " Score:", bottomButtons).width(100);
 		createLabel("score", "..", bottomButtons).width(100);
@@ -333,13 +338,11 @@ public final class SidebarController extends ChangeListener implements
 				
 				if (actor.equals(buttons.get("takeOff"))) {
 					Aircraft a;
-					if ((a = aircrafts.launch()) == null) {
+					if ((a = aircrafts.launch()) == null)
 						this.addEvent("The Airport is empty");
-					}
 					else
-					{
 						selectedAircraft = a;
-					}
+					System.out.println("Take off pressed");
 				}
 				
 				if (actor.equals(buttons.get("land")))
