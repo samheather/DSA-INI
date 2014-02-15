@@ -181,6 +181,11 @@ public final class SidebarController extends ChangeListener implements
 
 		aircraftControls.row();
 		
+		createLabel("", " Score:", bottomButtons).width(100);
+		createLabel("score", "..", bottomButtons).width(100);
+		
+		bottomButtons.row();
+		
 		
 		createLabel("", " Score:", bottomButtons).width(100);
 		createLabel("score", "..", bottomButtons).width(100);
@@ -331,8 +336,9 @@ public final class SidebarController extends ChangeListener implements
 				
 				// Buttons commands for landing and taking off.
 				
-				//if (actor.equals(buttons.get("takeOff")))
-				//	selectedAircraft.takeOff();
+				if (actor.equals(buttons.get("takeOff"))) {
+					System.out.println("Take off pressed");
+				}
 				
 				if (actor.equals(buttons.get("land")))
 					if (!aircrafts.airport.landPlane(selectedAircraft)) {
