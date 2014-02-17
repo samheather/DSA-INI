@@ -38,13 +38,12 @@ public class Art {
 	private final static Hashtable<String, Sound> sounds = new Hashtable<String, Sound>();
 
 	/**
-	 * A skin is loaded from preloade>>>>>>> branch 'master' of https://github.com/samheather/DSA-INI.gitd images in the hashtable textureFiles
+	 * A skin is loaded from preloaded images in the hashtable textureFiles
 	 */
 	private final static Skin skin = new Skin();
-
 	
 	//Pre-loading assets for quicker use
-	static{
+	public static void preLoad() {
 		textureFiles.put("earth", new Texture(Gdx.files.internal("data/earthImages.png"), true));
 		textureFiles.put("space", new Texture(Gdx.files.internal("data/spaceImages.png"), true));
 		textureFiles.put("water", new Texture(Gdx.files.internal("data/waterImages.png"), true));
@@ -86,7 +85,6 @@ public class Art {
 		
 		//space waypoints
 		//textures.put("waypoint", split(combined, 21, 720, 34, 20));
-		
 		
 		textures.put("menuAircraft", split(combined, 1280, 64, 727, 249));
 		textures.put("entrypoint", split(combined, 20, 720, 20, 20));

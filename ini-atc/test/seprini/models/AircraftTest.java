@@ -18,7 +18,8 @@ import com.badlogic.gdx.math.Vector2;
 
 public class AircraftTest {
 
-	private Aircraft aircraft;
+	private Aircraft testAircraft1;
+	private Aircraft testAircraft2;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -33,17 +34,21 @@ public class AircraftTest {
 		AircraftType defaultAircraft = new AircraftType();
 
 		defaultAircraft.setCoords(new Vector2(0, 0)).setActive(true)
-				.setMaxClimbRate(10).setMaxSpeed(0.8f).setMaxTurningSpeed(0.4f)
+				.setMaxClimbRate(10).setMaxSpeed(1.5f).setMaxTurningSpeed(0.4f)
 				.setRadius(15).setSeparationRadius(100)
 				.setTexture(Art.getTextureRegion("aircraft"))
 				.setVelocity(new Vector2(0.8f, 0.8f));
 
-		ArrayList<Waypoint> plan = new ArrayList<Waypoint>();
-		plan.add(new Waypoint(3, 5, true));
-		plan.add(new Waypoint(4, 7, true));
+		ArrayList<Waypoint> testPlan1 = new ArrayList<Waypoint>();
+		testPlan1.add(new Waypoint(1, 1, true));
+		testPlan1.add(new Waypoint(2, 2, true));
+		
+		ArrayList<Waypoint> testPlan2 = new ArrayList<Waypoint>();
+		testPlan2.add(new Waypoint(4, 4, true));
+		testPlan2.add(new Waypoint(5, 5, true));
 
-		aircraft = new Aircraft(defaultAircraft, plan, 0);
-
+		testAircraft1 = new Aircraft(defaultAircraft, testPlan1, 0);
+		testAircraft2 = new Aircraft(defaultAircraft, testPlan2, 0);
 	}
 
 	@After
@@ -69,22 +74,24 @@ public class AircraftTest {
 	@Test
 	public void testInsertWaypoint() {
 		Waypoint newWaypoint = new Waypoint(7, 8, true);
-		aircraft.insertWaypoint(newWaypoint);
-		assertEquals(aircraft.getFlightPlan().get(0), newWaypoint);
+		testAircraft1.insertWaypoint(newWaypoint);
+		assertEquals(testAircraft1.getFlightPlan().get(0), newWaypoint);
 
 	}
 
 	@Test
 	public void testIncreaseSpeed() {
-		aircraft.increaseSpeed();
-		assertEquals(1.1f, aircraft.getSpeed(), 100);
+		testAircraft2.selected(true);
+		testAircraft2.increaseSpeed();
+		assertEquals(1.1f, testAircraft2.getSpeed(), 0);
 
 	}
 
 	@Test
 	public void testDecreaseSpeed() {
-		aircraft.decreaseSpeed();
-		assertEquals(0.9f, aircraft.getSpeed(), 0);
+		testAircraft1.selected(true);
+		testAircraft1.decreaseSpeed();
+		assertEquals(0.9f, testAircraft1.getSpeed(), 0);
 	}
 
 	@Test
@@ -108,12 +115,12 @@ public class AircraftTest {
 	@Test
 	public void testGetRadius() {
 
-		assertEquals(15f, aircraft.getRadius(), 0);
+		assertEquals(15f, testAircraft1.getRadius(), 0);
 	}
 
 	@Test
 	public void testGetSeparationRadius() {
-		float result = aircraft.getSeparationRadius();
+		float result = testAircraft1.getSeparationRadius();
 		assertEquals(result, 100, 0);
 	}
 
@@ -123,7 +130,7 @@ public class AircraftTest {
 
 	@Test
 	public void testGetAltitude() {
-		float result = aircraft.getAltitude();
+		float result = testAircraft1.getAltitude();
 		if (result == 5000) {
 			assertEquals(5000, result, 0);
 		} else if (result == 10000) {
@@ -135,13 +142,13 @@ public class AircraftTest {
 
 	@Test
 	public void testGetSpeed() {
-		float result = aircraft.getSpeed();
+		float result = testAircraft1.getSpeed();
 		assertEquals(1f, result, 0);
 	}
 
 	@Test
 	public void testIsActive() {
-		assertTrue(aircraft.isActive());
+		assertTrue(testAircraft1.isActive());
 	}
 
 	@Test
@@ -150,10 +157,7 @@ public class AircraftTest {
 
 	@Test
 	public void testToString() {
-		ArrayList<Waypoint> plan = new ArrayList<Waypoint>();
-		plan.add(new Waypoint(3, 5, true));
-
-		assertTrue(("Aircraft - x: 3.0 y: 5.0\n\r flight plan: [Waypoint - x: 4.0 y: 7.0]")
-				.equals(aircraft.toString()));
+		assertTrue(("Aircraft - x: 1.0 y: 1.0\n\r flight plan: [Waypoint - x: 2.0 y: 2.0]")
+				.equals(testAircraft1.toString()));
 	}
 }

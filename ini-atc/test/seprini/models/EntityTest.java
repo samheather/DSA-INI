@@ -3,9 +3,7 @@ package seprini.models;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -17,14 +15,6 @@ public class EntityTest {
 	protected TextureRegion texture;
 	protected Vector2 size;
 	protected boolean debugshape;
-
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
 
 	@Before
 	public void setUp() throws Exception {

@@ -66,11 +66,11 @@ public class Leaderboard /* implements Drawable */{
 
 	public void addLeaderBoardEntries() {
 		try {
-			addLeaderboardEntry("a", 43);
-			addLeaderboardEntry("b", 44);
-			addLeaderboardEntry("c", 42);
-			addLeaderboardEntry("d", 45);
-			addLeaderboardEntry("e", 41);
+			addLeaderboardEntry("d", 300);
+			addLeaderboardEntry("d", 300);
+			addLeaderboardEntry("d", 300);
+			addLeaderboardEntry("d", 300);
+			addLeaderboardEntry("d", 300);
 		} catch (Exception ex) {
 			System.out.println("Adding leaderboard data caused error");
 		}
