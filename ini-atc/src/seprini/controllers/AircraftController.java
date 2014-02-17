@@ -326,8 +326,13 @@ public final class AircraftController extends InputListener implements
 			return null;
 
 		AircraftType act = randomAircraftType();
-		if (act == snakeyAircraft)
-			sidebar.addEvent("You've got snakes on a plane!");
+		if (act == snakeyAircraft){
+			if (MenuController.theme == "earth")
+				sidebar.addEvent("You have snakes in the plane!");
+		    else if( MenuController.theme == "space")
+		    	sidebar.addEvent("Space snakes attack again!");
+		    else sidebar.addEvent("The shark has appeared!");
+	 }
 
 		final Aircraft newAircraft = new Aircraft(act, flightplan.generate(),
 				aircraftId++);

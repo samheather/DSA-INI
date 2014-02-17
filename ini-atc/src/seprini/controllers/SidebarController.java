@@ -334,8 +334,13 @@ public final class SidebarController extends ChangeListener implements
 				
 				if (actor.equals(buttons.get("takeOff"))) {
 					Aircraft a;
-					if ((a = aircrafts.launch()) == null)
-						this.addEvent("The Airport is empty");
+					if ((a = aircrafts.launch()) == null){
+						if (MenuController.theme == "earth")
+							this.addEvent("The Airport is empty");
+					    else if( MenuController.theme == "space")
+					    	this.addEvent("The Spacestation is empty");
+					    else this.addEvent("Mothership is empty");
+						}
 					else
 						selectedAircraft = a;
 					System.out.println("Take off pressed");
@@ -343,7 +348,11 @@ public final class SidebarController extends ChangeListener implements
 				
 				if (actor.equals(buttons.get("land")))
 					if (!aircrafts.land(selectedAircraft)) {
-						this.addEvent("The Airport is full");
+						if (MenuController.theme == "earth")
+							this.addEvent("The Airport is full");
+					    else if( MenuController.theme == "space")
+					    	this.addEvent("The Spacestation is full");
+					    else this.addEvent("Mothership is full");
 					}
 
 			}
