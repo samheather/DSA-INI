@@ -41,6 +41,8 @@ public final class SidebarController extends ChangeListener implements
 	private boolean allowRedirection = false;
 
 	private final GameScreen screen;
+	
+	
 
 	// UI wrappers for the controls and the buttons at the bottom
 	private Table sidebar, aircraftControls, bottomButtons;
@@ -164,7 +166,7 @@ public final class SidebarController extends ChangeListener implements
 		createButton("land", "Land", aircraftControls, false).width(200).colspan(2);
 		
 
-		aircraftControls.row().spaceTop(100);
+		aircraftControls.row().spaceTop(250);
 
 		createButton("up", " Up", aircraftControls, false).width(100)
 				.colspan(2);
@@ -180,12 +182,6 @@ public final class SidebarController extends ChangeListener implements
 				.colspan(2);
 
 		aircraftControls.row();
-		
-		createLabel("", " Score:", bottomButtons).width(100);
-		createLabel("score", "..", bottomButtons).width(100);
-		
-		bottomButtons.row();
-		
 		
 		createLabel("", " Score:", bottomButtons).width(100);
 		createLabel("score", "..", bottomButtons).width(100);
