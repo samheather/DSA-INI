@@ -28,6 +28,15 @@ public final class Aircraft extends Entity {
 	private Vector2 velocity = new Vector2(0, 0);
 
 	public ArrayList<Waypoint> waypoints;
+	public ArrayList<Waypoint> oldWaypoints;
+	
+	public void saveWaypoints() {
+		oldWaypoints = waypoints;
+	}
+	
+	public void restoreWaypoints() {
+		waypoints = oldWaypoints;
+	}
 
 	private final float radius, separationRadius, maxTurningRate, maxClimbRate,
 			maxSpeed;
@@ -58,9 +67,17 @@ public final class Aircraft extends Entity {
 	private float previousAngle = 0;
 	// if is increasing, switch rotation sides so it uses the 'smaller' angle
 	private boolean rotateRight = false;
+	
+	public ArrayList<Aircraft> aircrafts;
+	
+	public boolean remove() {
+		aircrafts.remove(this);
+		return super.remove();
+	}
 
 	public Aircraft(AircraftType aircraftType, ArrayList<Waypoint> flightPlan,
-			int id) {
+			int id, ArrayList<Aircraft> aircrafts) {
+		this.aircrafts = aircrafts;
 
 		// allows drawing debug shape of this entity
 		debugShape = true;
@@ -250,7 +267,7 @@ public final class Aircraft extends Entity {
 			// checking whether aircraft is at the next waypoint. Whether it's
 			// close enough is dictated by the WP size in the config.
 			if (nextWaypoint.sub(coords).len() < Config.WAYPOINT_SIZE.x / 2) {
-				waypoints.remove(0);
+				waypoints.get(0).handleCollision(this);
 			}
 
 			// set velocity angle to fit rotation, allows for smooth turning
@@ -261,7 +278,7 @@ public final class Aircraft extends Entity {
 		// to detect when it is at its designated exit WP.
 		if (waypoints.get(waypoints.size() - 1).cpy().getCoords().sub(coords)
 				.len() < Config.EXIT_WAYPOINT_SIZE.x / 2) {
-			waypoints.clear();
+			waypoints.get(0).handleCollision(this);
 		}
 
 		// finally updating coordinates

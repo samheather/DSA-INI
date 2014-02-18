@@ -11,6 +11,7 @@ import seprini.data.Debug;
 import seprini.data.GameDifficulty;
 import seprini.data.State;
 import seprini.models.Aircraft;
+import seprini.models.Airport;
 import seprini.models.Airspace;
 import seprini.models.Cloud;
 import seprini.models.Map;
@@ -279,6 +280,7 @@ public final class AircraftController extends InputListener implements
 		// change the screen to the endScreen
 		screen.setScreen(new EndScreen());
 	}
+	public Airport airport = new Airport();
 
 	/**
 	 * Handles what happens after the separation rules have been breached
@@ -330,7 +332,7 @@ public final class AircraftController extends InputListener implements
 	 }
 
 		final Aircraft newAircraft = new Aircraft(act, flightplan.generate(),
-				aircraftId++);
+				aircraftId++, aircraftList);
 
 		aircraftList.add(newAircraft);
 
@@ -347,7 +349,14 @@ public final class AircraftController extends InputListener implements
 
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-					selectAircraft(newAircraft);
+					//if(event.getButton() == 0)
+					//	selectAircraft(newAircraft);
+					//else {
+						System.out.println("Hello world");
+						airport.land(newAircraft);
+						System.out.println(newAircraft.waypoints);
+					//}
+					
 				}
 
 			});
@@ -515,8 +524,8 @@ public final class AircraftController extends InputListener implements
 
 
 
-	public int getPlaneCount() {
-		return 0;
+	public int getAirportPlaneCount() {
+		return airport.getNumberInAirport();
 	}
 
 }

@@ -234,10 +234,10 @@ public final class SidebarController extends ChangeListener implements
 		};
 		
 		if ( MenuController.theme == "earth"){
-			airportText = " Planes in airport : " + aircrafts.getPlaneCount();
+			airportText = " Planes in airport : " + aircrafts.getAirportPlaneCount();
 		} else if( MenuController.theme == "space"){
-			airportText = " Spaceships in spacestation : " + aircrafts.getPlaneCount();
-		} else airportText = " Submarines in mothership : " + aircrafts.getPlaneCount();
+			airportText = " Spaceships in spacestation : " + aircrafts.getAirportPlaneCount();
+		} else airportText = " Submarines in mothership : " + aircrafts.getAirportPlaneCount();
 		
 		// update aircraft altitude text
 		labels.get("altitude").setText(altitudeText);

@@ -8,6 +8,11 @@ import com.badlogic.gdx.math.Vector2;
 public class Waypoint extends Entity {
 
 	private final boolean deletable;
+	
+
+	public void handleCollision(Aircraft a) {
+		a.waypoints.remove(0);
+	}
 
 	public Waypoint(Vector2 position, boolean deletable) {
 		coords = position;

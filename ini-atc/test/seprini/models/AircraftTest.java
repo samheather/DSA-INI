@@ -47,8 +47,8 @@ public class AircraftTest {
 		testPlan2.add(new Waypoint(4, 4, true));
 		testPlan2.add(new Waypoint(5, 5, true));
 
-		testAircraft1 = new Aircraft(defaultAircraft, testPlan1, 0);
-		testAircraft2 = new Aircraft(defaultAircraft, testPlan2, 0);
+		testAircraft1 = new Aircraft(defaultAircraft, testPlan1, 0, null);
+		testAircraft2 = new Aircraft(defaultAircraft, testPlan2, 0, null);
 	}
 
 	@After
