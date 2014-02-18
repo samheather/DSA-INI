@@ -147,11 +147,6 @@ public class AircraftTest {
 	}
 
 	@Test
-	public void testIsActive() {
-		assertTrue(testAircraft1.isActive());
-	}
-
-	@Test
 	public void testSelected() {
 	}
 

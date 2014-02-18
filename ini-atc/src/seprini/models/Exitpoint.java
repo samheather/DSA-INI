@@ -9,6 +9,14 @@ public final class Exitpoint extends Waypoint {
 	protected int radius;
 	private boolean hidden;
 	
+	@Override
+	public void handleCollision(Aircraft a) {
+		super.handleCollision(a);
+		seprini.data.State.changeScore(25);
+		a.remove();
+		a.removeFromAircraftListToAvoidFramerateProblems();
+	}
+	
 	public Exitpoint(Vector2 position, boolean hidden) {
 		this(position);
 		this.hidden = hidden;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import seprini.data.Config;
 import seprini.data.Debug;
+import seprini.data.State;
 import seprini.models.types.AircraftType;
 import seprini.screens.Screen;
 
@@ -70,7 +71,7 @@ public final class Aircraft extends Entity {
 	
 	public ArrayList<Aircraft> aircrafts;
 	
-	public void remove2() {
+	public void removeFromAircraftListToAvoidFramerateProblems() {
 		aircrafts.remove(this);
 	}
 
@@ -547,18 +548,17 @@ public final class Aircraft extends Entity {
 		if (getX() < -10 || getY() < -10 || getX() > Config.SCREEN_WIDTH - 190
 				|| getY() > Config.SCREEN_HEIGHT + 105) {
 			this.isActive = false;
-
-			Debug.msg("Aircraft id " + id
-					+ ": Out of bounds, last coordinates: " + coords);
+			
+			State.changeScore(-20);
 		}
 
 		if (waypoints.size() == 0) {
+			System.out.println("Fatal error: plane with zero waypoints: " + this.id);
+			//System.exit(2);
 			this.isActive = false;
-			Debug.msg("Aircraft id " + id + ": Reached exit WP");
-			seprini.data.State.changeScore(25);
 		}
 
-		return isActive;
+		return this.isActive;
 	}
 
 	/**

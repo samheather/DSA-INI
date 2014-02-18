@@ -40,7 +40,8 @@ public final class AircraftController extends InputListener implements
 
 	private final int maxAircraft, timeBetweenGenerations, separationRadius;
 
-	private float lastWarned, lastGenerated;
+	private float lastWarned;
+	private float lastGenerated = State.time();
 	private boolean breachingSound, breachingIsPlaying;
 
 	private final AircraftType defaultAircraft = new AircraftType();
@@ -77,7 +78,6 @@ public final class AircraftController extends InputListener implements
 	 * @param sidebar
 	 * @param screen
 	 */
-
 
 	private void addCloud(Cloud c) {
 		clouds.add(c);
@@ -203,8 +203,6 @@ public final class AircraftController extends InputListener implements
 			(planeI = aircraftList.get(i)).act();
 			planeI.isBreaching(false);
 
-
-
 			// Collision Detection + Separation breach detection.
 			for (int j = 0; j < aircraftList.size(); j++) {
 
@@ -260,7 +258,10 @@ public final class AircraftController extends InputListener implements
 		}
 
 		// try to generate a new aircraft
-		generateAircraft();
+		if (!(aircraftList.size() + airport.getNumberInAirport() >= maxAircraft))
+			if (!(State.time() - lastGenerated < timeBetweenGenerations
+					+ rand.nextInt(100)))
+				generateAircraft();
 
 	}
 
@@ -280,6 +281,7 @@ public final class AircraftController extends InputListener implements
 		// change the screen to the endScreen
 		screen.setScreen(new EndScreen());
 	}
+
 	public Airport airport = new Airport();
 
 	/**
@@ -311,27 +313,34 @@ public final class AircraftController extends InputListener implements
 	 *         otherwise <b>null</b>
 	 * 
 	 */
-	private Aircraft generateAircraft() {
+	private Aircraft generateAircraft()
+	{
+		return generateAircraft(flightplan.generate());
+	}
+	private Aircraft generateAircraft(ArrayList<Waypoint> waypoints) {
 		// number of aircraft has reached maximum, abort
-		if (aircraftList.size() >= maxAircraft)
+		if (aircraftList.size() + airport.getNumberInAirport() >= maxAircraft)
 			return null;
 
 		// time difference between aircraft generated - depends on difficulty
 		// selected
-		if (State.time() - lastGenerated < timeBetweenGenerations
-				+ rand.nextInt(100))
-			return null;
+		// if (State.time() - lastGenerated < timeBetweenGenerations
+		// + rand.nextInt(100))
+		// return null;
+
+		System.out.println("A BILLION TIMES");
 
 		AircraftType act = randomAircraftType();
-		if (act == snakeyAircraft){
+		if (act == snakeyAircraft) {
 			if (MenuController.theme == "earth")
 				sidebar.addEvent("You have snakes in the plane!");
-		    else if( MenuController.theme == "space")
-		    	sidebar.addEvent("Space snakes attack again!");
-		    else sidebar.addEvent("The shark has appeared!");
-	 }
+			else if (MenuController.theme == "space")
+				sidebar.addEvent("Space snakes attack again!");
+			else
+				sidebar.addEvent("The shark has appeared!");
+		}
 
-		final Aircraft newAircraft = new Aircraft(act, flightplan.generate(),
+		final Aircraft newAircraft = new Aircraft(act, waypoints,
 				aircraftId++, aircraftList);
 
 		aircraftList.add(newAircraft);
@@ -349,14 +358,12 @@ public final class AircraftController extends InputListener implements
 
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-					//if(event.getButton() == 0)
-					//	selectAircraft(newAircraft);
-					//else {
-						System.out.println("Hello world");
-						airport.land(newAircraft);
-						System.out.println(newAircraft.waypoints);
-					//}
-					
+					if (event.getButton() == 0) {
+						// selectAircraft(newAircraft);
+						launchPlane();
+
+					}
+
 				}
 
 			});
@@ -522,7 +529,16 @@ public final class AircraftController extends InputListener implements
 		return false;
 	}
 
-
+	public Aircraft launchPlane() {
+		if (airport.canLaunch()) {
+			airport.launch();
+			ArrayList<Waypoint> waypoints = flightplan.generate();
+			waypoints.set(0, airport);
+			Aircraft temp = generateAircraft(waypoints);
+			return temp;
+		}
+		return null;
+	}
 
 	public int getAirportPlaneCount() {
 		return airport.getNumberInAirport();
