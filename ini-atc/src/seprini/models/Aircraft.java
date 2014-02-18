@@ -70,9 +70,8 @@ public final class Aircraft extends Entity {
 	
 	public ArrayList<Aircraft> aircrafts;
 	
-	public boolean remove() {
+	public void remove2() {
 		aircrafts.remove(this);
-		return super.remove();
 	}
 
 	public Aircraft(AircraftType aircraftType, ArrayList<Waypoint> flightPlan,

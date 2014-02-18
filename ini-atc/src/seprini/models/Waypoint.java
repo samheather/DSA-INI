@@ -11,7 +11,7 @@ public class Waypoint extends Entity {
 	
 
 	public void handleCollision(Aircraft a) {
-		a.waypoints.remove(0);
+		a.waypoints.remove(this);
 	}
 
 	public Waypoint(Vector2 position, boolean deletable) {
