@@ -11,7 +11,6 @@ import seprini.data.Debug;
 import seprini.data.GameDifficulty;
 import seprini.data.State;
 import seprini.models.Aircraft;
-import seprini.models.Airport;
 import seprini.models.Airspace;
 import seprini.models.Cloud;
 import seprini.models.Map;
@@ -78,7 +77,6 @@ public final class AircraftController extends InputListener implements
 	 * @param screen
 	 */
 
-	private Airport airport = new Airport();
 
 	private void addCloud(Cloud c) {
 		clouds.add(c);
@@ -204,10 +202,7 @@ public final class AircraftController extends InputListener implements
 			(planeI = aircraftList.get(i)).act();
 			planeI.isBreaching(false);
 
-			if (planeI.getCoords().dst(airport.getCoords()) < (planeI
-					.getRadius() + airport.getRadius())) {
-				airport.planeCollision(planeI);
-			}
+
 
 			// Collision Detection + Separation breach detection.
 			for (int j = 0; j < aircraftList.size(); j++) {
@@ -518,31 +513,10 @@ public final class AircraftController extends InputListener implements
 		return false;
 	}
 
-	public boolean land(Aircraft selectedAircraft2) {
-		boolean a = airport.landPlane(selectedAircraft2);
-		sidebar.update();
-		return a;
-	}
 
-	public Aircraft launch() {
-		Aircraft a = airport.launchPlane();
-		Aircraft a2 = null;
-		if (a != null) {
-			System.out.println("launched plane");
-			aircraftList.remove(a);
-			a2 = generateAircraft();
-			if (a2 != null)
-				a2.setPosition(airport.getCoords().x, airport.getCoords().y);
-			else
-				aircraftList.add(a);
-		}
-		sidebar.update();
-		return a2;
-
-	}
 
 	public int getPlaneCount() {
-		return airport.getPlaneCount();
+		return 0;
 	}
 
 }
