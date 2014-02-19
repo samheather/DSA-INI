@@ -436,6 +436,10 @@ public final class AircraftController extends InputListener implements
 		// object
 		if (selectedAircraft != null) {
 			selectedAircraft.selected(false);
+			
+		// make sure old aircraft is not turning in circles
+			selectedAircraft.turnLeft(false);
+			selectedAircraft.turnRight(false);
 		}
 
 		// set new selected aircraft
@@ -452,6 +456,8 @@ public final class AircraftController extends InputListener implements
 			selectedAircraft.selected(false);
 			selectedAircraft = null;
 		}
+	
+		
 	}
 
 	/**
@@ -487,7 +493,6 @@ public final class AircraftController extends InputListener implements
 
 		if (button == Buttons.LEFT && sidebar.allowNewWaypoints()) {
 			waypoints.createWaypoint(x, y, false);
-			System.out.print("Hello");
 			return true;
 		}
 

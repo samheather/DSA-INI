@@ -264,6 +264,7 @@ public final class SidebarController extends ChangeListener implements
 		TextButton button = new TextButton(text, Art.getSkin(),
 				(toggle) ? "toggle" : "default");
 		button.pad(3);
+		
 		button.addListener(this);
 
 		buttons.put(name, button);
