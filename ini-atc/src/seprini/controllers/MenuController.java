@@ -34,7 +34,9 @@ public final class MenuController extends ChangeListener implements Controller {
 	private final MenuScreen screen;
 	private final Leaderboard lb = new Leaderboard();
 	public String theme = "earth";
-	public String airportMsg , planeMsg ;
+	public String airportMsg = "Planes in airport : ";
+	public String planeMsg = "You have snakes in the plane!";
+	
 
 	public void addLeaderboardEntry(String name, double score) {
 		lb.addLeaderboardEntry(name, score);
