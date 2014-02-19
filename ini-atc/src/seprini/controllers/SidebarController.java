@@ -41,36 +41,36 @@ public final class SidebarController extends ChangeListener implements
 	private boolean allowRedirection = false;
 
 	private final GameScreen screen;
-	
-	
 
 	// UI wrappers for the controls and the buttons at the bottom
 	private Table sidebar, aircraftControls, bottomButtons;
-	
+
 	private Table eventsDisplay = new Table(Art.getSkin());
-	
+
 	private class Event {
 		private final String message;
 		private final float time;
+
 		public float time() {
 			return time;
 		}
+
 		public String message() {
 			return message;
 		}
+
 		public Event(String message, float time) {
 			this.time = time;
 			this.message = message;
 		}
 	}
-	
+
 	private List<Event> events = new ArrayList<Event>();
-	
-	
+
 	public void addEvent(String message) {
 		addEvent(message, 10);
 	}
-	
+
 	public void addEvent(String message, int time) {
 		events.add(new Event(message, State.time() + time));
 	}
@@ -78,7 +78,6 @@ public final class SidebarController extends ChangeListener implements
 	// stores state of the turn left/right buttons
 	private boolean turningLeft, turningRight;
 	MenuController mc;
-	
 
 	/**
 	 * 
@@ -103,9 +102,9 @@ public final class SidebarController extends ChangeListener implements
 	 * Initialise all the buttons and labels
 	 */
 	public void init() {
-		//eventsDisplay.add("lololtesting");
-		//eventsDisplay.row();
-		//eventsDisplay.add("loltetsing2");
+		// eventsDisplay.add("lololtesting");
+		// eventsDisplay.row();
+		// eventsDisplay.add("loltetsing2");
 		sidebar.add(eventsDisplay);
 
 		// wrapper for aircraft controls
@@ -139,10 +138,10 @@ public final class SidebarController extends ChangeListener implements
 				.colspan(2);
 
 		aircraftControls.row();
-		
-		createLabel("planeNumber"," Planes in airport: ", aircraftControls).width(200)
-				.colspan(2);
-		
+
+		createLabel("planeNumber", " Planes in airport: ", aircraftControls)
+				.width(200).colspan(2);
+
 		aircraftControls.row();
 
 		// adding buttons to aircraft controls
@@ -163,15 +162,16 @@ public final class SidebarController extends ChangeListener implements
 
 		createButton("decelerate", " Decelerate", aircraftControls, false)
 				.width(200);
-		
+
 		aircraftControls.row().colspan(2);
-		
-		createButton("takeOff", "Take Off", aircraftControls, false).width(200).colspan(2);
-		
+
+		createButton("takeOff", "Take Off", aircraftControls, false).width(200)
+				.colspan(2);
+
 		aircraftControls.row().colspan(2);
-		
-		createButton("land", "Land", aircraftControls, false).width(200).colspan(2);
-		
+
+		createButton("land", "Land", aircraftControls, false).width(200)
+				.colspan(2);
 
 		aircraftControls.row().spaceTop(250);
 
@@ -189,10 +189,10 @@ public final class SidebarController extends ChangeListener implements
 				.colspan(2);
 
 		aircraftControls.row();
-		
+
 		createLabel("", " Score:", bottomButtons).width(100);
 		createLabel("score", "..", bottomButtons).width(100);
-		
+
 		bottomButtons.row();
 
 		createLabel("", " Time:", bottomButtons).width(100);
@@ -209,10 +209,10 @@ public final class SidebarController extends ChangeListener implements
 	 * Update the sidebar according to changes in the AircraftController
 	 */
 	public void update() {
-		
+
 		eventsDisplay.clear();
-		for(int i = 0; i<events.size(); ++i) {
-			if(events.get(i).time() < State.time()) {
+		for (int i = 0; i < events.size(); ++i) {
+			if (events.get(i).time() < State.time()) {
 				events.remove(i);
 				--i;
 			} else {
@@ -222,7 +222,6 @@ public final class SidebarController extends ChangeListener implements
 		}
 		String altitudeText;
 		String speedText;
-		
 
 		// update timer
 		labels.get("timer").setText("" + Math.round(State.time()));
@@ -236,16 +235,21 @@ public final class SidebarController extends ChangeListener implements
 			speedText = " Speed: ";
 		} else {
 			altitudeText = " Altitude: " + selectedAircraft.getAltitude() + "m";
-			speedText = " Speed: " + Math.round(selectedAircraft.getVelocity().len() * selectedAircraft.getSpeed()  * Config.AIRCRAFT_SPEED_MULTIPLIER) + "km/h";
-		};
+			speedText = " Speed: "
+					+ Math.round(selectedAircraft.getVelocity().len()
+							* selectedAircraft.getSpeed()
+							* Config.AIRCRAFT_SPEED_MULTIPLIER) + "km/h";
+		}
+		;
 
 		// update aircraft altitude text
 		labels.get("altitude").setText(altitudeText);
 
 		// update aircraft speed text
 		labels.get("speed").setText(speedText);
-		
-		labels.get("planeNumber").setText(mc.airportMsg + aircrafts.getAirportPlaneCount());
+
+		labels.get("planeNumber").setText(
+				mc.airportMsg + aircrafts.getAirportPlaneCount());
 	}
 
 	/**
@@ -257,9 +261,8 @@ public final class SidebarController extends ChangeListener implements
 	 */
 	private Cell<?> createButton(String name, String text, Table parent,
 			boolean toggle) {
-		TextButton button = new TextButton(text, Art.getSkin(), (toggle)
-				? "toggle"
-				: "default");
+		TextButton button = new TextButton(text, Art.getSkin(),
+				(toggle) ? "toggle" : "default");
 		button.pad(3);
 		button.addListener(this);
 
@@ -304,7 +307,7 @@ public final class SidebarController extends ChangeListener implements
 			if (actor.equals(buttons.get("createWaypoint")))
 				allowNewWaypoints = !allowNewWaypoints;
 
-			if (actor.equals(buttons.get("assignWaypoint"))){
+			if (actor.equals(buttons.get("assignWaypoint"))) {
 				allowRedirection = !allowRedirection;
 			}
 			if (selectedAircraft != null) {
@@ -325,18 +328,15 @@ public final class SidebarController extends ChangeListener implements
 
 				if (actor.equals(buttons.get("decelerate")))
 					selectedAircraft.decreaseSpeed();
-				
+
 				if (actor.equals(buttons.get("land"))) {
 					aircrafts.landPlane(selectedAircraft);
-					System.out.println("land");
 				}
 
-
 			}
-			
+
 			if (actor.equals(buttons.get("takeOff"))) {
 				aircrafts.launchPlane();
-				System.out.println("takeoff");
 			}
 		}
 		if (actor.equals(buttons.get("menu"))) {

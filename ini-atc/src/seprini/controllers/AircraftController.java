@@ -84,7 +84,9 @@ public final class AircraftController extends InputListener implements
 		clouds.add(c);
 		airspace.addActor(c);
 	}
+
 	MenuController mc;
+
 	public AircraftController(GameDifficulty diff, Airspace airspace,
 			Table sidebar, GameScreen screen, MenuController mc) {
 		this.mc = mc;
@@ -129,6 +131,7 @@ public final class AircraftController extends InputListener implements
 			maxAircraft = 10;
 			timeBetweenGenerations = 3;
 			separationRadius = 100;
+			State.setDifficultyMultiplier(1);
 			break;
 		}
 
@@ -269,9 +272,10 @@ public final class AircraftController extends InputListener implements
 			if (!(State.time() - lastGenerated < timeBetweenGenerations
 					+ rand.nextInt(100)))
 				generateAircraft();
-		
-		seprini.data.State.changeScore(-airport.getNumberInAirport() * Gdx.graphics.getDeltaTime());
-		
+
+		seprini.data.State.changeScore(-airport.getNumberInAirport()
+				* Gdx.graphics.getDeltaTime());
+
 		sidebar.update();
 
 	}
@@ -339,12 +343,10 @@ public final class AircraftController extends InputListener implements
 		// + rand.nextInt(100))
 		// return null;
 
-		System.out.println("A BILLION TIMES");
-
 		AircraftType act = randomAircraftType();
-		if (act == snakeyAircraft){
+		if (act == snakeyAircraft) {
 			sidebar.addEvent(mc.planeMsg);
-	 }
+		}
 
 		final Aircraft newAircraft = new Aircraft(act, waypoints, aircraftId++,
 				this);
@@ -442,7 +444,7 @@ public final class AircraftController extends InputListener implements
 		// make new aircraft know it's selected
 		selectedAircraft.selected(true);
 	}
-	
+
 	public void deselectAircraft(Aircraft aircraft) {
 		// make sure old selected aircraft is no longer selected in its own
 		// object
@@ -537,9 +539,9 @@ public final class AircraftController extends InputListener implements
 
 		return false;
 	}
-	
+
 	public void landPlane(Aircraft newAircraft) {
-		if(!newAircraft.canControl())
+		if (!newAircraft.canControl())
 			return;
 		newAircraft.deselect();
 		newAircraft.setCanControl(false);
@@ -564,7 +566,7 @@ public final class AircraftController extends InputListener implements
 
 	public void remove(Aircraft aircraft) {
 		aircraftList.remove(aircraft);
-		
+
 	}
 
 }
