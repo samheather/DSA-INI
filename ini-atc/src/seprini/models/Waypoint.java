@@ -11,7 +11,8 @@ public class Waypoint extends Entity {
 	
 
 	public void handleCollision(Aircraft a) {
-		a.waypoints.remove(this);
+		seprini.data.State.changeScore(5);
+		a.popWaypoint();
 	}
 
 	public Waypoint(Vector2 position, boolean deletable) {

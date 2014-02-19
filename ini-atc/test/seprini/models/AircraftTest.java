@@ -72,14 +72,6 @@ public class AircraftTest {
 	}
 
 	@Test
-	public void testInsertWaypoint() {
-		Waypoint newWaypoint = new Waypoint(7, 8, true);
-		testAircraft1.insertWaypoint(newWaypoint);
-		assertEquals(testAircraft1.getFlightPlan().get(0), newWaypoint);
-
-	}
-
-	@Test
 	public void testIncreaseSpeed() {
 		testAircraft2.selected(true);
 		testAircraft2.increaseSpeed();

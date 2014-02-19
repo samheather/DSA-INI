@@ -1,28 +1,28 @@
 package seprini.models;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import com.badlogic.gdx.math.Vector2;
 
 public class Airport extends Waypoint{ 
 	
-	private int numberInAirport = 0;
+	private Stack<Aircraft> aircraft = new Stack<Aircraft>();
 	private final int airportCapacity = 3;
 
 	@Override
 	public void handleCollision(Aircraft a) {
-		if(a.waypoints.size() > 1)
+		if(a.popWaypoint())
 			return;
-		if (!canLand()) {
-			a.restoreWaypoints();
-		}
-		else
+		a.restoreWaypoints();
+		if (canLand())
 		{
-			++numberInAirport;
+			a.deselect();
 			// Remove plane image for this plane from list of sprites
 			a.remove();
 			// Remove plane from list of planes so Physics no longer applied to it.
 			a.removeFromAircraftListToAvoidFramerateProblems();
+			aircraft.push(a);
 		}
 	}
 
@@ -33,28 +33,26 @@ public class Airport extends Waypoint{
 	}
 	
 	public int getNumberInAirport() {
-		return numberInAirport;
+		return aircraft.size();
 	}
 	
 	public boolean canLand() {
-		return numberInAirport < airportCapacity;
+		return getNumberInAirport() < airportCapacity;
 	}
 
 	public boolean canLaunch() {
-		return numberInAirport > 0;
+		return getNumberInAirport() > 0;
 	}
 	public void land(Aircraft newAircraft) {
-		newAircraft.saveWaypoints();
 		ArrayList<Waypoint> newFlightPlan = new ArrayList<Waypoint>();
 		newFlightPlan.add(this);
-		newAircraft.waypoints = newFlightPlan;
+		newAircraft.waypoints(newFlightPlan);
 	}
 	
-	public boolean launch() {
+	public Aircraft launch() {
 		if (!canLaunch())
-			return false;
-		--numberInAirport;
-		return true;
+			return null;
+		return aircraft.pop();
 	}
 
 	

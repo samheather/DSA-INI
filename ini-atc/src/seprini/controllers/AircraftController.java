@@ -20,6 +20,7 @@ import seprini.models.types.AircraftType;
 import seprini.screens.EndScreen;
 import seprini.screens.GameScreen;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
@@ -263,6 +264,8 @@ public final class AircraftController extends InputListener implements
 			if (!(State.time() - lastGenerated < timeBetweenGenerations
 					+ rand.nextInt(100)))
 				generateAircraft();
+		
+		seprini.data.State.changeScore(-airport.getNumberInAirport() * Gdx.graphics.getDeltaTime());
 
 		sidebar.update();
 
@@ -285,7 +288,7 @@ public final class AircraftController extends InputListener implements
 		screen.setScreen(new EndScreen());
 	}
 
-	public Airport airport = new Airport();
+	private Airport airport = new Airport();
 
 	/**
 	 * Handles what happens after the separation rules have been breached
@@ -344,7 +347,7 @@ public final class AircraftController extends InputListener implements
 		}
 
 		final Aircraft newAircraft = new Aircraft(act, waypoints, aircraftId++,
-				aircraftList);
+				this);
 
 		aircraftList.add(newAircraft);
 
@@ -440,6 +443,15 @@ public final class AircraftController extends InputListener implements
 		// make new aircraft know it's selected
 		selectedAircraft.selected(true);
 	}
+	
+	public void deselectAircraft(Aircraft aircraft) {
+		// make sure old selected aircraft is no longer selected in its own
+		// object
+		if (selectedAircraft == aircraft) {
+			selectedAircraft.selected(false);
+			selectedAircraft = null;
+		}
+	}
 
 	/**
 	 * Redirects aircraft to another waypoint.
@@ -526,20 +538,32 @@ public final class AircraftController extends InputListener implements
 
 		return false;
 	}
+	
+	public void landPlane(Aircraft newAircraft) {
+		newAircraft.deselect();
+		newAircraft.setCanControl(false);
+		airport.land(newAircraft);
+	}
 
 	public Aircraft launchPlane() {
+		Aircraft a = null;
 		if (airport.canLaunch()) {
-			airport.launch();
-			ArrayList<Waypoint> waypoints = flightplan.generate();
-			waypoints.set(0, airport);
-			Aircraft temp = generateAircraft(waypoints);
-			return temp;
+			a = airport.launch();
+			a.insertWaypoint(airport);
+			aircraftList.add(a);
+			airspace.addActor(a);
+			a.setCanControl(true);
 		}
-		return null;
+		return a;
 	}
 
 	public int getAirportPlaneCount() {
 		return airport.getNumberInAirport();
+	}
+
+	public void remove(Aircraft aircraft) {
+		aircraftList.remove(aircraft);
+		
 	}
 
 }

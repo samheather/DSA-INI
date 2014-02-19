@@ -68,7 +68,11 @@ public final class SidebarController extends ChangeListener implements
 	
 	
 	public void addEvent(String message) {
-		events.add(new Event(message, State.time() + 10));
+		addEvent(message, 10);
+	}
+	
+	public void addEvent(String message, int time) {
+		events.add(new Event(message, State.time() + time));
 	}
 
 	// stores state of the turn left/right buttons
@@ -334,7 +338,7 @@ public final class SidebarController extends ChangeListener implements
 				}
 				
 				if (actor.equals(buttons.get("land"))) {
-					aircrafts.airport.land(selectedAircraft);
+					aircrafts.landPlane(selectedAircraft);
 					System.out.println("land");
 				}
 
