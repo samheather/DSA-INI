@@ -1,6 +1,7 @@
 package seprini.screens;
 
 import seprini.controllers.AircraftController;
+import seprini.controllers.MenuController;
 import seprini.data.Art;
 import seprini.data.Config;
 import seprini.data.GameDifficulty;
@@ -29,7 +30,7 @@ public class GameScreen extends Screen {
 	private final Stage root;
 	private final AircraftController controller;
 
-	public GameScreen(GameDifficulty diff) {
+	public GameScreen(GameDifficulty diff, MenuController mc) {
 
 		// create a table layout, main ui
 		Table ui = new Table();
@@ -44,7 +45,7 @@ public class GameScreen extends Screen {
 		// create and add the Airspace group, contains aircraft and waypoints
 		Airspace airspace = new Airspace();
 
-		controller = new AircraftController(diff, airspace, sidebar, this);
+		controller = new AircraftController(diff, airspace, sidebar, this, mc);
 		root = new Stage();
 
 		root.setKeyboardFocus(airspace);

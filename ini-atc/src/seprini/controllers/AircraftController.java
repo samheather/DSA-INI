@@ -84,9 +84,10 @@ public final class AircraftController extends InputListener implements
 		clouds.add(c);
 		airspace.addActor(c);
 	}
-
+	MenuController mc;
 	public AircraftController(GameDifficulty diff, Airspace airspace,
-			Table sidebar, GameScreen screen) {
+			Table sidebar, GameScreen screen, MenuController mc) {
+		this.mc = mc;
 		this.difficulty = diff;
 		this.airspace = airspace;
 		this.screen = screen;
@@ -95,7 +96,7 @@ public final class AircraftController extends InputListener implements
 		airspace.addActor(new Map());
 
 		// manages the sidebar
-		this.sidebar = new SidebarController(sidebar, this, screen);
+		this.sidebar = new SidebarController(sidebar, this, screen, mc);
 
 		// manages the waypoints
 		this.waypoints = new WaypointComponent(this, this.sidebar);
@@ -342,7 +343,7 @@ public final class AircraftController extends InputListener implements
 
 		AircraftType act = randomAircraftType();
 		if (act == snakeyAircraft){
-			sidebar.addEvent(MenuController.planeMsg);
+			sidebar.addEvent(mc.planeMsg);
 	 }
 
 		final Aircraft newAircraft = new Aircraft(act, waypoints, aircraftId++,

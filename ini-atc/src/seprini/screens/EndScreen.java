@@ -59,7 +59,7 @@ public class EndScreen extends Screen {
 		ui.add(text).center();
 
 		ui.row();
-		if (State.getScore() > Leaderboard.leaderboardEntries[4].getScore()) {
+		if (State.getScore() > (new Leaderboard()).leaderboardEntries[4].getScore()) {
 			Label textLB = new Label("Enter your name to be entered into the Leaderboard:\n",
 					Art.getSkin(), "textStyle");
 			ui.add(textLB).center();
@@ -83,7 +83,7 @@ public class EndScreen extends Screen {
 				@Override
 				public void changed(ChangeEvent event, Actor actor) {
 					if(!tf.getText().isEmpty()) {
-					MenuController.addLeaderboardEntry(tf.getText(), State.getScore());
+						(new Leaderboard()).addLeaderboardEntry(tf.getText(), State.getScore());
 					}
 					setScreen(new MenuScreen());
 				}

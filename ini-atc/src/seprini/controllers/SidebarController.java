@@ -77,6 +77,8 @@ public final class SidebarController extends ChangeListener implements
 
 	// stores state of the turn left/right buttons
 	private boolean turningLeft, turningRight;
+	MenuController mc;
+	
 
 	/**
 	 * 
@@ -90,7 +92,8 @@ public final class SidebarController extends ChangeListener implements
 	 *            for changing screens once Menu or Pause have been clicked
 	 */
 	public SidebarController(Table sidebar, AircraftController aircrafts,
-			GameScreen screen) {
+			GameScreen screen, MenuController mc) {
+		this.mc = mc;
 		this.sidebar = sidebar;
 		this.aircrafts = aircrafts;
 		this.screen = screen;
@@ -242,7 +245,7 @@ public final class SidebarController extends ChangeListener implements
 		// update aircraft speed text
 		labels.get("speed").setText(speedText);
 		
-		labels.get("planeNumber").setText(MenuController.airportMsg);
+		labels.get("planeNumber").setText(mc.airportMsg + aircrafts.getAirportPlaneCount());
 	}
 
 	/**
