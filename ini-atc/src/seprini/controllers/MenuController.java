@@ -34,8 +34,8 @@ public final class MenuController extends ChangeListener implements Controller {
 	private final MenuScreen screen;
 	private final Leaderboard lb = new Leaderboard();
 	public String theme = "earth";
-	public String airportMsg = " Planes in airport : ";
-	public String planeMsg = "You have snakes in the plane!";
+	public String airportMsg;
+	public String planeMsg;
 	
 
 	public void addLeaderboardEntry(String name, double score) {
@@ -70,6 +70,8 @@ public final class MenuController extends ChangeListener implements Controller {
 		ui.row().padTop(80);
 		addLeaderboard();
 		ui.row();
+		
+		setEarth();
 
 	}
 
@@ -140,6 +142,14 @@ public final class MenuController extends ChangeListener implements Controller {
 
 		return ui.add(button);
 	}
+	
+	private void setEarth() {
+		ui.padTop(230);
+		Art.load("earth");
+		theme = "earth";
+		airportMsg = " Planes in airport : ";
+		planeMsg = "You have snakes in the plane!";
+	}
 
 	/**
 	 * Handles what happens once one of the buttons have been clicked
@@ -172,11 +182,7 @@ public final class MenuController extends ChangeListener implements Controller {
 		}
 		
 		if (actor.equals(buttons.get("earth"))){
-			ui.padTop(230);
-			Art.load("earth");
-			theme = "earth";
-			airportMsg = " Planes in airport : ";
-			planeMsg = "You have snakes in the plane!";
+			setEarth();
 		}
 		
 		if (actor.equals(buttons.get("space"))){
