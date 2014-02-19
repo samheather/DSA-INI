@@ -32,11 +32,13 @@ public final class MenuController extends ChangeListener implements Controller {
 
 	private final Table ui;
 	private final MenuScreen screen;
-	private static final Leaderboard lb = new Leaderboard();
-	public static String theme = "earth";
-	public static String airportMsg , planeMsg ;
+	private final Leaderboard lb = new Leaderboard();
+	public String theme = "earth";
+	public String airportMsg = " Planes in airport : ";
+	public String planeMsg = "You have snakes in the plane!";
+	
 
-	public static void addLeaderboardEntry(String name, double score) {
+	public void addLeaderboardEntry(String name, double score) {
 		lb.addLeaderboardEntry(name, score);
 	}
 
@@ -151,17 +153,17 @@ public final class MenuController extends ChangeListener implements Controller {
 		// Pass difficulty to the newly created GameScreen so the game can
 		// change variables depending on it
 		if (actor.equals(buttons.get("startEasy"))) {
-			screen.setScreen(new GameScreen(GameDifficulty.EASY));
+			screen.setScreen(new GameScreen(GameDifficulty.EASY, this));
 			Art.getSound("comeflywithme").stop();
 		}
 
 		if (actor.equals(buttons.get("startMedium"))) {
-			screen.setScreen(new GameScreen(GameDifficulty.MEDIUM));
+			screen.setScreen(new GameScreen(GameDifficulty.MEDIUM, this));
 			Art.getSound("comeflywithme").stop();
 		}
 
 		if (actor.equals(buttons.get("startHard"))) {
-			screen.setScreen(new GameScreen(GameDifficulty.HARD));
+			screen.setScreen(new GameScreen(GameDifficulty.HARD, this));
 			Art.getSound("comeflywithme").stop();
 		}
 
@@ -173,7 +175,7 @@ public final class MenuController extends ChangeListener implements Controller {
 			ui.padTop(230);
 			Art.load("earth");
 			theme = "earth";
-			airportMsg = "Planes in airport : ";
+			airportMsg = " Planes in airport : ";
 			planeMsg = "You have snakes in the plane!";
 		}
 		

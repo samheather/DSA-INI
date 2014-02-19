@@ -26,6 +26,7 @@ public class MenuScreen extends Screen {
 	 */
 	private final Stage root;
 	private final Table ui;
+	private final MenuController menuc;
 
 	/**
 	 * Initialises the input handler, stage and create the layout with buttons
@@ -42,7 +43,7 @@ public class MenuScreen extends Screen {
 
 		// creator the controller for this screen, this will handle basically
 		// everything for this screen, including input and creation of buttons
-		new MenuController(this, ui);
+		menuc = new MenuController(this, ui);
 
 		// make it fill the whole screen
 		ui.setFillParent(true);
