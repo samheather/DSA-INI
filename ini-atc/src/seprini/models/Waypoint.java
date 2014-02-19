@@ -10,9 +10,10 @@ public class Waypoint extends Entity {
 	private final boolean deletable;
 	
 
-	public void handleCollision(Aircraft a) {
+	public boolean handleCollision(Aircraft a) {
 		seprini.data.State.changeScore(5);
 		a.popWaypoint();
+		return false;
 	}
 
 	public Waypoint(Vector2 position, boolean deletable) {

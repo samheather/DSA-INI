@@ -11,9 +11,9 @@ public class Airport extends Waypoint{
 	private final int airportCapacity = 3;
 
 	@Override
-	public void handleCollision(Aircraft a) {
+	public boolean handleCollision(Aircraft a) {
 		if(a.popWaypoint())
-			return;
+			return false;
 		a.restoreWaypoints();
 		if (canLand())
 		{
@@ -23,7 +23,9 @@ public class Airport extends Waypoint{
 			// Remove plane from list of planes so Physics no longer applied to it.
 			a.removeFromAircraftListToAvoidFramerateProblems();
 			aircraft.push(a);
+			return true;
 		}
+		return false;
 	}
 
 

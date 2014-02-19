@@ -107,7 +107,7 @@ public final class AircraftController extends InputListener implements
 		// wanted value for that difficulty level.
 		switch (difficulty) {
 		case EASY:
-			maxAircraft = 10;
+			maxAircraft = 2;
 			timeBetweenGenerations = 3;
 			separationRadius = 100;
 			State.setDifficultyMultiplier(1);
@@ -201,7 +201,14 @@ public final class AircraftController extends InputListener implements
 		// Manages collision detection.
 		for (int i = 0; i < aircraftList.size(); i++) {
 			// Update aircraft.
-			(planeI = aircraftList.get(i)).act();
+			planeI = aircraftList.get(i);
+			if (!planeI.isActive()) {
+				removeAircraft(planeI);
+			}
+			if (planeI.act()) {
+				--i;
+				continue;
+			}
 			planeI.isBreaching(false);
 
 			// Collision Detection + Separation breach detection.
@@ -238,11 +245,6 @@ public final class AircraftController extends InputListener implements
 				}
 			}
 
-			// Remove inactive aircraft.
-			if (!planeI.isActive()) {
-				removeAircraft(i);
-			}
-
 			if (planeI.getAltitude() <= 0) {
 				screen.setScreen(new EndScreen());
 			}
@@ -266,7 +268,7 @@ public final class AircraftController extends InputListener implements
 				generateAircraft();
 		
 		seprini.data.State.changeScore(-airport.getNumberInAirport() * Gdx.graphics.getDeltaTime());
-
+		
 		sidebar.update();
 
 	}
@@ -410,19 +412,18 @@ public final class AircraftController extends InputListener implements
 	/**
 	 * Removes aircraft from aircraftList at index i.
 	 * 
-	 * @param i
+	 * @param planeI
 	 */
-	private void removeAircraft(int i) {
-		Aircraft aircraft = aircraftList.get(i);
+	private void removeAircraft(Aircraft planeI) {
 
-		if (aircraft.equals(selectedAircraft))
+		if (planeI.equals(selectedAircraft))
 			selectedAircraft = null;
 
 		// removes the aircraft from the list of aircrafts on screen
-		aircraftList.remove(i);
+		aircraftList.remove(planeI);
 
 		// removes the aircraft from the stage
-		aircraft.remove();
+		planeI.remove();
 	}
 
 	/**

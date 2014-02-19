@@ -236,7 +236,7 @@ public final class Aircraft extends Entity {
 	/**
 	 * Update the aircraft rotation & position
 	 */
-	public void act() {
+	public boolean act() {
 		//System.out.println("rofl");
 		// if player is holding D or -> on the keyboard, turn right
 		if (turnRight && this.canControl){
@@ -285,7 +285,9 @@ public final class Aircraft extends Entity {
 			// checking whether aircraft is at the next waypoint. Whether it's
 			// close enough is dictated by the WP size in the config.
 			if (nextWaypoint.sub(coords).len() < Config.WAYPOINT_SIZE.x / 2) {
-				waypoints().get(0).handleCollision(this);
+				boolean removed = false;
+				if (removed = waypoints().get(0).handleCollision(this))
+					return removed;
 			}
 
 			// set velocity angle to fit rotation, allows for smooth turning
@@ -314,6 +316,7 @@ public final class Aircraft extends Entity {
 		// updating bounds to make sure the aircraft is clickable
 		this.setBounds(getX() - getWidth() / 2, getY() - getWidth() / 2,
 				getWidth(), getHeight());
+		return false;
 	}
 
 	/**

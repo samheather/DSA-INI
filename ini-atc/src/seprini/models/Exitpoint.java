@@ -10,11 +10,12 @@ public final class Exitpoint extends Waypoint {
 	private boolean hidden;
 	
 	@Override
-	public void handleCollision(Aircraft a) {
+	public boolean handleCollision(Aircraft a) {
 		super.handleCollision(a);
 		seprini.data.State.changeScore(25);
 		a.remove();
 		a.removeFromAircraftListToAvoidFramerateProblems();
+		return true;
 	}
 	
 	public Exitpoint(Vector2 position, boolean hidden) {
