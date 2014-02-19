@@ -260,6 +260,7 @@ public final class AircraftController extends InputListener implements
 
 		// try to generate a new aircraft
 		generateAircraft();
+		sidebar.update();
 
 	}
 
