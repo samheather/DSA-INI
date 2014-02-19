@@ -34,6 +34,7 @@ public final class MenuController extends ChangeListener implements Controller {
 	private final MenuScreen screen;
 	private static final Leaderboard lb = new Leaderboard();
 	public static String theme = "earth";
+	public static String airportMsg , planeMsg ;
 
 	public static void addLeaderboardEntry(String name, double score) {
 		lb.addLeaderboardEntry(name, score);
@@ -172,18 +173,24 @@ public final class MenuController extends ChangeListener implements Controller {
 			ui.padTop(230);
 			Art.load("earth");
 			theme = "earth";
+			airportMsg = "Planes in airport : ";
+			planeMsg = "You have snakes in the plane!";
 		}
 		
 		if (actor.equals(buttons.get("space"))){
 			ui.padTop(230);
 			Art.load("space");
 			theme = "space";
+			airportMsg = " Spaceships in spacestation : ";
+			planeMsg = "Space snakes attack again!";
 		}
 		
 		if (actor.equals(buttons.get("water"))){
 			ui.padTop(230);
 			Art.load("water");
 			theme = "water";
+			airportMsg =  " Submarines in mothership : ";
+			planeMsg = "The shark has appeared!";
 		}
 	}
 	
