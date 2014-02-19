@@ -107,7 +107,7 @@ public final class AircraftController extends InputListener implements
 		// wanted value for that difficulty level.
 		switch (difficulty) {
 		case EASY:
-			maxAircraft = 2;
+			maxAircraft = 10;
 			timeBetweenGenerations = 3;
 			separationRadius = 100;
 			State.setDifficultyMultiplier(1);
