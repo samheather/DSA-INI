@@ -300,6 +300,8 @@ public final class SidebarController extends ChangeListener implements
 
 		return parent.add(label);
 	}
+	
+	private double lastLaunch = State.time();
 
 	@Override
 	public void changed(ChangeEvent event, Actor actor) {
@@ -336,7 +338,13 @@ public final class SidebarController extends ChangeListener implements
 			}
 
 			if (actor.equals(buttons.get("takeOff"))) {
-				aircrafts.launchPlane();
+				if((State.time() - lastLaunch) < 2 )
+					addEvent("You need to wait 2 seconds\nbetween plane launches");
+				else {
+					aircrafts.launchPlane();
+					lastLaunch = State.time();
+				}
+				
 			}
 		}
 		if (actor.equals(buttons.get("menu"))) {
