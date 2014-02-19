@@ -215,7 +215,6 @@ public final class SidebarController extends ChangeListener implements
 		}
 		String altitudeText;
 		String speedText;
-		String airportText;
 		
 
 		// update timer
@@ -233,19 +232,13 @@ public final class SidebarController extends ChangeListener implements
 			speedText = " Speed: " + Math.round(selectedAircraft.getVelocity().len() * selectedAircraft.getSpeed()  * Config.AIRCRAFT_SPEED_MULTIPLIER) + "km/h";
 		};
 		
-		if ( MenuController.theme == "earth"){
-			airportText = " Planes in airport : " + aircrafts.getPlaneCount();
-		} else if( MenuController.theme == "space"){
-			airportText = " Spaceships in spacestation : " + aircrafts.getPlaneCount();
-		} else airportText = " Submarines in mothership : " + aircrafts.getPlaneCount();
-		
 		// update aircraft altitude text
 		labels.get("altitude").setText(altitudeText);
 
 		// update aircraft speed text
 		labels.get("speed").setText(speedText);
 		
-		labels.get("planeNumber").setText(airportText);
+		labels.get("planeNumber").setText(MenuController.airportMsg);
 	}
 
 	/**

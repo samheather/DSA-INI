@@ -323,11 +323,7 @@ public final class AircraftController extends InputListener implements
 
 		AircraftType act = randomAircraftType();
 		if (act == snakeyAircraft){
-			if (MenuController.theme == "earth")
-				sidebar.addEvent("You have snakes in the plane!");
-		    else if( MenuController.theme == "space")
-		    	sidebar.addEvent("Space snakes attack again!");
-		    else sidebar.addEvent("The shark has appeared!");
+			sidebar.addEvent(MenuController.planeMsg);
 	 }
 
 		final Aircraft newAircraft = new Aircraft(act, flightplan.generate(),
