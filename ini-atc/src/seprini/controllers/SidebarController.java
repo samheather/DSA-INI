@@ -302,21 +302,17 @@ public final class SidebarController extends ChangeListener implements
 	public void changed(ChangeEvent event, Actor actor) {
 		if (State.paused == false) {
 			if (actor.equals(buttons.get("createWaypoint")))
-				allowNewWaypoints = (allowNewWaypoints) ? false : true;
+				allowNewWaypoints = !allowNewWaypoints;
 
 			if (actor.equals(buttons.get("assignWaypoint"))){
-				allowRedirection = (allowRedirection) ? false : true;
+				allowRedirection = !allowRedirection;
 			}
 			if (selectedAircraft != null) {
 				if (actor.equals(buttons.get("left")))
-					selectedAircraft.turnLeft(turningLeft = (turningLeft)
-							? false
-							: true);
+					selectedAircraft.turnLeft(turningLeft = !turningLeft);
 
 				if (actor.equals(buttons.get("right")))
-					selectedAircraft.turnRight(turningRight = (turningRight)
-							? false
-							: true);
+					selectedAircraft.turnRight(turningRight = !turningRight);
 
 				if (actor.equals(buttons.get("up")))
 					selectedAircraft.increaseAltitude();
@@ -333,12 +329,13 @@ public final class SidebarController extends ChangeListener implements
 				// Buttons commands for landing and taking off.
 				
 				if (actor.equals(buttons.get("takeOff"))) {
-
-					System.out.println("Take off pressed");
+					aircrafts.launchPlane();
+					System.out.println("takeoff");
 				}
 				
 				if (actor.equals(buttons.get("land"))) {
-					System.out.println("land pressed");
+					aircrafts.airport.land(selectedAircraft);
+					System.out.println("land");
 				}
 
 

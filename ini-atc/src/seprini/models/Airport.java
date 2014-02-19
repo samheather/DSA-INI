@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Airport extends Waypoint{ 
 	
-	private int numberInAirport = 2;
+	private int numberInAirport = 0;
 	private final int airportCapacity = 3;
 
 	@Override

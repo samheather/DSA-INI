@@ -262,6 +262,7 @@ public final class AircraftController extends InputListener implements
 			if (!(State.time() - lastGenerated < timeBetweenGenerations
 					+ rand.nextInt(100)))
 				generateAircraft();
+		sidebar.update();
 
 	}
 
@@ -359,8 +360,8 @@ public final class AircraftController extends InputListener implements
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
 					if (event.getButton() == 0) {
-						// selectAircraft(newAircraft);
-						launchPlane();
+						selectAircraft(newAircraft);
+//						launchPlane();
 
 					}
 
@@ -429,11 +430,6 @@ public final class AircraftController extends InputListener implements
 		// object
 		if (selectedAircraft != null) {
 			selectedAircraft.selected(false);
-
-			// make sure the old aircraft stops turning after selecting a new
-			// aircraft; prevents it from going in circles
-			selectedAircraft.turnLeft(false);
-			selectedAircraft.turnRight(false);
 		}
 
 		// set new selected aircraft
