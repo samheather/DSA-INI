@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 public class EndScreen extends Screen {
 
 	private final Stage root;
+	final TextField tf = new TextField("", Art.getSkin());
 
 	public EndScreen() {
 		root = new Stage();
@@ -33,8 +34,12 @@ public class EndScreen extends Screen {
 		ui.addListener(new InputListener() {
 			@Override
 			public boolean keyDown(InputEvent event, int keycode) {
-				if (keycode == Keys.ESCAPE)
+				if (keycode == Keys.ENTER) {
+					if(!tf.getText().isEmpty()) {
+						(new Leaderboard()).addLeaderboardEntry(tf.getText(), State.getScore());
+					}
 					setScreen(new MenuScreen());
+				}
 
 				return false;
 			}
@@ -70,7 +75,6 @@ public class EndScreen extends Screen {
 			Label l = new Label("Name: ", Art.getSkin());
 			t.add(l).center();
 		
-			final TextField tf = new TextField("", Art.getSkin());
 			tf.setMaxLength(30);
 			t.add(tf).left();
 
