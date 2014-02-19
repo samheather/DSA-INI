@@ -373,8 +373,12 @@ Full-Width Styles
   background: url(../images/sprite_download.png) no-repeat top right;
 }
 
-.github_download_link:hover {
+.playable_game_download_link:hover {
   background: url(../images/sprite_download_2.png) no-repeat top left;
+}
+
+.manual_download_link:hover {
+  background: url(../images/sprite_download_2.png) no-repeat top right;
 }
 
 #main_content_wrap {
