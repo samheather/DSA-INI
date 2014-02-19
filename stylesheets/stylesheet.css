@@ -344,7 +344,7 @@ Full-Width Styles
   margin-left: 10px;
 }
 
-.github_download_link {
+.playable_game_download_link {
   display: block;
   float: right;
   width: 90px;
@@ -352,6 +352,17 @@ Full-Width Styles
   text-indent: -5000px;
   overflow: hidden;
   background: url(../images/sprite_download_2.png) no-repeat bottom left;
+}
+
+.manual_download_link {
+  display: block;
+  float: right;
+  width: 90px;
+  height:70px;
+  text-indent: -5000px;
+  overflow: hidden;
+  background: url(../images/sprite_download2.png) no-repeat bottom right;
+  margin-left: 10px;
 }
 
 .zip_download_link:hover {
