@@ -33,11 +33,9 @@ public final class Aircraft extends Entity {
 	
 	private Stack<ArrayList<Waypoint>> waypointStack = new Stack<ArrayList<Waypoint>>();
 	
-	private ArrayList<Waypoint> waypoints() {
+	public ArrayList<Waypoint> waypoints() {
 		return waypointStack.peek();
 	}
-
-
 	
 	public boolean popWaypoint() {
 		if (waypoints().size() > 0)

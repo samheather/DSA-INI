@@ -80,7 +80,7 @@ public class GameScreen extends Screen {
 	public void render() {
 		// draw every actor on the stage
 		root.draw();
-
+		
 		// debug the ui and draw fps
 		if (Config.DEBUG_UI) {
 			Table.drawDebug(root);

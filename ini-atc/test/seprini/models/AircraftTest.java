@@ -31,6 +31,7 @@ public class AircraftTest {
 
 	@Before
 	public void setUp() throws Exception {
+		
 		AircraftType defaultAircraft = new AircraftType();
 
 		defaultAircraft.setCoords(new Vector2(0, 0)).setActive(true)
@@ -72,10 +73,18 @@ public class AircraftTest {
 	}
 
 	@Test
+	public void testInsertWaypoint() {
+		Waypoint newWaypoint = new Waypoint(7, 8, true);
+		testAircraft1.insertWaypoint(newWaypoint);
+		assertEquals("Checks that the newly added waypoint is the next waypoint that the plane will travel to", testAircraft1.waypoints().get(0), newWaypoint);
+		
+	}
+
+	@Test
 	public void testIncreaseSpeed() {
 		testAircraft2.selected(true);
 		testAircraft2.increaseSpeed();
-		assertEquals(1.1f, testAircraft2.getSpeed(), 0);
+		assertEquals("Checks that the speed of the currently selected plane is equal to the calculated value", 1.1f, testAircraft2.getSpeed(), 0);
 
 	}
 
@@ -83,17 +92,15 @@ public class AircraftTest {
 	public void testDecreaseSpeed() {
 		testAircraft1.selected(true);
 		testAircraft1.decreaseSpeed();
-		assertEquals(0.9f, testAircraft1.getSpeed(), 0);
+		assertEquals("Checks that the speed of the currently selected plane is equal to the calculated value", 0.9f, testAircraft1.getSpeed(), 0);
 	}
-
+	
 	@Test
 	public void testIncreaseAltitude() {
-
 	}
 
 	@Test
 	public void testDecreaseAltitude() {
-
 	}
 
 	@Test
@@ -106,7 +113,6 @@ public class AircraftTest {
 
 	@Test
 	public void testGetRadius() {
-
 		assertEquals(15f, testAircraft1.getRadius(), 0);
 	}
 
@@ -136,6 +142,11 @@ public class AircraftTest {
 	public void testGetSpeed() {
 		float result = testAircraft1.getSpeed();
 		assertEquals(1f, result, 0);
+	}
+
+	@Test
+	public void testIsActive() {
+		assertTrue(testAircraft1.isActive());
 	}
 
 	@Test
