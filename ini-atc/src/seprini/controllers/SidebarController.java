@@ -330,19 +330,17 @@ public final class SidebarController extends ChangeListener implements
 				if (actor.equals(buttons.get("decelerate")))
 					selectedAircraft.decreaseSpeed();
 				
-				// Buttons commands for landing and taking off.
-				
-				if (actor.equals(buttons.get("takeOff"))) {
-					aircrafts.launchPlane();
-					System.out.println("takeoff");
-				}
-				
 				if (actor.equals(buttons.get("land"))) {
 					aircrafts.landPlane(selectedAircraft);
 					System.out.println("land");
 				}
 
 
+			}
+			
+			if (actor.equals(buttons.get("takeOff"))) {
+				aircrafts.launchPlane();
+				System.out.println("takeoff");
 			}
 		}
 		if (actor.equals(buttons.get("menu"))) {
