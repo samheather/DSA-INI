@@ -258,10 +258,12 @@ public final class AircraftController extends InputListener implements
 		}
 
 		// try to generate a new aircraft
+
 		if (!(aircraftList.size() + airport.getNumberInAirport() >= maxAircraft))
 			if (!(State.time() - lastGenerated < timeBetweenGenerations
 					+ rand.nextInt(100)))
 				generateAircraft();
+
 		sidebar.update();
 
 	}
@@ -314,10 +316,10 @@ public final class AircraftController extends InputListener implements
 	 *         otherwise <b>null</b>
 	 * 
 	 */
-	private Aircraft generateAircraft()
-	{
+	private Aircraft generateAircraft() {
 		return generateAircraft(flightplan.generate());
 	}
+
 	private Aircraft generateAircraft(ArrayList<Waypoint> waypoints) {
 		// number of aircraft has reached maximum, abort
 		if (aircraftList.size() + airport.getNumberInAirport() >= maxAircraft)
@@ -341,8 +343,8 @@ public final class AircraftController extends InputListener implements
 				sidebar.addEvent("The shark has appeared!");
 		}
 
-		final Aircraft newAircraft = new Aircraft(act, waypoints,
-				aircraftId++, aircraftList);
+		final Aircraft newAircraft = new Aircraft(act, waypoints, aircraftId++,
+				aircraftList);
 
 		aircraftList.add(newAircraft);
 
@@ -361,7 +363,7 @@ public final class AircraftController extends InputListener implements
 				public void clicked(InputEvent event, float x, float y) {
 					if (event.getButton() == 0) {
 						selectAircraft(newAircraft);
-//						launchPlane();
+						// launchPlane();
 
 					}
 
