@@ -599,4 +599,11 @@ public final class Aircraft extends Entity {
 		return "Aircraft - x: " + getX() + " y: " + getY()
 				+ "\n\r flight plan: " + waypoints().toString();
 	}
+
+
+
+	public boolean canControl() {
+		// TODO Auto-generated method stub
+		return this.canControl;
+	}
 }

@@ -204,6 +204,8 @@ public final class AircraftController extends InputListener implements
 			planeI = aircraftList.get(i);
 			if (!planeI.isActive()) {
 				removeAircraft(planeI);
+				--i;
+				continue;
 			}
 			if (planeI.act()) {
 				--i;
@@ -541,6 +543,8 @@ public final class AircraftController extends InputListener implements
 	}
 	
 	public void landPlane(Aircraft newAircraft) {
+		if(!newAircraft.canControl())
+			return;
 		newAircraft.deselect();
 		newAircraft.setCanControl(false);
 		airport.land(newAircraft);
