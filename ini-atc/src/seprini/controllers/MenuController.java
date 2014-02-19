@@ -175,7 +175,7 @@ public final class MenuController extends ChangeListener implements Controller {
 			ui.padTop(230);
 			Art.load("earth");
 			theme = "earth";
-			airportMsg = "Planes in airport : ";
+			airportMsg = " Planes in airport : ";
 			planeMsg = "You have snakes in the plane!";
 		}
 		
