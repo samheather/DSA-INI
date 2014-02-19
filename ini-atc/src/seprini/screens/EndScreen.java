@@ -1,7 +1,6 @@
 package seprini.screens;
 
 import seprini.controllers.Leaderboard;
-import seprini.controllers.MenuController;
 import seprini.data.Art;
 import seprini.data.State;
 
@@ -35,8 +34,9 @@ public class EndScreen extends Screen {
 			@Override
 			public boolean keyDown(InputEvent event, int keycode) {
 				if (keycode == Keys.ENTER) {
-					if(!tf.getText().isEmpty()) {
-						(new Leaderboard()).addLeaderboardEntry(tf.getText(), State.getScore());
+					if (!tf.getText().isEmpty()) {
+						(new Leaderboard()).addLeaderboardEntry(tf.getText(),
+								State.getScore());
 					}
 					setScreen(new MenuScreen());
 				}
@@ -48,46 +48,48 @@ public class EndScreen extends Screen {
 		root.setKeyboardFocus(ui);
 
 		Art.getSkin().getFont("default").setScale(1f);
-		//System.out.println(Math.round(State.time()));
+		// System.out.println(Math.round(State.time()));
 		Label text = new Label(
 				"You have failed.\n"
 						+ "Two vehicles have collided mid-flight in a huge explosion which resulted in the death of "
-						+ (int)Math.max(Math.ceil(Math.random() * 500), 50)
+						+ (int) Math.max(Math.ceil(Math.random() * 500), 50)
 						+ " people.\n"
 						+ "However, you managed to avoid a crash for approximately "
 						+ Math.round(State.time())
 						+ " seconds, which is respectable (at least by some standards).\n"
-						+ "Your final score is "
-						+ State.getScore(),
+						+ "Your final score is " + State.getScore(),
 				Art.getSkin(), "textStyle");
 
 		ui.add(text).center();
 
 		ui.row();
-		if (State.getScore() > (new Leaderboard()).leaderboardEntries[4].getScore()) {
-			Label textLB = new Label("Enter your name to be entered into the Leaderboard:\n",
+		if (State.getScore() > (new Leaderboard()).leaderboardEntries[4]
+				.getScore()) {
+			Label textLB = new Label(
+					"Enter your name to be entered into the Leaderboard:\n",
 					Art.getSkin(), "textStyle");
 			ui.add(textLB).center();
 			ui.row();
-			
+
 			Table t = new Table();
 
 			Label l = new Label("Name: ", Art.getSkin());
 			t.add(l).center();
-		
+
 			tf.setMaxLength(30);
 			t.add(tf).left();
 
 			ui.add(t);
 			ui.row();
-		
+
 			TextButton button = new TextButton("Main Menu", Art.getSkin());
 
 			button.addListener(new ChangeListener() {
 				@Override
 				public void changed(ChangeEvent event, Actor actor) {
-					if(!tf.getText().isEmpty()) {
-						(new Leaderboard()).addLeaderboardEntry(tf.getText(), State.getScore());
+					if (!tf.getText().isEmpty()) {
+						(new Leaderboard()).addLeaderboardEntry(tf.getText(),
+								State.getScore());
 					}
 					setScreen(new MenuScreen());
 				}
@@ -96,7 +98,7 @@ public class EndScreen extends Screen {
 			ui.add(button).width(150);
 		} else {
 			TextButton button = new TextButton("Main Menu", Art.getSkin());
-			
+
 			button.addListener(new ChangeListener() {
 				public void changed(ChangeEvent event, Actor actor) {
 					setScreen(new MenuScreen());

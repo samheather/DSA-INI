@@ -30,23 +30,23 @@ public final class Aircraft extends Entity {
 
 	private int altitude;
 	private Vector2 velocity = new Vector2(0, 0);
-	
+
 	private Stack<ArrayList<Waypoint>> waypointStack = new Stack<ArrayList<Waypoint>>();
-	
+
 	public ArrayList<Waypoint> waypoints() {
 		return waypointStack.peek();
 	}
-	
+
 	public boolean popWaypoint() {
 		if (waypoints().size() > 0)
 			waypoints().remove(0);
 		return waypoints().size() > 0;
 	}
-	
+
 	public void waypoints(ArrayList<Waypoint> newwaypoints) {
 		waypointStack.push(newwaypoints);
 	}
-	
+
 	public ArrayList<Waypoint> restoreWaypoints() {
 		return waypointStack.pop();
 	}
@@ -57,19 +57,17 @@ public final class Aircraft extends Entity {
 	double minSpeed;
 
 	private float velocityScalar;
-	
+
 	@SuppressWarnings("unused")
 	private final int sepRulesBreachCounter = 0;
 	private boolean breaching;
 	private boolean isActive = true;
 	// When user has taken control of the
 	// aircraft
-	
+
 	private boolean canControl;
 	private boolean ignorePath = false;
-	
-	
-	
+
 	// whether the aircraft is selected by the player
 	private boolean selected;
 
@@ -80,13 +78,13 @@ public final class Aircraft extends Entity {
 	private float previousAngle = 0;
 	// if is increasing, switch rotation sides so it uses the 'smaller' angle
 	private boolean rotateRight = false;
-	
+
 	private AircraftController aircrafts;
-	
+
 	public void removeFromAircraftListToAvoidFramerateProblems() {
 		aircrafts.remove(this);
 	}
-	
+
 	public void deselect() {
 		aircrafts.deselectAircraft(this);
 	}
@@ -108,7 +106,7 @@ public final class Aircraft extends Entity {
 		maxTurningRate = aircraftType.getMaxTurningSpeed();
 		maxClimbRate = aircraftType.getMaxClimbRate();
 		maxSpeed = aircraftType.getMaxSpeed();
-		minSpeed = Math.max((maxSpeed - 1.5) , 0.4);
+		minSpeed = Math.max((maxSpeed - 1.5), 0.4);
 		velocityScalar = INITIAL_VELOCITY_SCALAR;
 		velocity = aircraftType.getVelocity();
 		canControl = aircraftType.getControllable();
@@ -164,15 +162,17 @@ public final class Aircraft extends Entity {
 		// if the user takes control of the aircraft, draw a line to the
 		// exitpoint
 		if (selected) {
-			Waypoint exitpoint = waypoints().get(waypoints().size() - 1);
 
 			batch.end();
 
 			drawer.begin(ShapeType.Line);
 			drawer.setColor(1, 0, 0, 0);
-			drawer.line(getX(), getY(), waypoints().get(0).getX(), waypoints().get(0).getY());
-			for (int i = 1 ; i < waypoints().size(); i++){
-				drawer.line(waypoints().get(i-1).getX(), waypoints().get(i-1).getY(), waypoints().get(i).getX(), waypoints().get(i).getY());
+			drawer.line(getX(), getY(), waypoints().get(0).getX(), waypoints()
+					.get(0).getY());
+			for (int i = 1; i < waypoints().size(); i++) {
+				drawer.line(waypoints().get(i - 1).getX(),
+						waypoints().get(i - 1).getY(), waypoints().get(i)
+								.getX(), waypoints().get(i).getY());
 			}
 			drawer.end();
 
@@ -194,7 +194,7 @@ public final class Aircraft extends Entity {
 
 		// draw the altitude for each aircraft
 		Color color;
-		
+
 		if (getAltitude() <= 7500) {
 			color = Color.GREEN;
 		} else if (getAltitude() <= 12500) {
@@ -209,17 +209,15 @@ public final class Aircraft extends Entity {
 				color, batch, true, 1);
 
 		// Changing scores for violation rules
-		if (this.breaching){
+		if (this.breaching) {
 			seprini.data.State.changeScore(-3 * Gdx.graphics.getDeltaTime());
 		}
-		
-		
+
 		// debug line from aircraft centre to waypoint centre
 		if (Config.DEBUG_UI) {
 			Vector2 nextWaypoint = vectorToWaypoint();
 
 			batch.end();
-			
 
 			drawer.begin(ShapeType.Line);
 			drawer.setColor(1, 0, 0, 0);
@@ -235,14 +233,14 @@ public final class Aircraft extends Entity {
 	 * Update the aircraft rotation & position
 	 */
 	public boolean act() {
-		//System.out.println("rofl");
+		// System.out.println("rofl");
 		// if player is holding D or -> on the keyboard, turn right
-		if (turnRight && this.canControl){
+		if (turnRight && this.canControl) {
 			turnRight();
 		}
 
 		// if the player is holding A or <-, turn left
-		if (turnLeft && this.canControl){
+		if (turnLeft && this.canControl) {
 			turnLeft();
 		}
 
@@ -259,7 +257,7 @@ public final class Aircraft extends Entity {
 			// sets a threshold due to float imprecision, should be generally
 			// relativeAngle != 0
 			if (relativeAngle > 1) {
-				
+
 				// if the current angle is bigger than the previous, it means we
 				// are rotating towards the wrong side
 				if (previousAngle < relativeAngle) {
@@ -294,8 +292,8 @@ public final class Aircraft extends Entity {
 
 		// For when the user takes control of the aircraft. Allows the aircraft
 		// to detect when it is at its designated exit WP.
-		if (waypoints().get(waypoints().size() - 1).cpy().getCoords().sub(coords)
-				.len() < Config.EXIT_WAYPOINT_SIZE.x / 2) {
+		if (waypoints().get(waypoints().size() - 1).cpy().getCoords()
+				.sub(coords).len() < Config.EXIT_WAYPOINT_SIZE.x / 2) {
 			waypoints().get(0).handleCollision(this);
 		}
 
@@ -329,9 +327,9 @@ public final class Aircraft extends Entity {
 				.nor();
 		Vector2 coord = velocity.cpy().nor();
 
-		float angle = (float) Math.toDegrees(Math.acos(way.dot(coord) / way.len()
-				* coord.len()));
-		
+		float angle = (float) Math.toDegrees(Math.acos(way.dot(coord)
+				/ way.len() * coord.len()));
+
 		return angle;
 	}
 
@@ -391,7 +389,8 @@ public final class Aircraft extends Entity {
 	 *         (maxSpeed)
 	 */
 	public boolean increaseSpeed() {
-		if ((!selected) || velocity.cpy().scl(velocityScalar + SPEED_CHANGE).len() > maxSpeed)
+		if ((!selected)
+				|| velocity.cpy().scl(velocityScalar + SPEED_CHANGE).len() > maxSpeed)
 			return false;
 
 		velocityScalar += SPEED_CHANGE;
@@ -416,7 +415,8 @@ public final class Aircraft extends Entity {
 		// velocityScalar-SPEED_CHANGE is less than the minimum speed allowed
 		// for the plane, don't change velocity and return false.
 
-		if ((!selected) || velocity.cpy().scl(velocityScalar - SPEED_CHANGE).len() < minSpeed)
+		if ((!selected)
+				|| velocity.cpy().scl(velocityScalar - SPEED_CHANGE).len() < minSpeed)
 			return false;
 
 		// Else, change the velocity as requested and return true.
@@ -431,7 +431,7 @@ public final class Aircraft extends Entity {
 	 * Increases rate of altitude change
 	 */
 	public void increaseAltitude() {
-		if (desiredAltitude + ALTITUDE_CHANGE > 15000){
+		if (desiredAltitude + ALTITUDE_CHANGE > 15000) {
 			return;
 		}
 
@@ -442,7 +442,7 @@ public final class Aircraft extends Entity {
 	 * Decreasing rate of altitude change
 	 */
 	public void decreaseAltitude() {
-		if (desiredAltitude - ALTITUDE_CHANGE < 5000){
+		if (desiredAltitude - ALTITUDE_CHANGE < 5000) {
 			return;
 		}
 
@@ -450,7 +450,7 @@ public final class Aircraft extends Entity {
 	}
 
 	public void turnRight(boolean set) {
-		if(set)
+		if (set)
 			this.setIgnorePath(true);
 		turnRight = set;
 	}
@@ -466,13 +466,13 @@ public final class Aircraft extends Entity {
 	 */
 	public void turnRight() {
 		float angle = 0;
-		for (int i = 0 ; i < waypoints().size() ; i++){
-			if (i != waypoints().size()-1){
+		for (int i = 0; i < waypoints().size(); i++) {
+			if (i != waypoints().size() - 1) {
 				waypoints().remove(i);
 			}
 		}
-		
-		if (getRotation() - maxTurningRate * 2 < 0){
+
+		if (getRotation() - maxTurningRate * 2 < 0) {
 			angle = (float) (360 - maxTurningRate * 2);
 		}
 
@@ -490,13 +490,13 @@ public final class Aircraft extends Entity {
 	 */
 	public void turnLeft() {
 		float angle = 0;
-		for (int i = 0 ; i < waypoints().size() ; i++){
-			if (i != waypoints().size()-1){
+		for (int i = 0; i < waypoints().size(); i++) {
+			if (i != waypoints().size() - 1) {
 				waypoints().remove(i);
 			}
 		}
 
-		if (getRotation() + maxTurningRate * 2 >= 360.0f){
+		if (getRotation() + maxTurningRate * 2 >= 360.0f) {
 			angle = (float) (maxTurningRate * 2);
 		}
 
@@ -529,12 +529,12 @@ public final class Aircraft extends Entity {
 	public int getAltitude() {
 		return altitude;
 	}
-	
-	public boolean getIgnorePath(){
+
+	public boolean getIgnorePath() {
 		return ignorePath;
 	}
-	
-	public void setIgnorePath(boolean x){
+
+	public void setIgnorePath(boolean x) {
 		ignorePath = x;
 	}
 
@@ -546,10 +546,11 @@ public final class Aircraft extends Entity {
 	public float getSpeed() {
 		return velocityScalar;
 	}
-	
-	public Vector2 getVelocity(){
+
+	public Vector2 getVelocity() {
 		return velocity;
 	}
+
 	/**
 	 * Returns false if aircraft flightplan is empty, true otherwise.
 	 * 
@@ -560,12 +561,13 @@ public final class Aircraft extends Entity {
 		if (getX() < -10 || getY() < -10 || getX() > Config.SCREEN_WIDTH - 190
 				|| getY() > Config.SCREEN_HEIGHT + 105) {
 			this.isActive = false;
-			
+
 			State.changeScore(-20);
 		}
 
 		if (waypoints().size() == 0) {
-			System.out.println("Fatal error: plane with zero waypoints: " + this.id);
+			System.out.println("Fatal error: plane with zero waypoints: "
+					+ this.id);
 			System.exit(2);
 			this.isActive = false;
 		}
@@ -585,9 +587,10 @@ public final class Aircraft extends Entity {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Setter for canControl
+	 * 
 	 * @param b
 	 */
 	public void setCanControl(boolean b) {
@@ -599,8 +602,6 @@ public final class Aircraft extends Entity {
 		return "Aircraft - x: " + getX() + " y: " + getY()
 				+ "\n\r flight plan: " + waypoints().toString();
 	}
-
-
 
 	public boolean canControl() {
 		// TODO Auto-generated method stub

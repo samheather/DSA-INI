@@ -17,7 +17,7 @@ public class AircraftType {
 	private boolean isActive;
 	private int probability;
 	private boolean controllable = true;
-	
+
 	public Vector2 getCoords() {
 		return coords.cpy();
 	}
@@ -26,7 +26,7 @@ public class AircraftType {
 		this.coords = coords;
 		return this;
 	}
-	
+
 	public Vector2 getVelocity() {
 		return velocity.cpy();
 	}
@@ -107,21 +107,21 @@ public class AircraftType {
 		this.aircraftName = aircraftName;
 		return this;
 	}
-	
-	public boolean getControllable(){
+
+	public boolean getControllable() {
 		return this.controllable;
 	}
-	
-	public AircraftType setControllable(boolean canControl){
+
+	public AircraftType setControllable(boolean canControl) {
 		this.controllable = canControl;
 		return this;
 	}
-	
-	public int getProbability(){
+
+	public int getProbability() {
 		return this.probability;
 	}
-	
-	public AircraftType setProbability(int chance){
+
+	public AircraftType setProbability(int chance) {
 		this.probability = chance;
 		return this;
 	}

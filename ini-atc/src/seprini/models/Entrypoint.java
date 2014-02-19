@@ -10,9 +10,9 @@ public class Entrypoint extends Waypoint {
 		super(position, deletable);
 		this.texture = Art.getTextureRegion("entrypoint");
 	}
+
 	public boolean handleCollision(Aircraft a) {
 		return false;
 	}
-	
 
 }

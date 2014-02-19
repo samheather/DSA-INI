@@ -29,11 +29,11 @@ public class FlightPlanComponent {
 		// Initialisation of parameters required by flightPlanWaypointGenerator.
 		ArrayList<Waypoint> flightPlan = new ArrayList<Waypoint>();
 		Waypoint entryWaypoint = setStartpoint();
-		//System.out.println("Entry point " + entryWaypoint.toString());
-		Waypoint lastWaypoint = setEndpoint(entryWaypoint, 620 );
-		//System.out.print("Exit point " + lastWaypoint.toString());
-		//System.out.print("\n \n");
-		
+		// System.out.println("Entry point " + entryWaypoint.toString());
+		Waypoint lastWaypoint = setEndpoint(entryWaypoint, 620);
+		// System.out.print("Exit point " + lastWaypoint.toString());
+		// System.out.print("\n \n");
+
 		// entryWaypoint immediately added to aircrafts flightPlan.
 		flightPlan.add(entryWaypoint);
 
@@ -67,21 +67,23 @@ public class FlightPlanComponent {
 			// Create the list of waypoints for the generator to choose from,
 			// including the final waypoint so that the base case can be
 			// satisfied;
-			ArrayList<Waypoint> waypointSelectionList = new ArrayList<Waypoint>(waypoints.getPermanentList());
+			ArrayList<Waypoint> waypointSelectionList = new ArrayList<Waypoint>(
+					waypoints.getPermanentList());
 			waypointSelectionList.add(lastWaypoint);
 
 			// Call selectNextWaypoint.
 			Waypoint nextWaypoint = selectNextWaypoint(currentWaypoint,
 					lastWaypoint, flightPlan, normalVectorFromCurrentToLast,
 					waypointSelectionList, 30, 150);
-			
+
 			waypointSelectionList.clear();
-			
+
 			// Recurse with updated flightPlan and nextWaypoint.
 			return flightPlanWaypointGenerator(flightPlan, nextWaypoint,
 					lastWaypoint);
 		}
 	}
+
 	/**
 	 * Selects a waypoint to insert into flightPlan, under certain constraints.
 	 * 
@@ -115,7 +117,8 @@ public class FlightPlanComponent {
 			// normalVectorFromCurrentToLast is less than specified maxAngle.
 			// 3. Is minDistance away from currentWaypoint
 			if (!flightPlan.contains(waypoint)
-					// the acos returns a value of radians, which is then converted to degrees.
+					// the acos returns a value of radians, which is then
+					// converted to degrees.
 					&& (Math.acos(normalVectorFromCurrentToPotential
 							.dot(normalVectorFromCurrentToLast)) * 180 / Math.PI) < maxAngle
 					&& waypoint.getCoords().dst(currentWaypoint.getCoords()) > minDistance
@@ -141,8 +144,8 @@ public class FlightPlanComponent {
 	 * @return Waypoint
 	 */
 	private Waypoint setStartpoint() {
-		return waypoints.getEntryList()
-				.get(rand.nextInt(waypoints.getEntryList().size()));
+		return waypoints.getEntryList().get(
+				rand.nextInt(waypoints.getEntryList().size()));
 	}
 
 	/**
@@ -152,13 +155,13 @@ public class FlightPlanComponent {
 	 * @param entryWaypoint
 	 *            - where this aircraft entered the game
 	 * @param minDistance
-	 *            - desired minimum distance between aircraft's entryWaypoint and
-	 *            its exitWaypoint.
+	 *            - desired minimum distance between aircraft's entryWaypoint
+	 *            and its exitWaypoint.
 	 * @return Exitpoint
 	 */
 	private Exitpoint setEndpoint(Waypoint entryWaypoint, int minDistance) {
-		Exitpoint chosenExitPoint = waypoints.getExitList().get(rand
-				.nextInt(waypoints.getExitList().size()));
+		Exitpoint chosenExitPoint = waypoints.getExitList().get(
+				rand.nextInt(waypoints.getExitList().size()));
 		if (chosenExitPoint.getCoords().dst(entryWaypoint.getCoords()) < minDistance) {
 			chosenExitPoint = setEndpoint(entryWaypoint, minDistance);
 		}

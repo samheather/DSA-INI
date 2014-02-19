@@ -9,17 +9,11 @@ import seprini.screens.GameScreen;
 import seprini.screens.MenuScreen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.esotericsoftware.tablelayout.Cell;
 
 /**
@@ -36,7 +30,6 @@ public final class MenuController extends ChangeListener implements Controller {
 	public String theme = "earth";
 	public String airportMsg;
 	public String planeMsg;
-	
 
 	public void addLeaderboardEntry(String name, double score) {
 		lb.addLeaderboardEntry(name, score);
@@ -70,7 +63,7 @@ public final class MenuController extends ChangeListener implements Controller {
 		ui.row().padTop(80);
 		addLeaderboard();
 		ui.row();
-		
+
 		setEarth();
 
 	}
@@ -99,7 +92,8 @@ public final class MenuController extends ChangeListener implements Controller {
 	 */
 	private void addButtons() {
 		// Create a label for difficulty and add it
-		Label difficultylabel = new Label("Difficulty:", Art.getSkin(), "menuLabel");
+		Label difficultylabel = new Label("Difficulty:", Art.getSkin(),
+				"menuLabel");
 		ui.add(difficultylabel).width(100).center();
 
 		// create a button to start the game in easy mode
@@ -113,15 +107,16 @@ public final class MenuController extends ChangeListener implements Controller {
 
 		// create a new row
 		ui.row();
-		
-		ui.add(new Label("Themes:", Art.getSkin(), "menuLabel")).width(100).center();
-		
+
+		ui.add(new Label("Themes:", Art.getSkin(), "menuLabel")).width(100)
+				.center();
+
 		addButton("earth", "Aircraft", this).width(100);
-		
+
 		addButton("space", "Spacecraft", this).width(100);
-		
+
 		addButton("water", "Submarines", this).width(100);
-		
+
 		ui.row();
 
 		// create the Exit button
@@ -142,7 +137,7 @@ public final class MenuController extends ChangeListener implements Controller {
 
 		return ui.add(button);
 	}
-	
+
 	private void setEarth() {
 		ui.padTop(230);
 		Art.load("earth");
@@ -177,29 +172,29 @@ public final class MenuController extends ChangeListener implements Controller {
 			Art.getSound("comeflywithme").stop();
 		}
 
-		if (actor.equals(buttons.get("exit"))){
+		if (actor.equals(buttons.get("exit"))) {
 			Gdx.app.exit();
 		}
-		
-		if (actor.equals(buttons.get("earth"))){
+
+		if (actor.equals(buttons.get("earth"))) {
 			setEarth();
 		}
-		
-		if (actor.equals(buttons.get("space"))){
+
+		if (actor.equals(buttons.get("space"))) {
 			ui.padTop(230);
 			Art.load("space");
 			theme = "space";
 			airportMsg = " Spaceships in spacestation : ";
 			planeMsg = "Space snakes attack again!";
 		}
-		
-		if (actor.equals(buttons.get("water"))){
+
+		if (actor.equals(buttons.get("water"))) {
 			ui.padTop(230);
 			Art.load("water");
 			theme = "water";
-			airportMsg =  " Submarines in mothership : ";
+			airportMsg = " Submarines in mothership : ";
 			planeMsg = "The shark has appeared!";
 		}
 	}
-	
+
 }

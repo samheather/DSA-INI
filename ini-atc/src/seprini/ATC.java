@@ -1,10 +1,7 @@
 package seprini;
 
-import org.hamcrest.core.IsInstanceOf;
-
 import seprini.data.Art;
 import seprini.data.State;
-import seprini.screens.EndScreen;
 import seprini.screens.MenuScreen;
 import seprini.screens.Screen;
 

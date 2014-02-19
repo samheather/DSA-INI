@@ -16,14 +16,14 @@ public abstract class Screen {
 	 * Instance of the main class, used for changing screen among other things
 	 */
 	private ATC atc;
-	
+
 	public final static ShapeRenderer shapeRenderer = new ShapeRenderer();
 
 	/**
 	 * Dispose of unused resources
 	 */
 	public void removed() {
-		
+
 	}
 
 	/**
@@ -35,6 +35,7 @@ public abstract class Screen {
 	public final void init(ATC pAtc) {
 		this.atc = pAtc;
 	}
+
 	/**
 	 * Convenience method for the main setScreen method
 	 * 
@@ -55,7 +56,6 @@ public abstract class Screen {
 			SpriteBatch batch) {
 		if (region == null)
 			Gdx.app.error("Screen", "Region drawing is null");
-
 
 		int width = region.getRegionWidth() + 1;
 

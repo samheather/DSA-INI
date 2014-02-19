@@ -18,8 +18,9 @@ public class Leaderboard /* implements Drawable */{
 	/**
 	 * Array containing the LeaderboardEntries
 	 */
-	public static LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
-	public String[] originalNames = {"Larry", "Sergey", "Tim", "Richard", "Fiona"};
+	public LeaderboardEntry[] leaderboardEntries = new LeaderboardEntry[5];
+	public String[] originalNames = { "Larry", "Sergey", "Tim", "Richard",
+			"Fiona" };
 	/**
 	 * Path to the file in which leaderboardScores are stored.
 	 */
@@ -40,17 +41,17 @@ public class Leaderboard /* implements Drawable */{
 		File leaderboardFileCheckForFile = new File(leaderboardFile);
 		// If game run before and scores exist:
 		if (!leaderboardFileCheckForFile.exists()) {
-		//	System.out
-		//			.println("Is first load, initialising leaderboard values");
+			// System.out
+			// .println("Is first load, initialising leaderboard values");
 			for (int i = 0; i < leaderboardEntries.length; i++) {
 				leaderboardEntries[i].setName(originalNames[i]);
-				leaderboardEntries[i].setScore((double) 50*i+10);
+				leaderboardEntries[i].setScore((double) 50 * i + 10);
 			}
 
 			sortLeaderboard(leaderboardEntries);
 			saveLeaderboard();
 		} else {
-			//System.out.println("Loaded before - loading previous leaderboard.");
+			// System.out.println("Loaded before - loading previous leaderboard.");
 			readLeaderboard(); // DO NOT change the leaderboard before this call
 			sortLeaderboard(leaderboardEntries);
 			saveLeaderboard();
