@@ -414,12 +414,14 @@ public final class Aircraft extends Entity {
 	}
 
 	public void turnRight(boolean set) {
-		ignorePath = true;
+		if(set)
+			this.setIgnorePath(true);
 		turnRight = set;
 	}
 
 	public void turnLeft(boolean set) {
-		ignorePath = true;
+		if (set)
+			this.setIgnorePath(true);
 		turnLeft = set;
 	}
 
