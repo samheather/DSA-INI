@@ -235,7 +235,6 @@ public final class SidebarController extends ChangeListener implements
 			altitudeText = " Altitude: " + selectedAircraft.getAltitude() + "m";
 			speedText = " Speed: " + Math.round(selectedAircraft.getVelocity().len() * selectedAircraft.getSpeed()  * Config.AIRCRAFT_SPEED_MULTIPLIER) + "km/h";
 		};
-
 		// update aircraft altitude text
 		labels.get("altitude").setText(altitudeText);
 
