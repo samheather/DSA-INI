@@ -29,6 +29,11 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+/**
+ * This is the controller for aircraft.
+ * @author Samuel
+ *
+ */
 public final class AircraftController extends InputListener implements
 		Controller {
 
@@ -39,17 +44,22 @@ public final class AircraftController extends InputListener implements
 	private final ArrayList<Aircraft> aircraftList = new ArrayList<Aircraft>();
 	private final ArrayList<Cloud> clouds = new ArrayList<Cloud>();
 
+	// Ints for controlling the spawning of aircraft.
 	private final int maxAircraft, timeBetweenGenerations, separationRadius;
 
+	// Values for controlling alert of user when separation rules are broken.
 	private float lastWarned;
 	private float lastGenerated = State.time();
 	private boolean breachingSound, breachingIsPlaying;
 
+	// The base types of aircraft
 	private final AircraftType defaultAircraft = new AircraftType();
 	private final AircraftType speedyAircraft = new AircraftType();
 	private final AircraftType slowyAircraft = new AircraftType();
 	private final AircraftType snakeyAircraft = new AircraftType();
 
+	// Total probabilities - sum of all probabilities, necessary to allow us to
+	// generate aircraft according to their probability.
 	private int totalProbabilities;
 
 	private Aircraft selectedAircraft;
@@ -67,9 +77,21 @@ public final class AircraftController extends InputListener implements
 	private final GameScreen screen;
 
 	private int aircraftId = 0;
+	
+	/**
+	 * Adds a cloud to the airspace.
+	 * @param c
+	 */
+	private void addCloud(Cloud c) {
+		clouds.add(c);
+		airspace.addActor(c);
+	}
+
+	MenuController mc;
 
 	/**
-	 * 
+	 * Constructor for aircraft controller, creates appropriate controller, e.g.
+	 * for the difficulty.
 	 * @param diff
 	 *            game difficulty, changes number of aircraft and time between
 	 *            them
@@ -79,14 +101,6 @@ public final class AircraftController extends InputListener implements
 	 * @param sidebar
 	 * @param screen
 	 */
-
-	private void addCloud(Cloud c) {
-		clouds.add(c);
-		airspace.addActor(c);
-	}
-
-	MenuController mc;
-
 	public AircraftController(GameDifficulty diff, Airspace airspace,
 			Table sidebar, GameScreen screen, MenuController mc) {
 		this.mc = mc;
@@ -167,11 +181,13 @@ public final class AircraftController extends InputListener implements
 		aircraftTypeList.add(slowyAircraft);
 		aircraftTypeList.add(snakeyAircraft);
 
+		// Calculate totalProbability
 		for (AircraftType plane : aircraftTypeList) {
 			totalProbabilities += plane.getProbability();
 			plane.setProbability(totalProbabilities);
 		}
 
+		// Initialise the sidebar with values.
 		this.sidebar.init();
 	}
 
@@ -184,6 +200,7 @@ public final class AircraftController extends InputListener implements
 
 	public void update() {
 
+		// Updates all clouds positions
 		for (int i = 0; i < clouds.size(); i++) {
 			clouds.get(i).act();
 		}
@@ -197,7 +214,8 @@ public final class AircraftController extends InputListener implements
 
 		breachingSound = false;
 
-		// wait at least 2 seconds before allowing to warn again
+		// wait at least 2 seconds before allowing to warn again of incoming 
+		// collision
 		breachingIsPlaying = (State.time() - lastWarned >= 2) ? false : true;
 
 		// Updates aircraft in turn
@@ -206,11 +224,14 @@ public final class AircraftController extends InputListener implements
 		for (int i = 0; i < aircraftList.size(); i++) {
 			// Update aircraft.
 			planeI = aircraftList.get(i);
+			
+			// if a plane is inactive, remove it and update the index
 			if (!planeI.isActive()) {
 				removeAircraft(planeI);
 				--i;
 				continue;
 			}
+			// if a plane is removed during its update, update the index
 			if (planeI.act()) {
 				--i;
 				continue;
@@ -275,7 +296,8 @@ public final class AircraftController extends InputListener implements
 
 		seprini.data.State.changeScore(-airport.getNumberInAirport()
 				* Gdx.graphics.getDeltaTime());
-
+		// Update the values in the sidebar every frame, so they see the time 
+		// they've played for and their current score.
 		sidebar.update();
 
 	}
@@ -475,14 +497,26 @@ public final class AircraftController extends InputListener implements
 		getSelectedAircraft().insertWaypoint(waypoint);
 	}
 
+	/**
+	 * Getter for currently selected aircraft.
+	 * @return
+	 */
 	public Aircraft getSelectedAircraft() {
 		return selectedAircraft;
 	}
 
+	/**
+	 * Getter for aircraft list.
+	 * @return
+	 */
 	public ArrayList<Aircraft> getAircraftList() {
 		return aircraftList;
 	}
 
+	/**
+	 * Getter for the current airspace.
+	 * @return
+	 */
 	public Airspace getAirspace() {
 		return airspace;
 	}
@@ -492,6 +526,7 @@ public final class AircraftController extends InputListener implements
 			int button) {
 
 		if (button == Buttons.LEFT && sidebar.allowNewWaypoints()) {
+			// Add new waypoint for plane to touch down at.
 			waypoints.createWaypoint(x, y, false);
 			return true;
 		}
@@ -501,6 +536,8 @@ public final class AircraftController extends InputListener implements
 
 	@Override
 	public boolean keyDown(InputEvent event, int keycode) {
+		// If keys are one of the pre-selected ones perform action (e.g. press
+		// left and plane turns left)
 
 		if (keycode == Keys.SPACE)
 			State.paused = (State.paused) ? false : true;
@@ -545,6 +582,10 @@ public final class AircraftController extends InputListener implements
 		return false;
 	}
 
+	/**
+	 * Lands a plane at the airport.
+	 * @param newAircraft
+	 */
 	public void landPlane(Aircraft newAircraft) {
 		if (!newAircraft.canControl())
 			return;
@@ -553,22 +594,40 @@ public final class AircraftController extends InputListener implements
 		airport.land(newAircraft);
 	}
 
+	/**
+	 * Called to launch a plane
+	 * @return the launched plane
+	 */
 	public Aircraft launchPlane() {
 		Aircraft a = null;
+		// if the aircraft cant launch, do nothing
 		if (airport.canLaunch()) {
+			// launch an aircraft from the airport
 			a = airport.launch();
+			// set its inital waypoint to the airport
 			a.insertWaypoint(airport);
+			// add it to the list of aircraft
 			aircraftList.add(a);
+			// add it to the airspace
 			airspace.addActor(a);
+			// allow user control
 			a.setCanControl(true);
 		}
 		return a;
 	}
 
+	/** 
+	 * Getter for number of planes in airport
+	 * @return
+	 */
 	public int getAirportPlaneCount() {
 		return airport.getNumberInAirport();
 	}
 
+	/**
+	 * Removes an aircraft from the aircraft list.
+	 * @param aircraft
+	 */
 	public void remove(Aircraft aircraft) {
 		aircraftList.remove(aircraft);
 
