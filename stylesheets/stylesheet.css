@@ -315,7 +315,7 @@ Full-Width Styles
 
 #downloads {
   position: absolute;
-  width: 315px;
+  width: 415px;
   z-index: 10;
   bottom: -40px;
   right: 0;
@@ -378,7 +378,7 @@ Full-Width Styles
 }
 
 .manual_download_link:hover {
-  background: url(../images/sprite_download_2.png) no-repeat top right;
+  background: url(../images/sprite_download2.png) no-repeat top right;
 }
 
 #main_content_wrap {
