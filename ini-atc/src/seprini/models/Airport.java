@@ -25,7 +25,11 @@ public class Airport extends Waypoint{
 			aircraft.push(a);
 			return true;
 		}
-		return false;
+		else
+		{
+			a.setCanControl(true);
+			return false;
+		}
 	}
 
 
