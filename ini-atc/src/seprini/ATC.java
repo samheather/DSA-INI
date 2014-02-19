@@ -25,6 +25,7 @@ public class ATC implements ApplicationListener {
 
 	@Override
 	public void create() {
+		// Loads in all the textures for the quicker gameplay
 		Art.preLoad();
 		Art.load("earth");
 

@@ -137,6 +137,9 @@ public final class MenuController extends ChangeListener implements Controller {
 
 		return ui.add(button);
 	}
+	/**
+	 * Sets the default theme to earth
+	 */
 
 	private void setEarth() {
 		ui.padTop(230);
@@ -179,7 +182,7 @@ public final class MenuController extends ChangeListener implements Controller {
 		if (actor.equals(buttons.get("earth"))) {
 			setEarth();
 		}
-
+		
 		if (actor.equals(buttons.get("space"))) {
 			ui.padTop(230);
 			Art.load("space");

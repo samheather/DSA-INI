@@ -46,14 +46,21 @@ public class State {
 		score = 0;
 	}
 
+	/**
+	 * Changes score based on the increment value
+	 */
 	public static void changeScore(float increment) {
 		score = Math.max(0, (score + difficultyMultiplier * increment));
 	}
-
+	/**
+	 *  Rounded getter for the score
+	 */
 	public static int getScore() {
 		return Math.round(score);
 	}
-
+	/**
+	 * Setter for difficulty multiplier 
+	 */
 	public static void setDifficultyMultiplier(float multiplier) {
 		difficultyMultiplier = multiplier;
 	}

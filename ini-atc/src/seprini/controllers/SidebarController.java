@@ -66,16 +66,25 @@ public final class SidebarController extends ChangeListener implements
 	}
 
 	private List<Event> events = new ArrayList<Event>();
+	
+	/**
+	 * Displays an event message on the sidemenu that is shown 10 seconds
+	 */
 
 	public void addEvent(String message) {
 		addEvent(message, 10);
 	}
-
+	
+	/**
+	 * Displays an event message on the sidemenu that is shown set amount of time
+	 */
+	
 	public void addEvent(String message, int time) {
 		events.add(new Event(message, State.time() + time));
 	}
 
 	// stores state of the turn left/right buttons
+	
 	private boolean turningLeft, turningRight;
 	MenuController mc;
 
@@ -247,7 +256,8 @@ public final class SidebarController extends ChangeListener implements
 
 		// update aircraft speed text
 		labels.get("speed").setText(speedText);
-
+		
+		// update airport capacity text
 		labels.get("planeNumber").setText(
 				mc.airportMsg + aircrafts.getAirportPlaneCount());
 	}
@@ -303,6 +313,10 @@ public final class SidebarController extends ChangeListener implements
 	}
 	
 	private double lastLaunch = State.time();
+	
+	/**
+	 * Reacts to sidemenu button changes
+	 */ 
 
 	@Override
 	public void changed(ChangeEvent event, Actor actor) {

@@ -25,7 +25,7 @@ public final class Aircraft extends Entity {
 	private static final float INITIAL_VELOCITY_SCALAR = 1f;
 	private static final float SPEED_CHANGE = 0.1f;
 	private static final int ALTITUDE_CHANGE = 5000;
-
+	succses 
 	private int desiredAltitude;
 
 	private int altitude;
