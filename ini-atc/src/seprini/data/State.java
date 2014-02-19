@@ -1,10 +1,5 @@
 package seprini.data;
 
-import java.util.ArrayList;
-
-import seprini.controllers.AircraftController;
-import seprini.models.Aircraft;
-
 import com.badlogic.gdx.Gdx;
 
 public class State {
@@ -50,15 +45,15 @@ public class State {
 		time = 0;
 		score = 0;
 	}
-	
+
 	public static void changeScore(float increment) {
-		score = Math.max(0,(score + difficultyMultiplier * increment));
+		score = Math.max(0, (score + difficultyMultiplier * increment));
 	}
-	
+
 	public static int getScore() {
 		return Math.round(score);
 	}
-	
+
 	public static void setDifficultyMultiplier(float multiplier) {
 		difficultyMultiplier = multiplier;
 	}

@@ -26,7 +26,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 public class Art {
 
 	private static Hashtable<String, Texture> textureFiles = new Hashtable<String, Texture>();
-	
+
 	/**
 	 * A hashtable which stores all of the textures
 	 */
@@ -41,12 +41,15 @@ public class Art {
 	 * A skin is loaded from preloaded images in the hashtable textureFiles
 	 */
 	private final static Skin skin = new Skin();
-	
-	//Pre-loading assets for quicker use
+
+	// Pre-loading assets for quicker use
 	public static void preLoad() {
-		textureFiles.put("earth", new Texture(Gdx.files.internal("data/earthImages.png"), true));
-		textureFiles.put("space", new Texture(Gdx.files.internal("data/spaceImages.png"), true));
-		textureFiles.put("water", new Texture(Gdx.files.internal("data/waterImages.png"), true));
+		textureFiles.put("earth",
+				new Texture(Gdx.files.internal("data/earthImages.png"), true));
+		textureFiles.put("space",
+				new Texture(Gdx.files.internal("data/spaceImages.png"), true));
+		textureFiles.put("water",
+				new Texture(Gdx.files.internal("data/waterImages.png"), true));
 		// load the sound effects
 		sounds.put("ding", loadSound("ding.wav"));
 		sounds.put("warning", loadSound("warning.mp3"));
@@ -54,8 +57,7 @@ public class Art {
 		sounds.put("comeflywithme", loadSound("comeflywithme.mp3"));
 		sounds.put("ambience", loadSound("ambience.mp3"));
 	}
-	
-	
+
 	/**
 	 * Initialises loading of texture, should be called once
 	 * 
@@ -68,24 +70,24 @@ public class Art {
 				TextureFilter.Linear);
 
 		// splits up the sprite into parts and loads them into the table
-		
-		//split(texture, x coord of image, y coord of image, height, width)
+
+		// split(texture, x coord of image, y coord of image, height, width)
 		textures.put("airspace", split(combined, 0, 0, 1079, 720));
-		textures.put("sidebar", split(combined, 1080, 0, 200,720));
-		
+		textures.put("sidebar", split(combined, 1080, 0, 200, 720));
+
 		textures.put("aircraft", split(combined, 1281, 0, 72, 63));
-		textures.put("fastAircraft", split(combined, 1281+72, 0, 72, 63));
-		textures.put("slowAircraft", split(combined, 1281+72+72, 0, 72, 63));
-		textures.put("snakeyaircraft", split(combined, 1281+72+72+72, 0, 72, 63));
+		textures.put("fastAircraft", split(combined, 1281 + 72, 0, 72, 63));
+		textures.put("slowAircraft", split(combined, 1281 + 72 + 72, 0, 72, 63));
+		textures.put("snakeyaircraft",
+				split(combined, 1281 + 72 + 72 + 72, 0, 72, 63));
 		textures.put("clouds", split(combined, 62, 722, 146 - 62, 756 - 722));
-		//CLOUDS 62, 722 -> 146, 756
-		
-		
+		// CLOUDS 62, 722 -> 146, 756
+
 		textures.put("waypoint", split(combined, 0, 720, 20, 20));
-		
-		//space waypoints
-		//textures.put("waypoint", split(combined, 21, 720, 34, 20));
-		
+
+		// space waypoints
+		// textures.put("waypoint", split(combined, 21, 720, 34, 20));
+
 		textures.put("menuAircraft", split(combined, 1280, 64, 727, 249));
 		textures.put("entrypoint", split(combined, 20, 720, 20, 20));
 		textures.put("exitpoint", split(combined, 40, 720, 20, 20));
@@ -118,7 +120,7 @@ public class Art {
 		textButtonStyle.over = skin.newDrawable("white", Color.LIGHT_GRAY);
 		textButtonStyle.font = skin.getFont("default");
 		skin.add("default", textButtonStyle);
-		
+
 		TextFieldStyle textFieldStyle = new TextFieldStyle();
 		textFieldStyle.font = skin.getFont("default");
 		textFieldStyle.background = skin.newDrawable("white", Color.LIGHT_GRAY);
@@ -142,14 +144,14 @@ public class Art {
 		labelStyle.font = skin.getFont("default");
 		labelStyle.fontColor = new Color(0.823f, 0.118f, 0.314f, 1);
 		skin.add("default", labelStyle);
-		
+
 		LabelStyle labelStyleBold = new LabelStyle();
-		labelStyleBold.font = skin.getFont("default"); //needs to be bold
+		labelStyleBold.font = skin.getFont("default"); // needs to be bold
 		labelStyleBold.background = skin.newDrawable("white", Color.CLEAR);
 		skin.add("bold", labelStyleBold);
-		
+
 		LabelStyle menuLabels = new LabelStyle();
-		menuLabels.font = skin.getFont("default"); //needs to be bold
+		menuLabels.font = skin.getFont("default"); // needs to be bold
 		menuLabels.background = skin.newDrawable("white", Color.DARK_GRAY);
 		skin.add("menuLabel", menuLabels);
 
@@ -158,7 +160,7 @@ public class Art {
 		textStyle.font = skin.getFont("default");
 		textStyle.fontColor = Color.BLACK;
 		skin.add("textStyle", textStyle);
-		
+
 	}
 
 	/**

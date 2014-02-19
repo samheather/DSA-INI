@@ -12,11 +12,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 /**
@@ -66,7 +63,8 @@ public class GameScreen extends Screen {
 		pixmap.fill();
 
 		// set the temporary background
-		sidebar.setBackground(new TextureRegionDrawable(Art.getTextureRegion("sidebar")));
+		sidebar.setBackground(new TextureRegionDrawable(Art
+				.getTextureRegion("sidebar")));
 
 		// move the sidebar to the top right, add it to the main table and set
 		// its size
@@ -81,7 +79,7 @@ public class GameScreen extends Screen {
 	public void render() {
 		// draw every actor on the stage
 		root.draw();
-		
+
 		// debug the ui and draw fps
 		if (Config.DEBUG_UI) {
 			Table.drawDebug(root);

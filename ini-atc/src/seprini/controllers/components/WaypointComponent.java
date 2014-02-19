@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class WaypointComponent {
-	
+
 	private ArrayList<Waypoint> permanentList = new ArrayList<Waypoint>();
 	private ArrayList<Waypoint> userList = new ArrayList<Waypoint>();
 	private ArrayList<Entrypoint> entryList = new ArrayList<Entrypoint>();
@@ -26,7 +26,7 @@ public class WaypointComponent {
 
 	private final AircraftController controller;
 	private final SidebarController sidebar;
-	
+
 	public WaypointComponent(AircraftController controller,
 			SidebarController sidebar) {
 
@@ -55,7 +55,7 @@ public class WaypointComponent {
 		createWaypoint(700, 500, true);
 		createWaypoint(450, 100, true);
 		createWaypoint(540, 360, true);
-		
+
 		Collections.shuffle(permanentList, new Random());
 	}
 
@@ -74,8 +74,7 @@ public class WaypointComponent {
 	public boolean createWaypoint(float x, float y, final boolean permanent) {
 		Debug.msg("Creating waypoint at: " + x + ":" + y);
 
-		if (userList.size() == Config.USER_WAYPOINT_LIMIT
-				&& !permanent)
+		if (userList.size() == Config.USER_WAYPOINT_LIMIT && !permanent)
 			return false;
 
 		Debug.msg("Waypoint at: " + x + ":" + y + " created");
@@ -120,7 +119,7 @@ public class WaypointComponent {
 
 		return true;
 	}
-	
+
 	/**
 	 * Creates an exitpoint, adds it to the list of exitpoints and adds it to
 	 * the airspace

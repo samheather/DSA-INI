@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 public class Waypoint extends Entity {
 
 	private final boolean deletable;
-	
 
 	public boolean handleCollision(Aircraft a) {
 		seprini.data.State.changeScore(5);
