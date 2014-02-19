@@ -566,7 +566,7 @@ public final class Aircraft extends Entity {
 
 		if (waypoints().size() == 0) {
 			System.out.println("Fatal error: plane with zero waypoints: " + this.id);
-			//System.exit(2);
+			System.exit(2);
 			this.isActive = false;
 		}
 
