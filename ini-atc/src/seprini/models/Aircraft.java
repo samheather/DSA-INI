@@ -32,20 +32,39 @@ public final class Aircraft extends Entity {
 
 	private Stack<ArrayList<Waypoint>> waypointStack = new Stack<ArrayList<Waypoint>>();
 
+	/**
+	 * @return current flight plan
+	 */
 	public ArrayList<Waypoint> waypoints() {
 		return waypointStack.peek();
 	}
 
+	/**
+	 * removes the first waypoint from the flight plan
+	 * 
+	 * @return whether or not the flight plan is empty
+	 */
 	public boolean popWaypoint() {
 		if (waypoints().size() > 0)
 			waypoints().remove(0);
 		return waypoints().size() > 0;
 	}
 
+	/**
+	 * Set a new flightplan
+	 * 
+	 * @param newwaypoints
+	 *            will replace current flightplan
+	 */
 	public void waypoints(ArrayList<Waypoint> newwaypoints) {
 		waypointStack.push(newwaypoints);
 	}
 
+	/**
+	 * Restore a previously replaced flightplan
+	 * 
+	 * @return the replacing flightplan that has now been removed
+	 */
 	public ArrayList<Waypoint> restoreWaypoints() {
 		return waypointStack.pop();
 	}
@@ -88,6 +107,18 @@ public final class Aircraft extends Entity {
 		aircrafts.deselectAircraft(this);
 	}
 
+	/**
+	 * Constructor
+	 * 
+	 * @param aircraftType
+	 * @param flightPlan
+	 *            The inital flightplan
+	 * @param id
+	 *            A unique integer id used for identifying the plane during
+	 *            debugging
+	 * @param aircrafts
+	 *            The aircraft controller the aircraft will be added to
+	 */
 	public Aircraft(AircraftType aircraftType, ArrayList<Waypoint> flightPlan,
 			int id, AircraftController aircrafts) {
 		this.aircrafts = aircrafts;
@@ -602,6 +633,9 @@ public final class Aircraft extends Entity {
 				+ "\n\r flight plan: " + waypoints().toString();
 	}
 
+	/**
+	 * @return Whether the aircraft can be controlled by the user
+	 */
 	public boolean canControl() {
 		// TODO Auto-generated method stub
 		return this.canControl;
