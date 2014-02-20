@@ -19,8 +19,7 @@ public class AirportTest {
 	private Aircraft testAircraft2;
 	private Aircraft testAircraft3;
 	private Aircraft testAircraft4;
-	private Stack<Aircraft> testAirport = new Stack<Aircraft>();
-	private final int airportCapacity = 3;
+	private Airport testAirport;
 	
 	@Before
 	public void setUp() {
@@ -39,46 +38,36 @@ public class AirportTest {
 		ArrayList<Waypoint> testPlan2 = new ArrayList<Waypoint>();
 		testPlan2.add(new Waypoint(4, 4, true));
 		testPlan2.add(new Waypoint(5, 5, true));
+		
+		ArrayList<Waypoint> testPlan3 = new ArrayList<Waypoint>();
+		testPlan3.add(new Waypoint(8, 8, true));
+		testPlan3.add(new Waypoint(9, 9, true));
 
 		testAircraft1 = new Aircraft(defaultAircraft, testPlan1, 0, null);
 		testAircraft2 = new Aircraft(defaultAircraft, testPlan2, 0, null);
-		testAircraft3 = new Aircraft(defaultAircraft, testPlan2, 0, null);
-		testAircraft4 = new Aircraft(defaultAircraft, testPlan2, 0, null);
+		testAircraft3 = new Aircraft(defaultAircraft, testPlan3, 0, null);
+		testAirport = new Airport();
 	}
 	
 	@Test
 	public void testHandleCollision() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAirport() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetNumberInAirport() {
-		fail("Not yet implemented");
+		testAircraft1.selected(true);
+		testAirport.handleCollision(testAircraft1);
+		testAircraft2.selected(true);
+		testAirport.handleCollision(testAircraft2);
+		testAircraft3.selected(true);
+		testAirport.handleCollision(testAircraft3);
+		assertEquals("The number of planes in the airport should equal 3", testAirport.getNumberInAirport(), 3);
 	}
 
 	@Test
 	public void testCanLand() {
-		assertFalse(testAirport.ca);
+		assertTrue("Checks if there is space in the airport for the plane", testAirport.canLand());
 	}
 
 	@Test
 	public void testCanLaunch() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testLand() {
-		testAircraft1.l
-	}
-
-	@Test
-	public void testLaunch() {
-		fail("Not yet implemented");
+		assertFalse("Checks if there is a plane to launch", testAirport.canLaunch());
 	}
 
 }

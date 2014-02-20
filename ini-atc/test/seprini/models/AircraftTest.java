@@ -21,14 +21,6 @@ public class AircraftTest {
 	private Aircraft testAircraft1;
 	private Aircraft testAircraft2;
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
 	@Before
 	public void setUp() throws Exception {
 
@@ -52,26 +44,6 @@ public class AircraftTest {
 		testAircraft2 = new Aircraft(defaultAircraft, testPlan2, 0, null);
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	@Test
-	public void testAdditionalDraw() {
-		// fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAircraft() {
-		// fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAct() {
-		// fail("Not yet implemented");
-
-	}
-
 	@Test
 	public void testInsertWaypoint() {
 		Waypoint newWaypoint = new Waypoint(7, 8, true);
@@ -79,7 +51,6 @@ public class AircraftTest {
 		assertEquals(
 				"Checks that the newly added waypoint is the next waypoint that the plane will travel to",
 				testAircraft1.waypoints().get(0), newWaypoint);
-
 	}
 
 	@Test
@@ -89,7 +60,6 @@ public class AircraftTest {
 		assertEquals(
 				"Checks that the speed of the currently selected plane is equal to the calculated value",
 				1.1f, testAircraft2.getSpeed(), 0);
-
 	}
 
 	@Test
@@ -102,22 +72,6 @@ public class AircraftTest {
 	}
 
 	@Test
-	public void testIncreaseAltitude() {
-	}
-
-	@Test
-	public void testDecreaseAltitude() {
-	}
-
-	@Test
-	public void testTurnRight() {
-	}
-
-	@Test
-	public void testTurnLeft() {
-	}
-
-	@Test
 	public void testGetRadius() {
 		assertEquals(15f, testAircraft1.getRadius(), 0);
 	}
@@ -126,10 +80,6 @@ public class AircraftTest {
 	public void testGetSeparationRadius() {
 		float result = testAircraft1.getSeparationRadius();
 		assertEquals(result, 100, 0);
-	}
-
-	@Test
-	public void testIsBreaching() {
 	}
 
 	@Test
