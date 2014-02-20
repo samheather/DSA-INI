@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class FlightPlanComponent {
 
-	static Random rand = new Random();
+	Random rand = new Random();
 
 	private WaypointComponent waypoints;
 
@@ -99,7 +99,7 @@ public class FlightPlanComponent {
 	 *            value = diameter of the turning circle of the aircraft.
 	 * @return nextWaypoint
 	 */
-	private static Waypoint selectNextWaypoint(Waypoint currentWaypoint,
+	private Waypoint selectNextWaypoint(Waypoint currentWaypoint,
 			Waypoint lastWaypoint, ArrayList<Waypoint> flightPlan,
 			Vector2 normalVectorFromCurrentToLast,
 			ArrayList<Waypoint> waypointSelectionList, int maxAngle,

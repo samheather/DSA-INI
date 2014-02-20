@@ -1,7 +1,8 @@
 package seprini.models;
 
 import java.util.ArrayList;
-import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -13,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Airport extends Waypoint {
 
-	private Stack<Aircraft> aircraft = new Stack<Aircraft>();
+	private Queue<Aircraft> aircraft = new LinkedList<Aircraft>();
 	private final int airportCapacity = 3;
 
 
@@ -29,7 +30,7 @@ public class Airport extends Waypoint {
 			// Remove plane from list of planes so Physics no longer applied to
 			// it.
 			a.removeFromAircraftListToAvoidFramerateProblems();
-			aircraft.push(a);
+			aircraft.offer(a);
 			return true;
 		} else {
 			a.setCanControl(true);
@@ -89,7 +90,7 @@ public class Airport extends Waypoint {
 		// if not able to launch, return null, to be handled externally
 		if (!canLaunch())
 			return null;
-		return aircraft.pop();
+		return aircraft.poll();
 	}
 
 }
