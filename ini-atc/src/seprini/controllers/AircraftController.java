@@ -591,6 +591,7 @@ public final class AircraftController extends InputListener implements
 			return;
 		newAircraft.deselect();
 		newAircraft.setCanControl(false);
+		newAircraft.setIgnorePath(false);
 		airport.land(newAircraft);
 	}
 
